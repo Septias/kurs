@@ -1,7 +1,13 @@
 import PromptSync from "prompt-sync";
 
-let promt = PromptSync()
+let prompt = PromptSync()
 
-let antwort = promt('Wie geht es dir? ')
+let antwort = prompt('Wie geht es dir? ')
 
 console.log('Dir geht es: ', antwort)
+
+let sp = prompt("f für feuer oder s für wasser")
+
+    if(sp == "f"){
+        console.log;("du machst ein feuer");
+    }
