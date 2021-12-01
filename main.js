@@ -1,14 +1,7 @@
+import PromptSync from "prompt-sync";
 
-// Setup-code, damit man Input von der Komandozeile annehmen kann
-const readline = require('readline').createInterface({
-    input: process.stdin,
-    output: process.stdout
-})
+let promt = PromptSync()
 
+let antwort = promt('Wie geht es dir? ')
 
-// hier ist der code um Input entgegenzunehmen
-readline.question(`What's your name?`, name => {
-    console.log(`Hi ${name}!`)
-    readline.close()
-})
-
+console.log('Dir geht es: ', antwort)

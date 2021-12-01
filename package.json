@@ -1,0 +1,24 @@
+{
+  "name": "kurs",
+  "version": "1.0.0",
+  "description": "",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "node main.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Septias/kurs.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Septias/kurs/issues"
+  },
+  "homepage": "https://github.com/Septias/kurs#readme",
+  "dependencies": {
+    "prompt-sync": "^4.2.0"
+  },
+  "type": "module"
+}
