@@ -7,11 +7,13 @@ Heute erstellen wir spiele mit [p5.js](https://p5js.org/).
 
 1. Um ein eigenes spiel zu programmieren `Browsergames/p5-template` in einen eigenen Ordner kopieren. z.B in `Browsergames/Sebastian`.
 
-2. In dem Ordner `npm install` ausführen um die Abhängigkeiten (Dependencies) zu installieren.
 
-3. Den neu erstellten Ordner in vscode öffnen.
+
+2. Den neu erstellten Ordner in vscode öffnen.
     - Entweder über `File > Open Folder...`
     - oder in der Konsole `code Browsergames/<Dein Ordnername>` eingeben.
+
+3. In dem Ordner `npm install` ausführen um die Abhängigkeiten (Dependencies) zu installieren.
 
 4. Vite-erweiterung aus dem `vscode-marketplace` installieren.
 
