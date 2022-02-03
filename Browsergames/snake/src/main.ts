@@ -14,7 +14,7 @@ const _app = new p5(p5Instance => {
 
   p.draw = function draw() {
     p.background(0);
-    p.fill(205);
+    p.fill(205, 30, 40);
     p.rect(x, y, 50, 50);
   };
 }, document.getElementById('app')!);
