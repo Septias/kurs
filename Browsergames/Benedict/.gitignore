@@ -1,0 +1,58 @@
+node_modules
+.DS_Store
+dist
+dist-ssr
+*.local
+
+let HEIGHT = 450;
+let PLAYER_HEIGHT = 50;
+const clampNumber = (num, a, b) => Math.max(Math.min(num, Math.max(a, b)), Math.min(a, b));
+
+class Player {
+  constructor(player_image) {
+    this.velocity_y = 0;
+    this.y = HEIGHT - PLAYER_HEIGHT;
+    this.image = player_image
+  }
+  
+  draw() {
+    image(this.image, 20, this.y, PLAYER_HEIGHT, 50)
+  }
+  
+  update() {
+    if (keyIsPressed) {
+      this.velocity_y -= 3;
+    } else {
+      this.velocity_y += 3;
+    }
+    console.log(this.y)
+    this.y += this.velocity_y;
+    this.clamp()
+    this.velocity_y = clampNumber(this.velocity_y, -10, 10)
+  }
+  
+  clamp() {
+    this.y = min(this.y, HEIGHT - PLAYER_HEIGHT)
+    this.y = max(this.y, 0)
+  }
+}
+
+let player;
+
+function preload() {
+  let img = loadImage('https://art.pixilart.com/799148159c09ce9.png')
+  player = new Player(img)
+}
+
+
+function setup() {
+  createCanvas(HEIGHT, 450)
+}
+
+
+function draw() {
+  background(69, 42, 13)
+  rect(0, 0, 10, 10)
+  player.update()
+  player.draw()
+}
