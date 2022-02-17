@@ -34,50 +34,45 @@ const _app = new p5(p5Instance => {
 
 
   p.keyPressed = function () {
-    if(p.keyCode === p.LEFT_ARROW) {
+    if (p.keyCode === p.LEFT_ARROW) {
       moveleft = true
     }
-    
+    if (p.keyCode === p.RIGHT_ARROW) {
+      moveright = true
+    }
   }
-  p.keyReleased = function() {
-    if(p.keyCode === p.LEFT_ARROW) {
+  p.keyReleased = function () {
+    if (p.keyCode === p.LEFT_ARROW) {
       moveleft = false
     }
-  }
-  p.keyPressed = function () {
-    if(p.keyCode === p.LEFT_ARROW) {
-      moveleft = true
-    }
-    
-  }
-  p.keyReleased = function() {
-    if(p.keyCode === p.LEFT_ARROW) {
-      moveleft = false
+    if (p.keyCode === p.RIGHT_ARROW) {
+      moveright = false
     }
   }
+
+
 
   p.draw = function draw() {
     p.background(0, 0, 0);
     p.fill(2, 200, 200);
     p.rect(x, y, 210, 210);
-    if(moveleft == true){
-      x=x-2
+    if (moveleft == true) {
+      x = x - 2
       console.log(x);
-      if(x<=-300){
-        x=this.windowWidth
-      } 
+      if (x <= -300) {
+        x = this.windowWidth
+      }
     }
-    if(moveleft == true){
-      x=x-2
+    if (moveright == true) {
+      x = x + 2
       console.log(x);
-      if(x<=-300){
-        x=this.windowWidth
-      } 
+      if (x <= -300) {
+        x = this.windowWidth
+      }
     }
   };
 }, document.getElementById('app')!);
 
-function getRndInteger(min:any, max:any) {
-  return Math.floor(Math.random() * (max - min) ) + min;
+function getRndInteger(min: any, max: any) {
+  return Math.floor(Math.random() * (max - min)) + min;
 }
-                                
