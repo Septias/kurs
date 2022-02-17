@@ -11,24 +11,7 @@ const _app = new p5(p5Instance => {
   let moveright = false
   let b = 210
   let n = 0 - b
-  /*let r = getRndInteger(0,255)
-  let g = getRndInteger(0,255)
-  let b = getRndInteger(0,255)
-  let r2 = getRndInteger(0,255)
-  let g2 = getRndInteger(0,255)
-  let b2 = getRndInteger(0,255)
-  let q = getRndInteger(0,500);
-  let h = getRndInteger(0,500);*/
-  /*(y = getRndInteger(0,500);
-    x = getRndInteger(0,500);
-    r = getRndInteger(0,255)
-    g = getRndInteger(0,255)
-    b = getRndInteger(0,255)
-    r2 = getRndInteger(0,255)
-    g2 = getRndInteger(0,255)
-    b2 = getRndInteger(0,255)
-    h = getRndInteger(0,500);
-    q = getRndInteger(0,500);*/
+
 
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight);
@@ -75,9 +58,8 @@ const _app = new p5(p5Instance => {
   };
 }, document.getElementById('app')!);
 
-function getRndInteger(min: any, max: any) {
-  return Math.floor(Math.random() * (max - min)) + min;
-}
+
+
 
 
 
