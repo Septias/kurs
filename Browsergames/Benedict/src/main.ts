@@ -5,17 +5,26 @@ import './style.css';
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
-  let x = p.windowWidth / 2 - 105
-  let y = p.windowHeight / 2 - 105
+  /* w = width h = hight von objekt*/
+
+  let w = 300
+  let h = 100
+
+  /* s= speed */
+
+  let s = 4
+
+  /* x y = objekt position */
+
+  let x = p.windowWidth / 2 - w / 2
+  let y = p.windowHeight / 2 - h / 2
+  let n = 0 - w
+  let m = 0 - h
+
   let moveleft = false
   let moveright = false
   let moveup = false
   let movedown = false
-  let b = 210
-  let c = 210
-  let n = 0 - b
-  let m = 0 - c
-
 
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight);
@@ -57,30 +66,30 @@ const _app = new p5(p5Instance => {
   p.draw = function draw() {
     p.background(0, 0, 0);
     p.fill(2, 200, 200);
-    p.rect(x, y, b, c);
+    p.rect(x, y, w, h);
     if (moveleft == true) {
-      x = x - 2
+      x = x - s
       console.log(x);
       if (x <= n) {
         x = p.windowWidth
       }
     }
     if (moveright == true) {
-      x = x + 2
+      x = x + s
       console.log(x);
       if (x >= p.windowWidth) {
         x = n
       }
     }
     if (moveup == true) {
-      y = y - 2
+      y = y - s
       console.log(y);
       if (y <= m) {
         y = p.windowHeight
       }
     }
     if (movedown == true) {
-      y = y + 2
+      y = y + s
       console.log(y);
       if (y >= p.windowHeight) {
         y = m
