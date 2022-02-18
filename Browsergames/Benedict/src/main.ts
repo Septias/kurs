@@ -101,9 +101,8 @@ const _app = new p5(p5Instance => {
     p.text("Speed: " + speed, 25, 50)
     if ((player_width <= collectible_width) || (player_height <= collectible_height)) {
       p.fill("red")
-      p.textAlign(CENTER, CENTER)
       p.textSize(70)
-      p.text("WARNING!! SIZES NOT COMPATIBLE!!")
+      p.text("WARNING!! SIZES NOT COMPATIBLE!!", 100, 70)
     }
     
     //Collectible Position Debug
