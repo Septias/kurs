@@ -10,7 +10,7 @@ const _app = new p5(p5Instance => {
   let player_height = 150
 
   //Player Speed
-  let speed = 15
+  let speed = 2
 
   //Player Positional Variables
   let player_position_horizontal = p.windowWidth / 2 - player_width / 2
@@ -125,8 +125,8 @@ const _app = new p5(p5Instance => {
     }
 
     //Collectible Checks
-    if (player_position_horizontal + player_width >= collectible_position_horizontal + collectible_width && player_position_horizontal - player_width <= collectible_position_horizontal - collectible_width) {
-      if (player_position_vertical + player_height >= collectible_position_vertical + collectible_height && player_position_vertical - player_height <= collectible_position_vertical - collectible_height) {
+    if (player_position_horizontal + player_width >= collectible_position_horizontal + collectible_width && player_position_horizontal  <= collectible_position_horizontal){
+      if (player_position_vertical + player_height >= collectible_position_vertical + collectible_height && player_position_vertical  <= collectible_position_vertical) {
 
         collectible_position_horizontal = getRndInteger(0, collectible_spawn_area_horizontal)
         collectible_position_vertical = getRndInteger(0, collectible_spawn_area_vertical)
