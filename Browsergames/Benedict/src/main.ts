@@ -6,8 +6,8 @@ const _app = new p5(p5Instance => {
 
 
   //Player Dimension
-  let player_width = 150
-  let player_height = 150
+  let player_width = 75
+  let player_height = 75
 
   //Player Speed
   let speed = 2
@@ -19,15 +19,15 @@ const _app = new p5(p5Instance => {
   let player_runoff_height = 0 - player_height
 
   //Collectible Dimensions
-  let collectible_width = 50
-  let collectible_height = 50
+  let collectible_width = 25
+  let collectible_height = 25
 
 
   //Collectible Positional Variables
   let collectible_spawn_area_horizontal = p.windowWidth - collectible_width / 2
   let collectible_spawn_area_vertical = p.windowHeight - collectible_height / 2
-  let collectible_position_horizontal = getRndInteger(0, collectible_spawn_area_horizontal)
-  let collectible_position_vertical = getRndInteger(0, collectible_spawn_area_vertical)
+  let collectible_position_horizontal = getRndInteger(0 - collectible_width, collectible_spawn_area_horizontal)
+  let collectible_position_vertical = getRndInteger(0 - collectible_height, collectible_spawn_area_vertical)
 
   //Move Variabels
   let moveleft = false
@@ -35,12 +35,17 @@ const _app = new p5(p5Instance => {
   let moveup = false
   let movedown = false
 
+  //Scoreboard Variables
+  let score_counter = 0
+
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight);
+    p.textFont('Helvetica');
+    p.textSize(14)
   };
 
   //Random Integer
-  function getRndInteger(min:any, max:any) {
+  function getRndInteger(min: any, max: any) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
@@ -81,19 +86,30 @@ const _app = new p5(p5Instance => {
 
   p.draw = function draw() {
     p.background(0, 0, 0);
-    
+
     //Collectible
-    p.fill(255,0,0)
+    p.fill(255, 0, 0)
     p.rect(collectible_position_horizontal, collectible_position_vertical, collectible_width, collectible_height);
-    
+
     //Player
     p.fill(2, 200, 200);
     p.rect(player_position_horizontal, player_position_vertical, player_width, player_height);
 
+    //Scoreboard
+    p.fill(255, 255, 255)
+    p.text("Score: " + score_counter, 25, 25)
+    p.text("Speed: " + speed, 25, 50)
+    if ((player_width <= collectible_width) || (player_height <= collectible_height)) {
+      p.fill("red")
+      p.textAlign(CENTER, CENTER)
+      p.textSize(70)
+      p.text("WARNING!! SIZES NOT COMPATIBLE!!")
+    }
+    
     //Collectible Position Debug
     //console.log(collectible_position_horizontal, collectible_position_vertical);
 
-
+    
     //Movement Checks
     if (moveleft == true) {
       player_position_horizontal = player_position_horizontal - speed
@@ -125,11 +141,16 @@ const _app = new p5(p5Instance => {
     }
 
     //Collectible Checks
-    if (player_position_horizontal + player_width >= collectible_position_horizontal + collectible_width && player_position_horizontal  <= collectible_position_horizontal){
-      if (player_position_vertical + player_height >= collectible_position_vertical + collectible_height && player_position_vertical  <= collectible_position_vertical) {
+    if (player_position_horizontal + player_width >= collectible_position_horizontal + collectible_width && player_position_horizontal <= collectible_position_horizontal) {
+      if (player_position_vertical + player_height >= collectible_position_vertical + collectible_height && player_position_vertical <= collectible_position_vertical) {
 
+        //Random Position for Collectible
         collectible_position_horizontal = getRndInteger(0, collectible_spawn_area_horizontal)
         collectible_position_vertical = getRndInteger(0, collectible_spawn_area_vertical)
+
+        //Incremeants Scoreboard by 1
+        score_counter = score_counter + 1
+        speed = speed + 0.5
 
         console.log("hit");
       }
