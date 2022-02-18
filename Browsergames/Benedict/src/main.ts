@@ -4,6 +4,8 @@ import './style.css';
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
+  //Player Health
+  let player_health = 3
 
   //Player Dimension
   let player_width = 75
@@ -22,12 +24,31 @@ const _app = new p5(p5Instance => {
   let collectible_width = 25
   let collectible_height = 25
 
-
   //Collectible Positional Variables
   let collectible_spawn_area_horizontal = p.windowWidth - collectible_width / 2
   let collectible_spawn_area_vertical = p.windowHeight - collectible_height / 2
   let collectible_position_horizontal = getRndInteger(0 - collectible_width, collectible_spawn_area_horizontal)
   let collectible_position_vertical = getRndInteger(0 - collectible_height, collectible_spawn_area_vertical)
+
+  //Obstacle Dimensions
+  let obstacle_height = 30
+  let obstacle_width = 30
+
+  //Obstacle 2 Dimensions
+  let obstacle2_height = 30
+  let obstacle2_width = 30
+
+  //Obstacle Positional Variables
+  let obstacle_spawn_area_horizontal = p.windowWidth - obstacle_width / 2
+  let obstacle_spawn_area_vertical = p.windowHeight - obstacle_height / 2
+  let obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
+  let obstacle_position_vertical = getRndInteger(0 - obstacle_height, obstacle_spawn_area_vertical)
+  
+  //Obstacle 2 Positional Variables
+  let obstacle2_spawn_area_horizontal = p.windowWidth - obstacle2_width / 2
+  let obstacle2_spawn_area_vertical = p.windowHeight - obstacle2_height / 2
+  let obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width, obstacle2_spawn_area_horizontal)
+  let obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
 
   //Move Variabels
   let moveleft = false
@@ -63,7 +84,6 @@ const _app = new p5(p5Instance => {
     if (p.keyCode === p.DOWN_ARROW) {
       movedown = true
     }
-
   }
 
   //Handles All Keyrealeses
@@ -82,10 +102,16 @@ const _app = new p5(p5Instance => {
     }
   }
 
-
-
   p.draw = function draw() {
     p.background(0, 0, 0);
+
+    //Obstacles
+    p.fill(145, 71, 254)
+    p.rect(obstacle_position_horizontal, obstacle_position_vertical, obstacle_width, obstacle_height);
+
+    //Obstacles2
+    p.fill(145, 71, 254)
+    p.rect(obstacle2_position_horizontal, obstacle2_position_vertical, obstacle2_width, obstacle2_height);
 
     //Collectible
     p.fill(255, 0, 0)
@@ -104,11 +130,11 @@ const _app = new p5(p5Instance => {
       p.textSize(70)
       p.text("WARNING!! SIZES NOT COMPATIBLE!!", 100, 70)
     }
-    
+
     //Collectible Position Debug
     //console.log(collectible_position_horizontal, collectible_position_vertical);
 
-    
+
     //Movement Checks
     if (moveleft == true) {
       player_position_horizontal = player_position_horizontal - speed
@@ -149,9 +175,40 @@ const _app = new p5(p5Instance => {
 
         //Incremeants Scoreboard by 1
         score_counter = score_counter + 1
-        speed = speed + 0.5
+        speed = speed + 0.1
 
         console.log("hit");
+      }
+    }
+
+    //Obstacle Checks
+    if (player_position_horizontal + player_width >= obstacle_position_horizontal + obstacle_width && player_position_horizontal <= obstacle_position_horizontal) {
+      if (player_position_vertical + player_height >= obstacle_position_vertical + obstacle_height && player_position_vertical <= obstacle_position_vertical) {
+        //Random Location for Obstacle 1
+        obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
+        obstacle_position_vertical = getRndInteger(0 - obstacle_height, obstacle_spawn_area_vertical)
+        
+        //Random Location for Obstacle 2
+        obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width, obstacle2_spawn_area_horizontal)
+        obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
+        
+
+        console.log("Obstacle!");
+      }
+    }
+    
+    if (player_position_horizontal + player_width >= obstacle2_position_horizontal + obstacle2_width && player_position_horizontal <= obstacle2_position_horizontal) {
+      if (player_position_vertical + player_height >= obstacle2_position_vertical + obstacle2_height && player_position_vertical <= obstacle2_position_vertical) {
+        //Random Location for Obstacle 1
+        obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
+        obstacle_position_vertical = getRndInteger(0 - obstacle_height, obstacle_spawn_area_vertical)
+        
+        //Random Location for Obstacle 2
+        obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width, obstacle2_spawn_area_horizontal)
+        obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
+        
+
+        console.log("Obstacle!");
       }
     }
   };
