@@ -5,21 +5,18 @@ import './style.css';
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
-  /* w = width h = hight von objekt*/
+  
 
-  let w = 300
-  let h = 100
+  let object_width = 300
+  let object_hight = 100
 
-  /* s= speed */
 
-  let s = 4
+  let speed = 4
 
-  /* x y = objekt position */
-
-  let x = p.windowWidth / 2 - w / 2
-  let y = p.windowHeight / 2 - h / 2
-  let n = 0 - w
-  let m = 0 - h
+  let object_position_horizontal = p.windowWidth / 2 - object_width / 2
+  let object_position_vertical = p.windowHeight / 2 - object_hight / 2
+  let object_runoff_width = 0 - object_width
+  let object_runoff_hight = 0 - object_hight
 
   let moveleft = false
   let moveright = false
@@ -66,33 +63,33 @@ const _app = new p5(p5Instance => {
   p.draw = function draw() {
     p.background(0, 0, 0);
     p.fill(2, 200, 200);
-    p.rect(x, y, w, h);
+    p.rect(object_position_horizontal, object_position_vertical, object_width, object_hight);
     if (moveleft == true) {
-      x = x - s
-      console.log(x);
-      if (x <= n) {
-        x = p.windowWidth
+      object_position_horizontal = object_position_horizontal - speed
+      console.log(object_position_horizontal);
+      if (object_position_horizontal <= object_runoff_width) {
+        object_position_horizontal = p.windowWidth
       }
     }
     if (moveright == true) {
-      x = x + s
-      console.log(x);
-      if (x >= p.windowWidth) {
-        x = n
+      object_position_horizontal = object_position_horizontal + speed
+      console.log(object_position_horizontal);
+      if (object_position_horizontal >= p.windowWidth) {
+        object_position_horizontal = object_runoff_width
       }
     }
     if (moveup == true) {
-      y = y - s
-      console.log(y);
-      if (y <= m) {
-        y = p.windowHeight
+      object_position_vertical = object_position_vertical - speed
+      console.log(object_position_vertical);
+      if (object_position_vertical <= object_runoff_hight) {
+        object_position_vertical = p.windowHeight
       }
     }
     if (movedown == true) {
-      y = y + s
-      console.log(y);
-      if (y >= p.windowHeight) {
-        y = m
+      object_position_vertical = object_position_vertical + speed
+      console.log(object_position_vertical);
+      if (object_position_vertical >= p.windowHeight) {
+        object_position_vertical = object_runoff_hight
       }
     }
   };
