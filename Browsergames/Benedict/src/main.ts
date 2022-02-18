@@ -9,8 +9,11 @@ const _app = new p5(p5Instance => {
   let y = p.windowHeight / 2 - 105
   let moveleft = false
   let moveright = false
+  let moveup = false
   let b = 210
+  let c = 210
   let n = 0 - b
+  let m = 0 - c
 
 
   p.setup = function setup() {
@@ -25,6 +28,10 @@ const _app = new p5(p5Instance => {
     if (p.keyCode === p.RIGHT_ARROW) {
       moveright = true
     }
+    if (p.keyCode === p.UP_ARROW) {
+      moveup = true
+    }
+    
   }
   p.keyReleased = function () {
     if (p.keyCode === p.LEFT_ARROW) {
@@ -33,6 +40,9 @@ const _app = new p5(p5Instance => {
     if (p.keyCode === p.RIGHT_ARROW) {
       moveright = false
     }
+    if (p.keyCode === p.UP_ARROW) {
+      moveup = false
+    }
   }
 
 
@@ -40,7 +50,7 @@ const _app = new p5(p5Instance => {
   p.draw = function draw() {
     p.background(0, 0, 0);
     p.fill(2, 200, 200);
-    p.rect(x, y, b, b);
+    p.rect(x, y, b, c);
     if (moveleft == true) {
       x = x - 2
       console.log(x);
@@ -55,11 +65,24 @@ const _app = new p5(p5Instance => {
         x = n
       }
     }
+    if (moveup == true) {
+      y = y - 2
+      console.log(y);
+      if (y <= m) {
+        y = p.windowHeight
+      }
+      
+      
+      
+    }
   };
+
+
+
+
 }, document.getElementById('app')!);
 
 
 
 
-/* lol*/
 
