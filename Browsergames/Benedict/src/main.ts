@@ -125,7 +125,7 @@ const _app = new p5(p5Instance => {
       p.fill("orange")
     }
     if (player_health == 1) {
-      p.fill("red")
+      p.fill(125,0,0)
     }
     p.rect(player_position_horizontal, player_position_vertical, player_width, player_height);
 
@@ -140,7 +140,7 @@ const _app = new p5(p5Instance => {
       p.fill("orange")
     }
     if (player_health == 1) {
-      p.fill("red")
+      p.fill(125,0,0)
     }
     p.text("Health: " + player_health,25,75)
     
