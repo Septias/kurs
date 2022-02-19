@@ -47,6 +47,9 @@ const _app = new p5(p5Instance => {
   let obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width / 2, obstacle2_spawn_area_horizontal)
   let obstacle2_position_vertical = getRndInteger(0 - obstacle2_height / 2, obstacle2_spawn_area_vertical)
 
+  //Obstacle spawntrigger
+  let obstacle_spawntrigger = false
+
   //Move Variabels
   let moveleft = false
   let moveright = false
@@ -58,7 +61,7 @@ const _app = new p5(p5Instance => {
   let player_health = 3
 
   //Deathscreen variables
-  let down_arrow_is_pressed = false
+  let space_is_pressed = false
 
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight);
@@ -85,8 +88,8 @@ const _app = new p5(p5Instance => {
     if (p.keyCode === p.DOWN_ARROW) {
       movedown = true
     }
-    if (p.keyCode === p.DOWN_ARROW) {
-      down_arrow_is_pressed = true
+    if (p.keyCode === 32) {
+      space_is_pressed = true
     }
   }
 
@@ -104,8 +107,8 @@ const _app = new p5(p5Instance => {
     if (p.keyCode === p.DOWN_ARROW) {
       movedown = false
     }
-    if (p.keyCode === p.DOWN_ARROW) {
-      down_arrow_is_pressed = false
+    if (p.keyCode === 32) {
+      space_is_pressed = false
     }
   }
 
@@ -165,10 +168,10 @@ const _app = new p5(p5Instance => {
       p.fill(153, 0, 0)
       p.text("You Died", p.windowWidth / 2, p.windowHeight / 2 - 100)
       p.fill(255, 255, 255)
-      p.text("You had a famous score of  " + score_counter, p.windowWidth / 2, p.windowHeight / 2)
-      p.text("Press Down Arrow to restart", p.windowWidth / 2, p.windowHeight / 2 + 200)
+      p.text("You had a famous score of " + score_counter, p.windowWidth / 2, p.windowHeight / 2)
+      p.text("Press Space to restart", p.windowWidth / 2, p.windowHeight / 2 + 200)
 
-      if (down_arrow_is_pressed == true) {
+      if (space_is_pressed == true) {
         location.reload()
       }
     }
@@ -219,6 +222,9 @@ const _app = new p5(p5Instance => {
         collectible_position_horizontal = getRndInteger(0, collectible_spawn_area_horizontal)
         collectible_position_vertical = getRndInteger(0, collectible_spawn_area_vertical)
 
+        //obstacle spawntrigger
+        obstacle_spawntrigger = true
+
         //Incremeants Scoreboard by 1
         score_counter = score_counter + 1
         speed = speed + 0.1
@@ -230,13 +236,9 @@ const _app = new p5(p5Instance => {
     //Obstacle Checks
     if (player_position_horizontal + player_width + obstacle_width >= obstacle_position_horizontal + obstacle_width && player_position_horizontal - obstacle_width <= obstacle_position_horizontal) {
       if (player_position_vertical + player_height + obstacle_height >= obstacle_position_vertical + obstacle_height && player_position_vertical - obstacle_height <= obstacle_position_vertical) {
-        //Random Location for Obstacle 1
-        obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
-        obstacle_position_vertical = getRndInteger(0 - obstacle_height, obstacle_spawn_area_vertical)
 
-        //Random Location for Obstacle 2
-        obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width, obstacle2_spawn_area_horizontal)
-        obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
+        //obstacle spawntrigger for 1 & 2
+        obstacle_spawntrigger = true
 
         player_health = player_health - 1
 
@@ -246,18 +248,27 @@ const _app = new p5(p5Instance => {
 
     if (player_position_horizontal + player_width + obstacle2_width >= obstacle2_position_horizontal + obstacle2_width && player_position_horizontal - obstacle2_width <= obstacle2_position_horizontal) {
       if (player_position_vertical + player_height + obstacle2_height >= obstacle2_position_vertical + obstacle2_height && player_position_vertical - obstacle2_height <= obstacle2_position_vertical) {
-        //Random Location for Obstacle 1
-        obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
-        obstacle_position_vertical = getRndInteger(0 - obstacle_height, obstacle_spawn_area_vertical)
 
-        //Random Location for Obstacle 2
-        obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width, obstacle2_spawn_area_horizontal)
-        obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
+        //obstacle spawntrigger for 1 & 2
+        obstacle_spawntrigger = true
 
         player_health = player_health - 1
 
         console.log("Obstacle!");
       }
+    }
+    //obstacle spawntrigger
+    if (obstacle_spawntrigger == true) {
+
+      //Random Location for Obstacle 1
+      obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
+      obstacle_position_vertical = getRndInteger(0 - obstacle_height, obstacle_spawn_area_vertical)
+
+      //Random Location for Obstacle 2
+      obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width, obstacle2_spawn_area_horizontal)
+      obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
+
+      obstacle_spawntrigger = false
     }
   };
 }, document.getElementById('app')!);
