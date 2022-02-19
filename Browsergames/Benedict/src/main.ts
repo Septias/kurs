@@ -165,7 +165,8 @@ const _app = new p5(p5Instance => {
       p.fill(153,0,0)
       p.text("You Died",p.windowWidth / 2, p.windowHeight / 2 - 100)
       p.fill(255,255,255)
-      p.text("Press Down Arrow to restart",p.windowWidth / 2, p.windowHeight / 2 + 100)
+      p.text("You had a famous score of  " + score_counter,p.windowWidth / 2,p.windowHeight / 2)
+      p.text("Press Down Arrow to restart",p.windowWidth / 2, p.windowHeight / 2 + 200)
 
       if (down_arrow_is_pressed == true) {
         location.reload()
