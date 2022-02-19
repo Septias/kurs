@@ -4,9 +4,6 @@ import './style.css';
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
-  //Player Health
-  let player_health = 3
-
   //Player Dimension
   let player_width = 75
   let player_height = 75
@@ -58,6 +55,10 @@ const _app = new p5(p5Instance => {
 
   //Scoreboard Variables
   let score_counter = 0
+  let player_health = 3
+
+  //Deathscreen variables
+  let down_arrow_is_pressed = false
 
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight);
@@ -84,6 +85,9 @@ const _app = new p5(p5Instance => {
     if (p.keyCode === p.DOWN_ARROW) {
       movedown = true
     }
+    if (p.keyCode === p.DOWN_ARROW ) {
+       down_arrow_is_pressed = true
+    }
   }
 
   //Handles All Keyrealeses
@@ -99,6 +103,9 @@ const _app = new p5(p5Instance => {
     }
     if (p.keyCode === p.DOWN_ARROW) {
       movedown = false
+    }
+    if (p.keyCode === p.DOWN_ARROW) {
+      down_arrow_is_pressed = false
     }
   }
 
@@ -151,6 +158,19 @@ const _app = new p5(p5Instance => {
     }
 
     //Deathscreen
+    if (player_health == 0) {
+      p.background(0,0,0)
+      p.textAlign(p.CENTER)
+      p.textSize(50)
+      p.fill(153,0,0)
+      p.text("You Died",p.windowWidth / 2, p.windowHeight / 2 - 100)
+      p.fill(255,255,255)
+      p.text("Press Down Arrow to restart",p.windowWidth / 2, p.windowHeight / 2 + 100)
+
+      if (down_arrow_is_pressed == true) {
+        location.reload()
+      }
+    }
     
       
 
@@ -219,11 +239,6 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
-        if (player_health == 0) {
-          location.reload()
-        }
-        
-
         console.log("Obstacle!");
       }
     }
@@ -239,11 +254,6 @@ const _app = new p5(p5Instance => {
         obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
         
         player_health = player_health - 1
-
-        if (player_health == 0) {
-          location.reload()
-        }
-
 
         console.log("Obstacle!");
       }
