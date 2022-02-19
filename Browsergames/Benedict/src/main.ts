@@ -81,7 +81,7 @@ const _app = new p5(p5Instance => {
 
 
   //Obstacle spawntrigger
-  let obstacle_spawntrigger = false
+  let object_spawntrigger = false
 
   //Move Variabels
   let moveleft = false
@@ -265,12 +265,9 @@ const _app = new p5(p5Instance => {
     if (player_position_horizontal + player_width >= collectible_position_horizontal + collectible_width && player_position_horizontal <= collectible_position_horizontal) {
       if (player_position_vertical + player_height >= collectible_position_vertical + collectible_height && player_position_vertical <= collectible_position_vertical) {
 
-        //Random Position for Collectible
-        collectible_position_horizontal = getRndInteger(0, collectible_spawn_area_horizontal)
-        collectible_position_vertical = getRndInteger(0, collectible_spawn_area_vertical)
-
+        
         //Obstacle Spawntrigger
-        obstacle_spawntrigger = true
+        object_spawntrigger = true
 
         //Incremeants Scoreboard by 1
         score_counter = score_counter + 1
@@ -283,12 +280,9 @@ const _app = new p5(p5Instance => {
     if (player_position_horizontal + player_width >= heal_collectible_position_horizontal + heal_collectible_width && player_position_horizontal <= heal_collectible_position_horizontal) {
       if (player_position_vertical + player_height >= heal_collectible_position_vertical + heal_collectible_height && player_position_vertical <= heal_collectible_position_vertical) {
 
-        //Random Position for Heal Collectible
-        heal_collectible_position_horizontal = getRndInteger(0, heal_collectible_spawn_area_horizontal)
-        heal_collectible_position_vertical = getRndInteger(0, heal_collectible_spawn_area_vertical)
-
+        
         //Obstacle Spawntrigger
-        obstacle_spawntrigger = true
+        object_spawntrigger = true
 
         //Incremeants Health by 1
         if (player_health < 3 ) {
@@ -306,7 +300,7 @@ const _app = new p5(p5Instance => {
       if (player_position_vertical + player_height + obstacle_height >= obstacle_position_vertical + obstacle_height && player_position_vertical - obstacle_height <= obstacle_position_vertical) {
 
         //obstacle spawntrigger for 1 & 2
-        obstacle_spawntrigger = true
+        object_spawntrigger = true
 
         player_health = player_health - 1
 
@@ -318,7 +312,7 @@ const _app = new p5(p5Instance => {
       if (player_position_vertical + player_height + obstacle2_height >= obstacle2_position_vertical + obstacle2_height && player_position_vertical - obstacle2_height <= obstacle2_position_vertical) {
 
         //obstacle spawntrigger for 1 & 2
-        obstacle_spawntrigger = true
+        object_spawntrigger = true
 
         player_health = player_health - 1
 
@@ -330,7 +324,7 @@ const _app = new p5(p5Instance => {
       if (player_position_vertical + player_height + obstacle3_height >= obstacle3_position_vertical + obstacle3_height && player_position_vertical - obstacle3_height <= obstacle3_position_vertical) {
 
         //obstacle spawntrigger for 1 & 2 & 3
-        obstacle_spawntrigger = true
+        object_spawntrigger = true
 
         player_health = player_health - 1
 
@@ -342,7 +336,7 @@ const _app = new p5(p5Instance => {
       if (player_position_vertical + player_height + obstacle4_height >= obstacle4_position_vertical + obstacle4_height && player_position_vertical - obstacle4_height <= obstacle4_position_vertical) {
 
         //obstacle spawntrigger for 1 & 2
-        obstacle_spawntrigger = true
+        object_spawntrigger = true
 
         player_health = player_health - 1
 
@@ -350,7 +344,15 @@ const _app = new p5(p5Instance => {
       }
     }
     //obstacle spawntrigger
-    if (obstacle_spawntrigger == true) {
+    if (object_spawntrigger == true) {
+
+      //Random Position for Collectible
+      collectible_position_horizontal = getRndInteger(0, collectible_spawn_area_horizontal)
+      collectible_position_vertical = getRndInteger(0, collectible_spawn_area_vertical)
+
+      //Random Position for Heal Collectible
+      heal_collectible_position_horizontal = getRndInteger(0, heal_collectible_spawn_area_horizontal)
+      heal_collectible_position_vertical = getRndInteger(0, heal_collectible_spawn_area_vertical)
 
       //Random Location for Obstacle 1
       obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
@@ -369,7 +371,7 @@ const _app = new p5(p5Instance => {
       obstacle4_position_vertical = getRndInteger(0 - obstacle4_height, obstacle4_spawn_area_vertical)
 
 
-      obstacle_spawntrigger = false
+      object_spawntrigger = false
     }
   };
 }, document.getElementById('app')!);
