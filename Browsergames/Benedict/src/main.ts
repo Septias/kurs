@@ -169,14 +169,11 @@ const _app = new p5(p5Instance => {
     p.fill(255, 0, 0)
     p.rect(collectible_position_horizontal, collectible_position_vertical, collectible_width, collectible_height);
 
-    //Heal Collectible
-    p.fill("green")
-    p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
-
-
+    
+    
     //Player
     if (player_health == 3) {
-      p.fill(2, 200, 200)
+      p.fill("green")
     }
     if (player_health == 2) {
       p.fill("orange")
@@ -185,13 +182,13 @@ const _app = new p5(p5Instance => {
       p.fill(125, 0, 0)
     }
     p.rect(player_position_horizontal, player_position_vertical, player_width, player_height);
-
+    
     //Scoreboard
     p.fill(255, 255, 255)
     p.text("Score: " + score_counter, 25, 25)
     p.text("Speed: " + ((speed).toFixed(1)), 25, 50)
     if (player_health == 3) {
-      p.fill(255, 255, 255)
+      p.fill("green")
     }
     if (player_health == 2) {
       p.fill("orange")
@@ -200,7 +197,10 @@ const _app = new p5(p5Instance => {
       p.fill(125, 0, 0)
     }
     p.text("Health: " + player_health, 25, 75)
-
+    
+    //Heal Collectible
+    p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
+    
     if ((player_width <= collectible_width) || (player_height <= collectible_height)) {
       p.fill("red")
       p.textSize(70)
