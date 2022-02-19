@@ -133,11 +133,6 @@ const _app = new p5(p5Instance => {
     p.fill(255, 255, 255)
     p.text("Score: " + score_counter, 25, 25)
     p.text("Speed: " + speed, 25, 50)
-    if ((player_width <= collectible_width) || (player_height <= collectible_height)) {
-      p.fill("red")
-      p.textSize(70)
-      p.text("WARNING!! SIZES NOT COMPATIBLE!!", 100, 70)
-    }
     if (player_health == 3) {
       p.fill(255,255,255)
     }
@@ -148,7 +143,12 @@ const _app = new p5(p5Instance => {
       p.fill("red")
     }
     p.text("Health: " + player_health,25,75)
-
+    
+    if ((player_width <= collectible_width) || (player_height <= collectible_height)) {
+      p.fill("red")
+      p.textSize(70)
+      p.text("WARNING!! SIZES NOT COMPATIBLE!!", 100, 85)
+    }
     
 
     //Collectible Position Debug
