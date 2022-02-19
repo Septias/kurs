@@ -149,6 +149,11 @@ const _app = new p5(p5Instance => {
       p.textSize(70)
       p.text("WARNING!! SIZES NOT COMPATIBLE!!", 100, 85)
     }
+
+    //Deathscreen
+    
+      
+
     
 
     //Collectible Position Debug
