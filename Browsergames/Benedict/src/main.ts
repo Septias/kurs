@@ -27,6 +27,17 @@ const _app = new p5(p5Instance => {
   let collectible_position_horizontal = getRndInteger(0 - collectible_width / 2, collectible_spawn_area_horizontal)
   let collectible_position_vertical = getRndInteger(0 - collectible_height / 2, collectible_spawn_area_vertical)
 
+  //Heal Collectible Dimensions
+  let heal_collectible_width = 25
+  let heal_collectible_height = 25
+
+  //Heal Collectible Positional Variables
+  let heal_collectible_spawn_area_horizontal = p.windowWidth - heal_collectible_width / 2
+  let heal_collectible_spawn_area_vertical = p.windowHeight - heal_collectible_height / 2
+  let heal_collectible_position_horizontal = getRndInteger(0 - heal_collectible_width / 2, heal_collectible_spawn_area_horizontal)
+  let heal_collectible_position_vertical = getRndInteger(0 - heal_collectible_height / 2, heal_collectible_spawn_area_vertical)
+
+
   //Obstacle Dimensions
   let obstacle_height = 30
   let obstacle_width = 30
@@ -158,6 +169,11 @@ const _app = new p5(p5Instance => {
     p.fill(255, 0, 0)
     p.rect(collectible_position_horizontal, collectible_position_vertical, collectible_width, collectible_height);
 
+    //Heal Collectible
+    p.fill("green")
+    p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
+
+
     //Player
     if (player_health == 3) {
       p.fill(2, 200, 200)
@@ -253,7 +269,7 @@ const _app = new p5(p5Instance => {
         collectible_position_horizontal = getRndInteger(0, collectible_spawn_area_horizontal)
         collectible_position_vertical = getRndInteger(0, collectible_spawn_area_vertical)
 
-        //obstacle spawntrigger
+        //Obstacle Spawntrigger
         obstacle_spawntrigger = true
 
         //Incremeants Scoreboard by 1
@@ -263,6 +279,25 @@ const _app = new p5(p5Instance => {
         console.log("hit");
       }
     }
+    //Heal Collectible Checks
+    if (player_position_horizontal + player_width >= heal_collectible_position_horizontal + heal_collectible_width && player_position_horizontal <= heal_collectible_position_horizontal) {
+      if (player_position_vertical + player_height >= heal_collectible_position_vertical + heal_collectible_height && player_position_vertical <= heal_collectible_position_vertical) {
+
+        //Random Position for Heal Collectible
+        heal_collectible_position_horizontal = getRndInteger(0, heal_collectible_spawn_area_horizontal)
+        heal_collectible_position_vertical = getRndInteger(0, heal_collectible_spawn_area_vertical)
+
+        //Obstacle Spawntrigger
+        obstacle_spawntrigger = true
+
+        //Incremeants Health by 1
+        if (player_health < 3 ) {
+          player_health = player_health + 1
+        }
+        console.log("Heal");
+      }
+    }
+
 
     //Obstacle Checks
 
