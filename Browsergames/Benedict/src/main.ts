@@ -202,8 +202,8 @@ const _app = new p5(p5Instance => {
     }
 
     //Obstacle Checks
-    if (player_position_horizontal + player_width >= obstacle_position_horizontal + obstacle_width && player_position_horizontal <= obstacle_position_horizontal) {
-      if (player_position_vertical + player_height >= obstacle_position_vertical + obstacle_height && player_position_vertical <= obstacle_position_vertical) {
+    if (player_position_horizontal + player_width + obstacle_width >= obstacle_position_horizontal + obstacle_width && player_position_horizontal - obstacle_width <= obstacle_position_horizontal) {
+      if (player_position_vertical + player_height + obstacle_height >= obstacle_position_vertical + obstacle_height && player_position_vertical - obstacle_height <= obstacle_position_vertical) {
         //Random Location for Obstacle 1
         obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
         obstacle_position_vertical = getRndInteger(0 - obstacle_height, obstacle_spawn_area_vertical)
@@ -223,8 +223,8 @@ const _app = new p5(p5Instance => {
       }
     }
     
-    if (player_position_horizontal + player_width >= obstacle2_position_horizontal + obstacle2_width && player_position_horizontal <= obstacle2_position_horizontal) {
-      if (player_position_vertical + player_height >= obstacle2_position_vertical + obstacle2_height && player_position_vertical <= obstacle2_position_vertical) {
+    if (player_position_horizontal + player_width + obstacle2_width >= obstacle2_position_horizontal + obstacle2_width && player_position_horizontal - obstacle2_width<= obstacle2_position_horizontal) {
+      if (player_position_vertical + player_height + obstacle2_height >= obstacle2_position_vertical + obstacle2_height && player_position_vertical - obstacle2_height <= obstacle2_position_vertical) {
         //Random Location for Obstacle 1
         obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
         obstacle_position_vertical = getRndInteger(0 - obstacle_height, obstacle_spawn_area_vertical)
