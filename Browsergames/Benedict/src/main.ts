@@ -35,6 +35,10 @@ const _app = new p5(p5Instance => {
   let obstacle2_height = 30
   let obstacle2_width = 30
 
+  //Obstacle 3 Dimensions
+  let obstacle3_height = 30
+  let obstacle3_width = 30
+
   //Obstacle Positional Variables
   let obstacle_spawn_area_horizontal = p.windowWidth - obstacle_width / 2
   let obstacle_spawn_area_vertical = p.windowHeight - obstacle_height / 2
@@ -46,6 +50,13 @@ const _app = new p5(p5Instance => {
   let obstacle2_spawn_area_vertical = p.windowHeight - obstacle2_height / 2
   let obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width / 2, obstacle2_spawn_area_horizontal)
   let obstacle2_position_vertical = getRndInteger(0 - obstacle2_height / 2, obstacle2_spawn_area_vertical)
+
+  //Obstacle 3 Positional Variables
+  let obstacle3_spawn_area_horizontal = p.windowWidth - obstacle3_width / 2
+  let obstacle3_spawn_area_vertical = p.windowHeight - obstacle3_height / 2
+  let obstacle3_position_horizontal = getRndInteger(0 - obstacle3_width / 2, obstacle3_spawn_area_horizontal)
+  let obstacle3_position_vertical = getRndInteger(0 - obstacle3_height / 2, obstacle3_spawn_area_vertical)
+
 
   //Obstacle spawntrigger
   let obstacle_spawntrigger = false
@@ -122,6 +133,11 @@ const _app = new p5(p5Instance => {
     //Obstacles2
     p.fill(145, 71, 254)
     p.rect(obstacle2_position_horizontal, obstacle2_position_vertical, obstacle2_width, obstacle2_height);
+
+    //Obstacles3
+    p.fill(145, 71, 254)
+    p.rect(obstacle3_position_horizontal, obstacle3_position_vertical, obstacle3_width, obstacle3_height);
+
 
     //Collectible
     p.fill(255, 0, 0)
@@ -234,6 +250,8 @@ const _app = new p5(p5Instance => {
     }
 
     //Obstacle Checks
+
+    //obstacle
     if (player_position_horizontal + player_width + obstacle_width >= obstacle_position_horizontal + obstacle_width && player_position_horizontal - obstacle_width <= obstacle_position_horizontal) {
       if (player_position_vertical + player_height + obstacle_height >= obstacle_position_vertical + obstacle_height && player_position_vertical - obstacle_height <= obstacle_position_vertical) {
 
@@ -245,11 +263,23 @@ const _app = new p5(p5Instance => {
         console.log("Obstacle!");
       }
     }
-
+    //obstacle2
     if (player_position_horizontal + player_width + obstacle2_width >= obstacle2_position_horizontal + obstacle2_width && player_position_horizontal - obstacle2_width <= obstacle2_position_horizontal) {
       if (player_position_vertical + player_height + obstacle2_height >= obstacle2_position_vertical + obstacle2_height && player_position_vertical - obstacle2_height <= obstacle2_position_vertical) {
 
         //obstacle spawntrigger for 1 & 2
+        obstacle_spawntrigger = true
+
+        player_health = player_health - 1
+
+        console.log("Obstacle!");
+      }
+    }
+    //obstacle3
+    if (player_position_horizontal + player_width + obstacle3_width >= obstacle3_position_horizontal + obstacle3_width && player_position_horizontal - obstacle3_width <= obstacle3_position_horizontal) {
+      if (player_position_vertical + player_height + obstacle3_height >= obstacle3_position_vertical + obstacle3_height && player_position_vertical - obstacle3_height <= obstacle3_position_vertical) {
+
+        //obstacle spawntrigger for 1 & 2 & 3
         obstacle_spawntrigger = true
 
         player_health = player_health - 1
@@ -267,6 +297,10 @@ const _app = new p5(p5Instance => {
       //Random Location for Obstacle 2
       obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width, obstacle2_spawn_area_horizontal)
       obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
+
+      //Random Location for Obstacle 3
+      obstacle3_position_horizontal = getRndInteger(0 - obstacle3_width, obstacle3_spawn_area_horizontal)
+      obstacle3_position_vertical = getRndInteger(0 - obstacle3_height, obstacle3_spawn_area_vertical)
 
       obstacle_spawntrigger = false
     }
