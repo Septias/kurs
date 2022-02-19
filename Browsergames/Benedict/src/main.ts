@@ -130,6 +130,18 @@ const _app = new p5(p5Instance => {
       p.textSize(70)
       p.text("WARNING!! SIZES NOT COMPATIBLE!!", 100, 70)
     }
+    if (player_health == 3) {
+      p.fill(255,255,255)
+    }
+    if (player_health == 2) {
+      p.fill("orange")
+    }
+    if (player_health == 1) {
+      p.fill("red")
+    }
+    p.text("Health: " + player_health,25,75)
+
+    
 
     //Collectible Position Debug
     //console.log(collectible_position_horizontal, collectible_position_vertical);
@@ -191,6 +203,12 @@ const _app = new p5(p5Instance => {
         //Random Location for Obstacle 2
         obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width, obstacle2_spawn_area_horizontal)
         obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
+
+        player_health = player_health - 1
+
+        if (player_health == 0) {
+          location.reload()
+        }
         
 
         console.log("Obstacle!");
@@ -207,6 +225,12 @@ const _app = new p5(p5Instance => {
         obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width, obstacle2_spawn_area_horizontal)
         obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
         
+        player_health = player_health - 1
+
+        if (player_health == 0) {
+          location.reload()
+        }
+
 
         console.log("Obstacle!");
       }
