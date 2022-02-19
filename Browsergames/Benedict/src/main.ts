@@ -118,7 +118,15 @@ const _app = new p5(p5Instance => {
     p.rect(collectible_position_horizontal, collectible_position_vertical, collectible_width, collectible_height);
 
     //Player
-    p.fill(2, 200, 200);
+    if (player_health == 3) {
+      p.fill(2,200,200)
+    }
+    if (player_health == 2) {
+      p.fill("orange")
+    }
+    if (player_health == 1) {
+      p.fill("red")
+    }
     p.rect(player_position_horizontal, player_position_vertical, player_width, player_height);
 
     //Scoreboard
