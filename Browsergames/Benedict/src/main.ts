@@ -142,7 +142,7 @@ const _app = new p5(p5Instance => {
     //Scoreboard
     p.fill(255, 255, 255)
     p.text("Score: " + score_counter, 25, 25)
-    p.text("Speed: " + speed, 25, 50)
+    p.text("Speed: " + ((speed).toFixed(1)), 25, 50)
     if (player_health == 3) {
       p.fill(255, 255, 255)
     }
