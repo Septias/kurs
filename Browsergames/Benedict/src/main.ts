@@ -27,8 +27,8 @@ const _app = new p5(p5Instance => {
   //Collectible Positional Variables
   let collectible_spawn_area_horizontal = p.windowWidth - collectible_width / 2
   let collectible_spawn_area_vertical = p.windowHeight - collectible_height / 2
-  let collectible_position_horizontal = getRndInteger(0 - collectible_width, collectible_spawn_area_horizontal)
-  let collectible_position_vertical = getRndInteger(0 - collectible_height, collectible_spawn_area_vertical)
+  let collectible_position_horizontal = getRndInteger(0 - collectible_width / 2, collectible_spawn_area_horizontal)
+  let collectible_position_vertical = getRndInteger(0 - collectible_height / 2, collectible_spawn_area_vertical)
 
   //Obstacle Dimensions
   let obstacle_height = 30
@@ -41,14 +41,14 @@ const _app = new p5(p5Instance => {
   //Obstacle Positional Variables
   let obstacle_spawn_area_horizontal = p.windowWidth - obstacle_width / 2
   let obstacle_spawn_area_vertical = p.windowHeight - obstacle_height / 2
-  let obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
-  let obstacle_position_vertical = getRndInteger(0 - obstacle_height, obstacle_spawn_area_vertical)
+  let obstacle_position_horizontal = getRndInteger(0 - obstacle_width / 2, obstacle_spawn_area_horizontal)
+  let obstacle_position_vertical = getRndInteger(0 - obstacle_height / 2, obstacle_spawn_area_vertical)
   
   //Obstacle 2 Positional Variables
   let obstacle2_spawn_area_horizontal = p.windowWidth - obstacle2_width / 2
   let obstacle2_spawn_area_vertical = p.windowHeight - obstacle2_height / 2
-  let obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width, obstacle2_spawn_area_horizontal)
-  let obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
+  let obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width / 2, obstacle2_spawn_area_horizontal)
+  let obstacle2_position_vertical = getRndInteger(0 - obstacle2_height / 2, obstacle2_spawn_area_vertical)
 
   //Move Variabels
   let moveleft = false
