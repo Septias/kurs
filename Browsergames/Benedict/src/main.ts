@@ -372,15 +372,15 @@ const _app = new p5(p5Instance => {
         player_health = player_health - 1
 
         //Obstacle speed + 1
-        obstacle_negative_speed + 1
-        obstacle2_negative_speed + 1
-        obstacle3_negative_speed + 1
-        obstacle4_negative_speed + 1
+        obstacle_negative_speed + 0.005
+        obstacle2_negative_speed + 0.005
+        obstacle3_negative_speed + 0.005
+        obstacle4_negative_speed + 0.005
 
-        obstacle_positive_speed + 1
-        obstacle2_positive_speed + 1
-        obstacle3_positive_speed + 1
-        obstacle4_positive_speed + 1
+        obstacle_positive_speed + 0.005
+        obstacle2_positive_speed + 0.005
+        obstacle3_positive_speed + 0.005
+        obstacle4_positive_speed + 0.005
 
 
         console.log("Obstacle!");
@@ -396,15 +396,15 @@ const _app = new p5(p5Instance => {
         player_health = player_health - 1
 
         //Obstacle speed + 1
-        obstacle_negative_speed + 1
-        obstacle2_negative_speed + 1
-        obstacle3_negative_speed + 1
-        obstacle4_negative_speed + 1
+        obstacle_negative_speed + 0.005
+        obstacle2_negative_speed + 0.005
+        obstacle3_negative_speed + 0.005
+        obstacle4_negative_speed + 0.005
 
-        obstacle_positive_speed + 1
-        obstacle2_positive_speed + 1
-        obstacle3_positive_speed + 1
-        obstacle4_positive_speed + 1
+        obstacle_positive_speed + 0.005
+        obstacle2_positive_speed + 0.005
+        obstacle3_positive_speed + 0.005
+        obstacle4_positive_speed + 0.005
 
         console.log("Obstacle!");
       }
@@ -418,16 +418,17 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
-        //Obstacle speed + 1
-        obstacle_negative_speed + 1
-        obstacle2_negative_speed + 1
-        obstacle3_negative_speed + 1
-        obstacle4_negative_speed + 1
+       //Obstacle speed + 1
+       obstacle_negative_speed + 0.005
+       obstacle2_negative_speed + 0.005
+       obstacle3_negative_speed + 0.005
+       obstacle4_negative_speed + 0.005
 
-        obstacle_positive_speed + 1
-        obstacle2_positive_speed + 1
-        obstacle3_positive_speed + 1
-        obstacle4_positive_speed + 1
+       obstacle_positive_speed + 0.005
+       obstacle2_positive_speed + 0.005
+       obstacle3_positive_speed + 0.005
+       obstacle4_positive_speed + 0.005
+
 
         console.log("Obstacle!");
       }
@@ -442,15 +443,16 @@ const _app = new p5(p5Instance => {
         player_health = player_health - 1
 
         //Obstacle speed + 1
-        obstacle_negative_speed + 1
-        obstacle2_negative_speed + 1
-        obstacle3_negative_speed + 1
-        obstacle4_negative_speed + 1
+        obstacle_negative_speed + 0.005
+        obstacle2_negative_speed + 0.005
+        obstacle3_negative_speed + 0.005
+        obstacle4_negative_speed + 0.005
 
-        obstacle_positive_speed + 1
-        obstacle2_positive_speed + 1
-        obstacle3_positive_speed + 1
-        obstacle4_positive_speed + 1
+        obstacle_positive_speed + 0.005
+        obstacle2_positive_speed + 0.005
+        obstacle3_positive_speed + 0.005
+        obstacle4_positive_speed + 0.005
+
 
         console.log("Obstacle!");
       }
