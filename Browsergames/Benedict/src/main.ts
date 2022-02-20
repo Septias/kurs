@@ -199,7 +199,7 @@ const _app = new p5(p5Instance => {
     if (obstacle3_position_horizontal <= 0) {
       obstacle3_speed = obstacle3_positive_speed
     }
-    if (obstacle3_position_horizontal >= p.windowHeight - obstacle3_height) {
+    if (obstacle3_position_horizontal >= p.windowWidth - obstacle3_height) {
       obstacle3_speed = obstacle3_negative_speed
     }
 
@@ -210,7 +210,7 @@ const _app = new p5(p5Instance => {
     if (obstacle4_position_horizontal <= 0) {
       obstacle4_speed = obstacle4_positive_speed
     }
-    if (obstacle4_position_horizontal >= p.windowHeight - obstacle4_height) {
+    if (obstacle4_position_horizontal >= p.windowWidth - obstacle4_height) {
       obstacle4_speed = obstacle4_negative_speed
     }
 
