@@ -78,6 +78,25 @@ const _app = new p5(p5Instance => {
   let obstacle4_position_horizontal = getRndInteger(0 - obstacle4_width / 2, obstacle4_spawn_area_horizontal)
   let obstacle4_position_vertical = getRndInteger(0 - obstacle4_height / 2, obstacle4_spawn_area_vertical)
 
+  //Obstacle Speed Variable
+  let obstacle_positive_speed = 4
+  let obstacle_negative_speed = -4
+  let obstacle_speed = obstacle_negative_speed
+
+  //Obstacle2 Speed Variable
+  let obstacle2_positive_speed = 4
+  let obstacle2_negative_speed = -4
+  let obstacle2_speed = obstacle2_negative_speed
+
+  //Obstacle3 Speed Variable
+  let obstacle3_positive_speed = 4
+  let obstacle3_negative_speed = -4
+  let obstacle3_speed = obstacle3_negative_speed
+
+  //Obstacle4 Speed Variable
+  let obstacle4_positive_speed = 4
+  let obstacle4_negative_speed = -4
+  let obstacle4_speed = obstacle4_negative_speed
 
 
   //Obstacle spawntrigger
@@ -92,6 +111,7 @@ const _app = new p5(p5Instance => {
   //Scoreboard Variables
   let score_counter = 0
   let player_health = 3
+  let highscore = 0
 
   //Deathscreen variables
   let space_is_pressed = false
@@ -100,6 +120,7 @@ const _app = new p5(p5Instance => {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.textFont('Helvetica');
     p.textSize(14)
+    
   };
 
   //Random Integer
@@ -148,29 +169,78 @@ const _app = new p5(p5Instance => {
   p.draw = function draw() {
     p.background(0, 0, 0);
 
-    //Obstacles
+    //Obstacles Horizontal
     p.fill(145, 71, 254)
     p.rect(obstacle_position_horizontal, obstacle_position_vertical, obstacle_width, obstacle_height);
+    obstacle_position_vertical = obstacle_position_vertical + obstacle_speed
+    if (obstacle_position_vertical <= 0) {
+      obstacle_speed = obstacle_positive_speed
+    }
+    if (obstacle_position_vertical >= p.windowHeight - obstacle_height) {
+      obstacle_speed = obstacle_negative_speed
+    }
 
-    //Obstacles2
+
+    //Obstacles2 Horizontal
     p.fill(145, 71, 254)
     p.rect(obstacle2_position_horizontal, obstacle2_position_vertical, obstacle2_width, obstacle2_height);
+    obstacle2_position_vertical = obstacle2_position_vertical + obstacle2_speed
+    if (obstacle2_position_vertical <= 0) {
+      obstacle2_speed = obstacle2_positive_speed
+    }
+    if (obstacle2_position_vertical >= p.windowHeight - obstacle2_height) {
+      obstacle2_speed = obstacle2_negative_speed
+    }
 
     //Obstacles3
     p.fill(145, 71, 254)
     p.rect(obstacle3_position_horizontal, obstacle3_position_vertical, obstacle3_width, obstacle3_height);
+    obstacle3_position_horizontal = obstacle3_position_horizontal + obstacle3_speed
+    if (obstacle3_position_horizontal <= 0) {
+      obstacle3_speed = obstacle3_positive_speed
+    }
+    if (obstacle3_position_horizontal >= p.windowHeight - obstacle3_height) {
+      obstacle3_speed = obstacle3_negative_speed
+    }
 
     //Obstacles4
     p.fill(145, 71, 254)
     p.rect(obstacle4_position_horizontal, obstacle4_position_vertical, obstacle4_width, obstacle4_height);
+    obstacle4_position_horizontal = obstacle4_position_horizontal + obstacle4_speed
+    if (obstacle4_position_horizontal <= 0) {
+      obstacle4_speed = obstacle4_positive_speed
+    }
+    if (obstacle4_position_horizontal >= p.windowHeight - obstacle4_height) {
+      obstacle4_speed = obstacle4_negative_speed
+    }
 
 
     //Collectible
-    p.fill(255, 0, 0)
+    p.fill(225, 0, 127)
     p.rect(collectible_position_horizontal, collectible_position_vertical, collectible_width, collectible_height);
 
-    
-    
+
+    //Scoreboard
+    p.fill(255, 255, 255)
+    p.fill(255, 255, 255)
+    p.text("Highscore: " + highscore, 25, 25)
+    p.text("Score: " + score_counter, 25, 50)
+    p.text("Speed: " + ((speed).toFixed(1)), 25, 75)
+    if (player_health == 3) {
+      p.fill("green")
+    }
+    if (player_health == 2) {
+      p.fill("orange")
+    }
+    if (player_health == 1) {
+      p.fill(125, 0, 0)
+    }
+    p.text("Health: " + player_health, 25, 100)
+
+    //Heal Collectible
+    p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
+
+
     //Player
     if (player_health == 3) {
       p.fill("green")
@@ -182,25 +252,8 @@ const _app = new p5(p5Instance => {
       p.fill(125, 0, 0)
     }
     p.rect(player_position_horizontal, player_position_vertical, player_width, player_height);
-    
-    //Scoreboard
-    p.fill(255, 255, 255)
-    p.text("Score: " + score_counter, 25, 25)
-    p.text("Speed: " + ((speed).toFixed(1)), 25, 50)
-    if (player_health == 3) {
-      p.fill("green")
-    }
-    if (player_health == 2) {
-      p.fill("orange")
-    }
-    if (player_health == 1) {
-      p.fill(125, 0, 0)
-    }
-    p.text("Health: " + player_health, 25, 75)
-    
-    //Heal Collectible
-    p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
-    
+
+
     if ((player_width <= collectible_width) || (player_height <= collectible_height)) {
       p.fill("red")
       p.textSize(70)
@@ -209,6 +262,8 @@ const _app = new p5(p5Instance => {
 
     //Deathscreen
     if (player_health == 0) {
+      
+
       p.background(0, 0, 0)
       p.textAlign(p.CENTER)
       p.textSize(50)
@@ -217,9 +272,19 @@ const _app = new p5(p5Instance => {
       p.fill(255, 255, 255)
       p.text("You had a famous score of " + score_counter, p.windowWidth / 2, p.windowHeight / 2)
       p.text("Press Space to restart", p.windowWidth / 2, p.windowHeight / 2 + 200)
+      if (score_counter > highscore) {
+        highscore = score_counter
+
+        
+
+      }
+
 
       if (space_is_pressed == true) {
         location.reload()
+
+
+
       }
     }
 
@@ -265,7 +330,7 @@ const _app = new p5(p5Instance => {
     if (player_position_horizontal + player_width >= collectible_position_horizontal + collectible_width && player_position_horizontal <= collectible_position_horizontal) {
       if (player_position_vertical + player_height >= collectible_position_vertical + collectible_height && player_position_vertical <= collectible_position_vertical) {
 
-        
+
         //Obstacle Spawntrigger
         object_spawntrigger = true
 
@@ -277,18 +342,20 @@ const _app = new p5(p5Instance => {
       }
     }
     //Heal Collectible Checks
-    if (player_position_horizontal + player_width >= heal_collectible_position_horizontal + heal_collectible_width && player_position_horizontal <= heal_collectible_position_horizontal) {
-      if (player_position_vertical + player_height >= heal_collectible_position_vertical + heal_collectible_height && player_position_vertical <= heal_collectible_position_vertical) {
+    if (player_health < 3) {
+      if (player_position_horizontal + player_width >= heal_collectible_position_horizontal + heal_collectible_width && player_position_horizontal <= heal_collectible_position_horizontal) {
+        if (player_position_vertical + player_height >= heal_collectible_position_vertical + heal_collectible_height && player_position_vertical <= heal_collectible_position_vertical) {
 
-        
-        //Obstacle Spawntrigger
-        object_spawntrigger = true
 
-        //Incremeants Health by 1
-        if (player_health < 3 ) {
-          player_health = player_health + 1
+          //Obstacle Spawntrigger
+          object_spawntrigger = true
+
+          //Incremeants Health by 1
+          if (player_health < 3) {
+            player_health = player_health + 1
+          }
+          console.log("Heal");
         }
-        console.log("Heal");
       }
     }
 
@@ -374,4 +441,7 @@ const _app = new p5(p5Instance => {
       object_spawntrigger = false
     }
   };
+
 }, document.getElementById('app')!);
+
+
