@@ -120,7 +120,7 @@ const _app = new p5(p5Instance => {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.textFont('Helvetica');
     p.textSize(14)
-    
+
   };
 
   //Random Integer
@@ -262,7 +262,7 @@ const _app = new p5(p5Instance => {
 
     //Deathscreen
     if (player_health == 0) {
-      
+
 
       p.background(0, 0, 0)
       p.textAlign(p.CENTER)
@@ -275,7 +275,7 @@ const _app = new p5(p5Instance => {
       if (score_counter > highscore) {
         highscore = score_counter
 
-        
+
 
       }
 
@@ -371,6 +371,18 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
+        //Obstacle speed + 1
+        obstacle_negative_speed + 1
+        obstacle2_negative_speed + 1
+        obstacle3_negative_speed + 1
+        obstacle4_negative_speed + 1
+
+        obstacle_positive_speed + 1
+        obstacle2_positive_speed + 1
+        obstacle3_positive_speed + 1
+        obstacle4_positive_speed + 1
+
+
         console.log("Obstacle!");
       }
     }
@@ -382,6 +394,17 @@ const _app = new p5(p5Instance => {
         object_spawntrigger = true
 
         player_health = player_health - 1
+
+        //Obstacle speed + 1
+        obstacle_negative_speed + 1
+        obstacle2_negative_speed + 1
+        obstacle3_negative_speed + 1
+        obstacle4_negative_speed + 1
+
+        obstacle_positive_speed + 1
+        obstacle2_positive_speed + 1
+        obstacle3_positive_speed + 1
+        obstacle4_positive_speed + 1
 
         console.log("Obstacle!");
       }
@@ -395,6 +418,17 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
+        //Obstacle speed + 1
+        obstacle_negative_speed + 1
+        obstacle2_negative_speed + 1
+        obstacle3_negative_speed + 1
+        obstacle4_negative_speed + 1
+
+        obstacle_positive_speed + 1
+        obstacle2_positive_speed + 1
+        obstacle3_positive_speed + 1
+        obstacle4_positive_speed + 1
+
         console.log("Obstacle!");
       }
     }
@@ -406,6 +440,17 @@ const _app = new p5(p5Instance => {
         object_spawntrigger = true
 
         player_health = player_health - 1
+
+        //Obstacle speed + 1
+        obstacle_negative_speed + 1
+        obstacle2_negative_speed + 1
+        obstacle3_negative_speed + 1
+        obstacle4_negative_speed + 1
+
+        obstacle_positive_speed + 1
+        obstacle2_positive_speed + 1
+        obstacle3_positive_speed + 1
+        obstacle4_positive_speed + 1
 
         console.log("Obstacle!");
       }
