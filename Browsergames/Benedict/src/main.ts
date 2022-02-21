@@ -225,7 +225,8 @@ const _app = new p5(p5Instance => {
     p.fill(255, 255, 255)
     p.text("Highscore: " + highscore, 25, 25)
     p.text("Score: " + score_counter, 25, 50)
-    p.text("Speed: " + ((speed).toFixed(1)), 25, 75)
+    p.text("Obstacle Speed: " + obstacle_positive_speed,25,75)
+    p.text("Speed: " + ((speed).toFixed(1)), 25, 100)
     if (player_health == 3) {
       p.fill("green")
     }
@@ -235,10 +236,13 @@ const _app = new p5(p5Instance => {
     if (player_health == 1) {
       p.fill(125, 0, 0)
     }
-    p.text("Health: " + player_health, 25, 100)
+    p.text("Health: " + player_health, 25, 125)
 
     //Heal Collectible
     p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
+
+    //Healthbar
+    p.text (player_health,player_position_horizontal + player_width / 2 - p.textWidth(player_health) / 2 ,player_position_vertical - 10 )
 
 
     //Player
@@ -338,6 +342,17 @@ const _app = new p5(p5Instance => {
         score_counter = score_counter + 1
         speed = speed + 0.1
 
+        //Obstacle speed+ 1
+        obstacle_negative_speed + 0.05
+        obstacle2_negative_speed + 0.05
+        obstacle3_negative_speed + 0.05
+        obstacle4_negative_speed + 0.05
+
+        obstacle_positive_speed + 0.05
+        obstacle2_positive_speed + 0.05
+        obstacle3_positive_speed + 0.05
+        obstacle4_positive_speed + 0.05
+
         console.log("hit");
       }
     }
@@ -371,17 +386,7 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
-        //Obstacle speed + 1
-        obstacle_negative_speed + 0.005
-        obstacle2_negative_speed + 0.005
-        obstacle3_negative_speed + 0.005
-        obstacle4_negative_speed + 0.005
-
-        obstacle_positive_speed + 0.005
-        obstacle2_positive_speed + 0.005
-        obstacle3_positive_speed + 0.005
-        obstacle4_positive_speed + 0.005
-
+       
 
         console.log("Obstacle!");
       }
@@ -395,17 +400,7 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
-        //Obstacle speed + 1
-        obstacle_negative_speed + 0.005
-        obstacle2_negative_speed + 0.005
-        obstacle3_negative_speed + 0.005
-        obstacle4_negative_speed + 0.005
-
-        obstacle_positive_speed + 0.005
-        obstacle2_positive_speed + 0.005
-        obstacle3_positive_speed + 0.005
-        obstacle4_positive_speed + 0.005
-
+        
         console.log("Obstacle!");
       }
     }
@@ -418,17 +413,7 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
-       //Obstacle speed + 1
-       obstacle_negative_speed + 0.005
-       obstacle2_negative_speed + 0.005
-       obstacle3_negative_speed + 0.005
-       obstacle4_negative_speed + 0.005
-
-       obstacle_positive_speed + 0.005
-       obstacle2_positive_speed + 0.005
-       obstacle3_positive_speed + 0.005
-       obstacle4_positive_speed + 0.005
-
+       
 
         console.log("Obstacle!");
       }
@@ -442,16 +427,7 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
-        //Obstacle speed + 1
-        obstacle_negative_speed + 0.005
-        obstacle2_negative_speed + 0.005
-        obstacle3_negative_speed + 0.005
-        obstacle4_negative_speed + 0.005
-
-        obstacle_positive_speed + 0.005
-        obstacle2_positive_speed + 0.005
-        obstacle3_positive_speed + 0.005
-        obstacle4_positive_speed + 0.005
+        
 
 
         console.log("Obstacle!");
