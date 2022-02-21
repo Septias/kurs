@@ -10,6 +10,7 @@ const _app = new p5(p5Instance => {
 
   //Player Speed
   let speed = 2
+  let framrate = 50
 
   //Player Positional Variables
   let player_position_horizontal = p.windowWidth / 2 - player_width / 2
@@ -120,6 +121,7 @@ const _app = new p5(p5Instance => {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.textFont('Helvetica');
     p.textSize(14)
+    p.frameRate(framrate)
 
   };
 
@@ -225,7 +227,7 @@ const _app = new p5(p5Instance => {
     p.fill(255, 255, 255)
     p.text("Highscore: " + highscore, 25, 25)
     p.text("Score: " + score_counter, 25, 50)
-    p.text("Obstacle Speed: " + obstacle_positive_speed,25,75)
+    p.text("Obstacle Speed: " + obstacle_positive_speed, 25, 75)
     p.text("Speed: " + ((speed).toFixed(1)), 25, 100)
     if (player_health == 3) {
       p.fill("green")
@@ -242,7 +244,7 @@ const _app = new p5(p5Instance => {
     p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
 
     //Healthbar
-    p.text (player_health,player_position_horizontal + player_width / 2 - p.textWidth(player_health) / 2 ,player_position_vertical - 10 )
+    p.text(player_health, player_position_horizontal + player_width / 2 - p.textWidth(player_health) / 2, player_position_vertical - 10)
 
 
     //Player
@@ -340,18 +342,18 @@ const _app = new p5(p5Instance => {
 
         //Incremeants Scoreboard by 1
         score_counter = score_counter + 1
-        speed = speed + 0.1
+        framrate = framrate + 2
 
         //Obstacle speed+ 1
-        obstacle_negative_speed + 0.05
-        obstacle2_negative_speed + 0.05
-        obstacle3_negative_speed + 0.05
-        obstacle4_negative_speed + 0.05
+        obstacle_negative_speed - 0.05
+        obstacle2_negative_speed - 0.05
+        obstacle3_negative_speed - 0.05
+        obstacle4_negative_speed - 0.05
 
-        obstacle_positive_speed + 0.05
-        obstacle2_positive_speed + 0.05
-        obstacle3_positive_speed + 0.05
-        obstacle4_positive_speed + 0.05
+        obstacle_positive_speed - 0.05
+        obstacle2_positive_speed - 0.05
+        obstacle3_positive_speed - 0.05
+        obstacle4_positive_speed - 0.05
 
         console.log("hit");
       }
@@ -386,7 +388,7 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
-       
+
 
         console.log("Obstacle!");
       }
@@ -400,7 +402,7 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
-        
+
         console.log("Obstacle!");
       }
     }
@@ -413,7 +415,7 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
-       
+
 
         console.log("Obstacle!");
       }
@@ -427,7 +429,7 @@ const _app = new p5(p5Instance => {
 
         player_health = player_health - 1
 
-        
+
 
 
         console.log("Obstacle!");
