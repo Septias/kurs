@@ -266,6 +266,8 @@ const _app = new p5(p5Instance => {
 
 
     //Scoreboard
+    p.textAlign(p.LEFT)
+    p.textSize(14)
     p.fill(255, 255, 255)
     p.fill(255, 255, 255)
     p.text("Highscore: " + highscore, 25, 25)
@@ -313,7 +315,8 @@ const _app = new p5(p5Instance => {
     if (player_health == 0) {
 
 
-      p.background(0, 0, 0)
+      p.fill(0,0,0)
+      p.rect(0,0,p.windowWidth,p.windowHeight)
       p.textAlign(p.CENTER)
       p.textSize(50)
       p.fill(153, 0, 0)
@@ -330,7 +333,8 @@ const _app = new p5(p5Instance => {
 
 
       if (space_is_pressed == true) {
-        location.reload()
+        //location.reload()
+        player_health = 3
 
 
 
