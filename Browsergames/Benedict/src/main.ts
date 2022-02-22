@@ -4,6 +4,13 @@ import './style.css';
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
+
+
+
+
+
+
+
   //Player Dimension
   let player_width = 75
   let player_height = 75
@@ -103,6 +110,21 @@ const _app = new p5(p5Instance => {
   //Obstacle spawntrigger
   let object_spawntrigger = false
 
+  //bullet variables
+
+
+  let bullest_flight_direction_verhältniss = 0
+  let bullet_is_flying = false
+
+  //bullet dimensions
+  let bullet_width = 10
+  let bullet_height = 10
+
+  //Bullet position Variables
+  let bullet_position_horizontal = 0
+  let bullet_position_vertical = 0
+
+
   //Move Variabels
   let moveleft = false
   let moveright = false
@@ -122,6 +144,7 @@ const _app = new p5(p5Instance => {
     p.textFont('Helvetica');
     p.textSize(14)
     p.frameRate(framrate)
+
 
   };
 
@@ -168,6 +191,14 @@ const _app = new p5(p5Instance => {
     }
   }
 
+  //bullets
+  if (space_is_pressed == true) {
+    mouseX_ = p.mouseX
+    mouseY_ = p.mouseY
+  }
+
+
+
   p.draw = function draw() {
     p.background(0, 0, 0);
 
@@ -193,6 +224,12 @@ const _app = new p5(p5Instance => {
     if (obstacle2_position_vertical >= p.windowHeight - obstacle2_height) {
       obstacle2_speed = obstacle2_negative_speed
     }
+    //bullets
+
+
+
+
+
 
     //Obstacles3
     p.fill(145, 71, 254)
@@ -222,6 +259,12 @@ const _app = new p5(p5Instance => {
     p.rect(collectible_position_horizontal, collectible_position_vertical, collectible_width, collectible_height);
 
 
+
+
+
+
+
+
     //Scoreboard
     p.fill(255, 255, 255)
     p.fill(255, 255, 255)
@@ -243,10 +286,6 @@ const _app = new p5(p5Instance => {
     //Heal Collectible
     p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
 
-    //Healthbar
-    p.text(player_health, player_position_horizontal + player_width / 2 - p.textWidth(player_health) / 2, player_position_vertical - 10)
-
-
     //Player
     if (player_health == 3) {
       p.fill("green")
@@ -265,6 +304,10 @@ const _app = new p5(p5Instance => {
       p.textSize(70)
       p.text("WARNING!! SIZES NOT COMPATIBLE!!", 100, 85)
     }
+    //Healthbar
+    p.text(player_health, player_position_horizontal + player_width / 2 - p.textWidth(player_health) / 2, player_position_vertical - 10)
+
+
 
     //Deathscreen
     if (player_health == 0) {
@@ -293,6 +336,7 @@ const _app = new p5(p5Instance => {
 
       }
     }
+
 
 
 
@@ -464,9 +508,38 @@ const _app = new p5(p5Instance => {
 
 
       object_spawntrigger = false
-    }
-  };
 
+
+
+
+
+
+    }
+
+
+    //Bullets
+    if (space_is_pressed == true) {
+      bullet_position_horizontal = player_position_horizontal + player_width / 2 - bullet_width / 2
+      bullet_position_vertical = player_position_vertical + player_height / 2 - bullet_height / 2
+      p.fill("blue")
+      p.rect(bullet_position_horizontal, bullet_position_vertical, bullet_width, bullet_height)
+      bullet_is_flying = true
+    }
+    //if (bullet_is_flying == true) {
+    bullest_flight_direction_verhältniss = p.mouseY / p.mouseX
+    bullet_position_horizontal = bullet_position_horizontal + 4
+    bullet_position_vertical = bullet_position_vertical + 4 * bullest_flight_direction_verhältniss
+    if (bullet_position_horizontal <= 0 - bullet_width || bullet_position_horizontal >= p.windowWidth) {
+      bullet_is_flying = false
+    }
+    if (bullet_position_vertical <= 0 - bullet_height || bullet_position_vertical >= p.windowHeight) {
+      bullet_is_flying = false
+    }
+    //console.log (p.mouseX,p.mouseY)
+    console.log(bullet_is_flying)
+    console.log(bullet_position_horizontal)
+    //}
+  };
 }, document.getElementById('app')!);
 
 
