@@ -135,9 +135,11 @@ const _app = new p5(p5Instance => {
   let score_counter = 0
   let player_health = 3
   let highscore = 0
+  
 
   //Deathscreen variables
   let space_is_pressed = false
+
 
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight);
@@ -326,6 +328,7 @@ const _app = new p5(p5Instance => {
       p.text("Press Space to restart", p.windowWidth / 2, p.windowHeight / 2 + 200)
       if (score_counter > highscore) {
         highscore = score_counter
+        
 
 
 
@@ -333,10 +336,8 @@ const _app = new p5(p5Instance => {
 
 
       if (space_is_pressed == true) {
-        //location.reload()
         player_health = 3
-
-
+        score_counter = 0
 
       }
     }
