@@ -28,17 +28,8 @@ const _app = new p5(p5Instance => {
   let deathscreen_hight = p.windowHeight
   let deathscreen_pos_horizontal = 0
   let deathscreen_pos_vertikal = 0
-  let respawn = false
-  
-  p.keyPressed = function() {
-    if (p.keyCode === 32)
-    respawn = true
-  }
+  let space = false
 
-  p.keyReleased = function() {
-    if (p.keyCode === 32)
-    respawn = false
-  }
 
   //Player
   let Player_Width = 90
@@ -47,8 +38,6 @@ const _app = new p5(p5Instance => {
   let Player_Position_Vertikal = p.windowHeight / 2 - Player_Hight / 2
 
   let lives = 3
-
-  let alive = true
 
 
 
@@ -60,11 +49,20 @@ const _app = new p5(p5Instance => {
   p.keyPressed = function () {
     if (p.keyCode === p.UP_ARROW)
       up = true
+
+    if (p.keyCode === 32) {
+      space = true
+    }
   }
 
   p.keyReleased = function () {
-    if (p.keyCode === p.UP_ARROW)
+    if (p.keyCode === p.UP_ARROW) {
       up = false
+    }
+
+    if (p.keyCode === 32) {
+      space = false
+    }
   }
 
 
@@ -73,22 +71,35 @@ const _app = new p5(p5Instance => {
   let obstacle1_width = 35
   let obstacle1_hight = 35
 
-  let obstacle_pos_horizontal = p.windowWidth + obstacle1_width
-  let obstacle_pos_vertical = p.windowHeight / 2 - obstacle1_hight
+  let spawntrigger = true
+
+  /*let obstacle_pos_horizontal =p.windowWidth + obstacle1_width
+  let obstacle_pos_vertical = p.windowHeight / 2 - obstacle1_hight*/
 
 
 
 
-
+  let obstacle_spawn_position_horizontal = p.windowWidth + obstacle1_width
+  let obstacle_spawn_area_vertical = p.windowHeight - obstacle1_hight / 2
+  let obstacle_pos_horizontal = obstacle_spawn_position_horizontal
+  let obstacle_pos_vertical = getRndInteger(0 - obstacle1_hight / 2, obstacle_spawn_area_vertical)
 
 
   //Draw
   p.draw = function draw() {
 
+
+    if (spawntrigger == true) {
+      obstacle_pos_vertical = getRndInteger(0 - obstacle1_hight / 2, obstacle_spawn_area_vertical)
+    }
+
+    console.log(space)
+
     p.background(0, 0, 0)//img für bild
     p.textFont("Calibri")
     p.textSize(20)
     p.fill(255, 255, 255)
+    p.textAlign(p.LEFT)
     p.text("Lives: " + lives, 25, 35)
 
 
@@ -121,10 +132,15 @@ const _app = new p5(p5Instance => {
     p.rect(obstacle_pos_horizontal, obstacle_pos_vertical, obstacle1_width, obstacle1_hight)
     obstacle_pos_horizontal = obstacle_pos_horizontal - speedobstackle
 
-
-    if(obstacle_pos_horizontal < 0) {
-      obstacle_pos_horizontal = p.windowWidth + obstacle1_width
+    if (obstacle_pos_horizontal > 0) {
+      spawntrigger = false
     }
+
+    if (obstacle_pos_horizontal < 0) {
+      obstacle_pos_horizontal = p.windowWidth + obstacle1_width
+      spawntrigger = true
+    }
+
 
     //console.log(obstacle_pos_vertical)
 
@@ -133,35 +149,33 @@ const _app = new p5(p5Instance => {
     //Damage
     if (Player_Position_Horizontal + Player_Width >= obstacle_pos_horizontal + obstacle1_width && Player_Position_Horizontal <= obstacle_pos_horizontal) {
       if (Player_Position_Vertikal + Player_Hight >= obstacle_pos_vertical + obstacle1_hight && Player_Position_Vertikal <= obstacle_pos_vertical) {
-        
-      obstacle_pos_horizontal = p.windowWidth + obstacle1_width
-        
-      lives = lives - 1
-      
-      console.log("Damage")
-      console.log(lives)
+
+        obstacle_pos_horizontal = p.windowWidth + obstacle1_width
+
+        lives = lives - 1
+
+        console.log("Damage")
+        console.log(lives)
       }
     }
 
 
     //Death
     if (lives == 0) {
-    alive = false  
-    }
 
-    if (alive == false) {
-    p.fill(0,0,0)
-    p.rect(deathscreen_pos_horizontal,deathscreen_pos_vertikal,deathscreen_width,deathscreen_hight)
-    p.fill(600, 50, 30)
-    p.textSize(90)
-    p.text("You Died", p.windowWidth / 2 - 90, p.windowHeight / 2 - 90)
-    }
-    
 
-if(respawn == true) {
-  deathscreen_pos_horizontal = 0 -deathscreen_width
-  deathscreen_pos_vertikal = 0 - deathscreen_hight
-}    
+      p.fill(0, 0, 0)
+      p.rect(deathscreen_pos_horizontal, deathscreen_pos_vertikal, deathscreen_width, deathscreen_hight)
+      p.fill(600, 50, 30)
+      p.textSize(90)
+      p.textAlign(p.CENTER)
+      p.text("You Died", p.windowWidth / 2, p.windowHeight / 2)
+
+
+      if (space == true) {
+        lives = 3
+      }
+    }
 
 
 
