@@ -330,6 +330,10 @@ const _app = new p5(p5Instance => {
     //Heal Collectible
     p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
 
+    //Healthbar
+    p.text(player_health, player_position_horizontal + player_width / 2 - p.textWidth("player_health") / 2, player_position_vertical - 10)
+
+
     //Player
     if (player_health == 3) {
       p.fill("green")
