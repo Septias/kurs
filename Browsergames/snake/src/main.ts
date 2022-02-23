@@ -154,7 +154,7 @@ const _app = new p5(p5Instance => {
     p.rect(deathscreen_pos_horizontal,deathscreen_pos_vertikal,deathscreen_width,deathscreen_hight)
     p.fill(600, 50, 30)
     p.textSize(90)
-    p.text("You Died", p.windowWidth / 2 - 90, p.windowHeight / 2)
+    p.text("You Died", p.windowWidth / 2 - 90, p.windowHeight / 2 - 90)
     }
     
 
