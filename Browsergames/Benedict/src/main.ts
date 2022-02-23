@@ -4,6 +4,13 @@ import './style.css';
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
+
+
+
+
+
+
+
   //Player Dimension
   let player_width = 75
   let player_height = 75
@@ -103,6 +110,21 @@ const _app = new p5(p5Instance => {
   //Obstacle spawntrigger
   let object_spawntrigger = false
 
+  //bullet variables
+
+
+  let bullest_flight_direction_verhältniss = 0
+  let bullet_is_flying = false
+
+  //bullet dimensions
+  let bullet_width = 10
+  let bullet_height = 10
+
+  //Bullet position Variables
+  let bullet_position_horizontal = 0
+  let bullet_position_vertical = 0
+
+
   //Move Variabels
   let moveleft = false
   let moveright = false
@@ -113,15 +135,20 @@ const _app = new p5(p5Instance => {
   let score_counter = 0
   let player_health = 3
   let highscore = 0
+  let Scoreboard_speed_player = 1
+  let Scoreboard_speed_obatcle = 1
+  
 
   //Deathscreen variables
   let space_is_pressed = false
+
 
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.textFont('Helvetica');
     p.textSize(14)
     p.frameRate(framrate)
+
 
   };
 
@@ -168,6 +195,14 @@ const _app = new p5(p5Instance => {
     }
   }
 
+  //bullets
+  if (space_is_pressed == true) {
+    mouseX_ = p.mouseX
+    mouseY_ = p.mouseY
+  }
+
+
+
   p.draw = function draw() {
     p.background(0, 0, 0);
 
@@ -193,6 +228,12 @@ const _app = new p5(p5Instance => {
     if (obstacle2_position_vertical >= p.windowHeight - obstacle2_height) {
       obstacle2_speed = obstacle2_negative_speed
     }
+    //bullets
+
+
+
+
+
 
     //Obstacles3
     p.fill(145, 71, 254)
@@ -222,13 +263,21 @@ const _app = new p5(p5Instance => {
     p.rect(collectible_position_horizontal, collectible_position_vertical, collectible_width, collectible_height);
 
 
+
+
+
+
+
+
     //Scoreboard
+    p.textAlign(p.LEFT)
+    p.textSize(14)
     p.fill(255, 255, 255)
     p.fill(255, 255, 255)
     p.text("Highscore: " + highscore, 25, 25)
     p.text("Score: " + score_counter, 25, 50)
     p.text("Obstacle Speed: " + obstacle_positive_speed, 25, 75)
-    p.text("Speed: " + ((speed).toFixed(1)), 25, 100)
+    p.text("Speed: " + Scoreboard_speed_player, 25, 100)
     if (player_health == 3) {
       p.fill("green")
     }
@@ -265,12 +314,17 @@ const _app = new p5(p5Instance => {
       p.textSize(70)
       p.text("WARNING!! SIZES NOT COMPATIBLE!!", 100, 85)
     }
+    //Healthbar
+    p.text(player_health, player_position_horizontal + player_width / 2 - p.textWidth(player_health) / 2, player_position_vertical - 10)
+
+
 
     //Deathscreen
     if (player_health == 0) {
 
 
-      p.background(0, 0, 0)
+      p.fill(0,0,0)
+      p.rect(0,0,p.windowWidth,p.windowHeight)
       p.textAlign(p.CENTER)
       p.textSize(50)
       p.fill(153, 0, 0)
@@ -280,6 +334,7 @@ const _app = new p5(p5Instance => {
       p.text("Press Space to restart", p.windowWidth / 2, p.windowHeight / 2 + 200)
       if (score_counter > highscore) {
         highscore = score_counter
+        
 
 
 
@@ -287,12 +342,12 @@ const _app = new p5(p5Instance => {
 
 
       if (space_is_pressed == true) {
-        location.reload()
-
-
+        player_health = 3
+        score_counter = 0
 
       }
     }
+
 
 
 
@@ -343,6 +398,7 @@ const _app = new p5(p5Instance => {
         //Incremeants Scoreboard by 1
         score_counter = score_counter + 1
         framrate = framrate + 2
+        Scoreboard_speed_player = Scoreboard_speed_player + 1
 
         //Obstacle speed+ 1
         obstacle_negative_speed - 0.05
@@ -464,9 +520,38 @@ const _app = new p5(p5Instance => {
 
 
       object_spawntrigger = false
-    }
-  };
 
+
+
+
+
+
+    }
+
+
+    //Bullets
+    if (space_is_pressed == true) {
+      bullet_position_horizontal = player_position_horizontal + player_width / 2 - bullet_width / 2
+      bullet_position_vertical = player_position_vertical + player_height / 2 - bullet_height / 2
+      p.fill("blue")
+      p.rect(bullet_position_horizontal, bullet_position_vertical, bullet_width, bullet_height)
+      bullet_is_flying = true
+    }
+    //if (bullet_is_flying == true) {
+    bullest_flight_direction_verhältniss = p.mouseY / p.mouseX
+    bullet_position_horizontal = bullet_position_horizontal + 4
+    bullet_position_vertical = bullet_position_vertical + 4 * bullest_flight_direction_verhältniss
+    if (bullet_position_horizontal <= 0 - bullet_width || bullet_position_horizontal >= p.windowWidth) {
+      bullet_is_flying = false
+    }
+    if (bullet_position_vertical <= 0 - bullet_height || bullet_position_vertical >= p.windowHeight) {
+      bullet_is_flying = false
+    }
+    //console.log (p.mouseX,p.mouseY)
+    console.log(bullet_is_flying)
+    console.log(bullet_position_horizontal)
+    //}
+  };
 }, document.getElementById('app')!);
 
 
