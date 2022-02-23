@@ -139,12 +139,12 @@ const _app = new p5(p5Instance => {
   let Scoreboard_speed_obatcle = 1
 
 
-  //Deathscreen variables
+  //Deathscreen variables 
   let space_is_pressed = false
 
 
   p.setup = function setup() {
-    p.createCanvas(p.windowWidth, p.windowHeight);
+    p.createCanvas(p.windowWidth - 50(p.windowWidth), p.windowHeight - 50%(p.windowHeight));
     p.textFont('Helvetica');
     p.textSize(14)
     p.frameRate(framrate)
@@ -330,8 +330,7 @@ const _app = new p5(p5Instance => {
     //Heal Collectible
     p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
 
-    //Healthbar
-    p.text(player_health, player_position_horizontal + player_width / 2 - p.textWidth("player_health") / 2, player_position_vertical - 10)
+    
 
 
     //Player
