@@ -9,7 +9,8 @@ const _app = new p5(p5Instance => {
 
 
 
-
+  //speed
+  let framrate = 50
 
   //Player Dimension
   let player_width = 75
@@ -17,7 +18,7 @@ const _app = new p5(p5Instance => {
 
   //Player Speed
   let speed = 2
-  let framrate = 50
+
 
   //Player Positional Variables
   let player_position_horizontal = p.windowWidth / 2 - player_width / 2
@@ -111,18 +112,17 @@ const _app = new p5(p5Instance => {
   let object_spawntrigger = false
 
   //bullet variables
-
-
-  let bullest_flight_direction_verhältniss = 0
+  let bullet_flight_direction_verhältniss = 0
   let bullet_is_flying = false
+  let bullet_speed = 6
 
   //bullet dimensions
   let bullet_width = 10
   let bullet_height = 10
 
   //Bullet position Variables
-  let bullet_position_horizontal = 0
-  let bullet_position_vertical = 0
+  let bullet_position_horizontal = player_position_horizontal + player_width / 2 - bullet_width / 2
+  let bullet_position_vertical = player_position_vertical + player_height / 2 - bullet_height / 2
 
 
   //Move Variabels
@@ -137,7 +137,7 @@ const _app = new p5(p5Instance => {
   let highscore = 0
   let Scoreboard_speed_player = 1
   let Scoreboard_speed_obatcle = 1
-  
+
 
   //Deathscreen variables
   let space_is_pressed = false
@@ -173,6 +173,7 @@ const _app = new p5(p5Instance => {
     }
     if (p.keyCode === 32) {
       space_is_pressed = true
+      bullet_is_flying = true
     }
   }
 
@@ -195,16 +196,53 @@ const _app = new p5(p5Instance => {
     }
   }
 
-  //bullets
-  if (space_is_pressed == true) {
-    mouseX_ = p.mouseX
-    mouseY_ = p.mouseY
-  }
 
 
 
   p.draw = function draw() {
     p.background(0, 0, 0);
+
+
+
+    p.keyPressed = function () {
+      if (p.keyCode === p.LEFT_ARROW) {
+        moveleft = true
+      }
+      if (p.keyCode === p.RIGHT_ARROW) {
+        moveright = true
+      }
+      if (p.keyCode === p.UP_ARROW) {
+        moveup = true
+      }
+      if (p.keyCode === p.DOWN_ARROW) {
+        movedown = true
+      }
+      if (p.keyCode === 32) {
+        space_is_pressed = true
+        bullet_is_flying = true
+      }
+    }
+
+    //Handles All Keyrealeses
+    p.keyReleased = function () {
+      if (p.keyCode === p.LEFT_ARROW) {
+        moveleft = false
+      }
+      if (p.keyCode === p.RIGHT_ARROW) {
+        moveright = false
+      }
+      if (p.keyCode === p.UP_ARROW) {
+        moveup = false
+      }
+      if (p.keyCode === p.DOWN_ARROW) {
+        movedown = false
+      }
+      if (p.keyCode === 32) {
+        space_is_pressed = false
+      }
+    }
+
+
 
     //Obstacles Horizontal
     p.fill(145, 71, 254)
@@ -319,8 +357,8 @@ const _app = new p5(p5Instance => {
     if (player_health == 0) {
 
 
-      p.fill(0,0,0)
-      p.rect(0,0,p.windowWidth,p.windowHeight)
+      p.fill(0, 0, 0)
+      p.rect(0, 0, p.windowWidth, p.windowHeight)
       p.textAlign(p.CENTER)
       p.textSize(50)
       p.fill(153, 0, 0)
@@ -330,7 +368,7 @@ const _app = new p5(p5Instance => {
       p.text("Press Space to restart", p.windowWidth / 2, p.windowHeight / 2 + 200)
       if (score_counter > highscore) {
         highscore = score_counter
-        
+
 
 
 
@@ -340,6 +378,7 @@ const _app = new p5(p5Instance => {
       if (space_is_pressed == true) {
         player_health = 3
         score_counter = 0
+        framrate = 50
 
       }
     }
@@ -526,28 +565,52 @@ const _app = new p5(p5Instance => {
 
 
     //Bullets
+
     if (space_is_pressed == true) {
-      bullet_position_horizontal = player_position_horizontal + player_width / 2 - bullet_width / 2
-      bullet_position_vertical = player_position_vertical + player_height / 2 - bullet_height / 2
+      
+      bullet_flight_direction_verhältniss = p.mouseY / p.mouseX
+      
+
+    }
+    if (bullet_is_flying == true) {
       p.fill("blue")
       p.rect(bullet_position_horizontal, bullet_position_vertical, bullet_width, bullet_height)
-      bullet_is_flying = true
+      bullet_position_horizontal = bullet_position_horizontal + bullet_speed
+      bullet_position_vertical = bullet_position_vertical + bullet_speed * bullet_flight_direction_verhältniss
+      if (bullet_position_horizontal <= 0 - bullet_width || bullet_position_horizontal >= p.windowWidth) {
+        bullet_is_flying = false
+      }
+      if (bullet_position_vertical <= 0 - bullet_height || bullet_position_vertical >= p.windowHeight) {
+        bullet_is_flying = false
+      }
     }
-    //if (bullet_is_flying == true) {
-    bullest_flight_direction_verhältniss = p.mouseY / p.mouseX
-    bullet_position_horizontal = bullet_position_horizontal + 4
-    bullet_position_vertical = bullet_position_vertical + 4 * bullest_flight_direction_verhältniss
-    if (bullet_position_horizontal <= 0 - bullet_width || bullet_position_horizontal >= p.windowWidth) {
-      bullet_is_flying = false
+    if (space_is_pressed == true) {
+      console.log(bullet_is_flying, "h" + bullet_position_horizontal, "v" + bullet_position_vertical)
     }
-    if (bullet_position_vertical <= 0 - bullet_height || bullet_position_vertical >= p.windowHeight) {
-      bullet_is_flying = false
-    }
-    //console.log (p.mouseX,p.mouseY)
-    console.log(bullet_is_flying)
-    console.log(bullet_position_horizontal)
-    //}
+
+
+
+
   };
+
+
 }, document.getElementById('app')!);
 
+
+   /*if (p.mouseX > bullet_position_horizontal && p.mouseY > bullet_position_vertical) {
+        bullet_position_horizontal = bullet_position_horizontal + bullet_speed
+        bullet_position_vertical = bullet_position_vertical + bullet_speed * bullet_flight_direction_verhältniss
+      }
+      if (p.mouseX < bullet_position_horizontal && p.mouseY > bullet_position_vertical) {
+        bullet_position_horizontal = 0 - bullet_position_horizontal - bullet_speed
+        bullet_position_vertical = bullet_position_vertical + bullet_speed * bullet_flight_direction_verhältniss
+      }
+      if (p.mouseX > bullet_position_horizontal && p.mouseY < bullet_position_vertical) {
+        bullet_position_horizontal =  bullet_position_horizontal + bullet_speed
+        bullet_position_vertical =0 - bullet_position_vertical - bullet_speed * bullet_flight_direction_verhältniss
+      }
+      if (p.mouseX < bullet_position_horizontal && p.mouseY < bullet_position_vertical) {
+        bullet_position_horizontal = 0 - bullet_position_horizontal - bullet_speed
+        bullet_position_vertical = 0 - bullet_position_vertical - bullet_speed * bullet_flight_direction_verhältniss
+      }*/
 
