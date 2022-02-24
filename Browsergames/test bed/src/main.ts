@@ -1,594 +1,194 @@
 import p5, { Vector } from 'p5';
+
 import './style.css';
 
-const _app = new p5(p5Instance => {
-  const p = p5Instance as unknown as p5;
-  //speed
-  let framerate = 50
+//Obstacles
+let speed_obstackle = 4
+let spawntrigger = true
 
-  //Player Dimension
-  let player_width = 75
-  let player_height = 75
+//Obstacle Size
+let obstacle1_width = 35
+let obstacle1_height = 35
 
-  //Player Speed
-  let speed = 4
-
-
-  //Player Positional Variables
-  let player_position_horizontal = p.windowWidth / 2 - player_width / 2
-  let player_position_vertical = p.windowHeight / 2 - player_height / 2
-  let player_runoff_width = 0 - player_width
-  let player_runoff_height = 0 - player_height
-
-  //Collectible Dimensions
-  let collectible_width = 25
-  let collectible_height = 25
-
-  //Collectible Positional Variables
-  let collectible_spawn_area_horizontal = p.windowWidth - collectible_width / 2
-  let collectible_spawn_area_vertical = p.windowHeight - collectible_height / 2
-  let collectible_position_horizontal = getRndInteger(0 - collectible_width / 2, collectible_spawn_area_horizontal)
-  let collectible_position_vertical = getRndInteger(0 - collectible_height / 2, collectible_spawn_area_vertical)
-
-  //Heal Collectible Dimensions
-  let heal_collectible_width = 25
-  let heal_collectible_height = 25
-
-  //Heal Collectible Positional Variables
-  let heal_collectible_spawn_area_horizontal = p.windowWidth - heal_collectible_width / 2
-  let heal_collectible_spawn_area_vertical = p.windowHeight - heal_collectible_height / 2
-  let heal_collectible_position_horizontal = getRndInteger(0 - heal_collectible_width / 2, heal_collectible_spawn_area_horizontal)
-  let heal_collectible_position_vertical = getRndInteger(0 - heal_collectible_height / 2, heal_collectible_spawn_area_vertical)
+let obstackle2_width = 35
+let obstackle2_height = 35
 
 
-  //Obstacle Dimensions
-  let obstacle_height = 30
-  let obstacle_width = 30
-
-  //Obstacle 2 Dimensions
-  let obstacle2_height = 30
-  let obstacle2_width = 30
-
-  //Obstacle 3 Dimensions
-  let obstacle3_height = 30
-  let obstacle3_width = 30
-
-  //Obstacle 4 Dimensions
-  let obstacle4_height = 30
-  let obstacle4_width = 30
-
-  //Obstacle Positional Variables
-  let obstacle_spawn_area_horizontal = p.windowWidth - obstacle_width / 2
-  let obstacle_spawn_area_vertical = p.windowHeight - obstacle_height / 2
-  let obstacle_position_horizontal = getRndInteger(0 - obstacle_width / 2, obstacle_spawn_area_horizontal)
-  let obstacle_position_vertical = getRndInteger(0 - obstacle_height / 2, obstacle_spawn_area_vertical)
-
-  //Obstacle 2 Positional Variables
-  let obstacle2_spawn_area_horizontal = p.windowWidth - obstacle2_width / 2
-  let obstacle2_spawn_area_vertical = p.windowHeight - obstacle2_height / 2
-  let obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width / 2, obstacle2_spawn_area_horizontal)
-  let obstacle2_position_vertical = getRndInteger(0 - obstacle2_height / 2, obstacle2_spawn_area_vertical)
-
-  //Obstacle 3 Positional Variables
-  let obstacle3_spawn_area_horizontal = p.windowWidth - obstacle3_width / 2
-  let obstacle3_spawn_area_vertical = p.windowHeight - obstacle3_height / 2
-  let obstacle3_position_horizontal = getRndInteger(0 - obstacle3_width / 2, obstacle3_spawn_area_horizontal)
-  let obstacle3_position_vertical = getRndInteger(0 - obstacle3_height / 2, obstacle3_spawn_area_vertical)
-
-  //Obstacle 4 Positional Variables
-  let obstacle4_spawn_area_horizontal = p.windowWidth - obstacle4_width / 2
-  let obstacle4_spawn_area_vertical = p.windowHeight - obstacle4_height / 2
-  let obstacle4_position_horizontal = getRndInteger(0 - obstacle4_width / 2, obstacle4_spawn_area_horizontal)
-  let obstacle4_position_vertical = getRndInteger(0 - obstacle4_height / 2, obstacle4_spawn_area_vertical)
-
-  //Obstacle Speed Variable
-  let obstacle_positive_speed = 4
-  let obstacle_negative_speed = -4
-  let obstacle_speed = obstacle_negative_speed
-
-  //Obstacle2 Speed Variable
-  let obstacle2_positive_speed = 4
-  let obstacle2_negative_speed = -4
-  let obstacle2_speed = obstacle2_negative_speed
-
-  //Obstacle3 Speed Variable
-  let obstacle3_positive_speed = 4
-  let obstacle3_negative_speed = -4
-  let obstacle3_speed = obstacle3_negative_speed
-
-  //Obstacle4 Speed Variable
-  let obstacle4_positive_speed = 4
-  let obstacle4_negative_speed = -4
-  let obstacle4_speed = obstacle4_negative_speed
-
-
-  //Obstacle spawntrigger
-  let object_spawntrigger = false
-
-  //bullet variables
-  let bullet_flight_direction_verhältniss = 0
-  let bullet_is_flying = false
-  let bullet_speed = 6
-
-  //bullet dimensions
-  let bullet_width = 10
-  let bullet_height = 10
-
-  //Bullet position Variables
-  let bullet_position_horizontal = player_position_horizontal + player_width / 2 - bullet_width / 2
-  let bullet_position_vertical = player_position_vertical + player_height / 2 - bullet_height / 2
-
-
-  //Move Variabels
-  let moveleft = false
-  let moveright = false
-  let moveup = false
-  let movedown = false
-
-  //Scoreboard Variables
-  let score_counter = 0
-  let player_health = 3
-  let highscore = 0
-  let scoreboard_speed_player = 1
-  let scoreboard_speed_obastcle = 1
-
-
-  //Deathscreen variables 
-  let space_is_pressed = false
-
-
-  p.setup = function setup() {
-    p.createCanvas(p.windowWidth, p.windowHeight);
-    p.textFont('Helvetica');
-    p.textSize(14)
-    p.frameRate(200)
-
-
-  };
-
-  //Random Integer
+  //Randomizer
   function getRndInteger(min: any, max: any) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  //Handles All Keypresses
+
+const _app = new p5(p5Instance => {
+  const p = p5Instance as unknown as p5;
+
+
+  //Background  
+  p.setup = function setup() {
+    p.createCanvas(p.windowWidth, p.windowHeight)
+    p.textFont("Calibri")
+  }
+  
+  //Deathscreen
+  let deathscreen_width = p.windowWidth
+  let deathscreen_height = p.windowHeight
+  let deathscreen_pos_horizontal = 0
+  let deathscreen_pos_vertikal = 0
+  let space = false
+
+  //Player
+  let Player_Width = 90
+  let Player_height = 90
+  let Player_Position_Horizontal = p.windowWidth / 2 - Player_Width / 2
+  let Player_Position_Vertikal = p.windowHeight / 2 - Player_height / 2
+  let lives = 3
+
+  //Movement Player
+  let speed = 6
+  let up = false
+
+
   p.keyPressed = function () {
-    if (p.keyCode === p.LEFT_ARROW) {
-      moveleft = true
-    }
-    if (p.keyCode === p.RIGHT_ARROW) {
-      moveright = true
-    }
-    if (p.keyCode === p.UP_ARROW) {
-      moveup = true
-    }
-    if (p.keyCode === p.DOWN_ARROW) {
-      movedown = true
-    }
+    if (p.keyCode === p.UP_ARROW)
+      up = true
+
     if (p.keyCode === 32) {
-      space_is_pressed = true
-      bullet_is_flying = true
+      space = true
     }
   }
 
-  //Handles All Keyrealeses
   p.keyReleased = function () {
-    if (p.keyCode === p.LEFT_ARROW) {
-      moveleft = false
-    }
-    if (p.keyCode === p.RIGHT_ARROW) {
-      moveright = false
-    }
     if (p.keyCode === p.UP_ARROW) {
-      moveup = false
+      up = false
     }
-    if (p.keyCode === p.DOWN_ARROW) {
-      movedown = false
-    }
+
     if (p.keyCode === 32) {
-      space_is_pressed = false
+      space = false
     }
   }
 
+  let obstacles: Obstacle[] = []
 
 
-
+  //Draw
   p.draw = function draw() {
-    p.background(0, 0, 0);
-
-
-
-    p.keyPressed = function () {
-      if (p.keyCode === p.LEFT_ARROW) {
-        moveleft = true
-      }
-      if (p.keyCode === p.RIGHT_ARROW) {
-        moveright = true
-      }
-      if (p.keyCode === p.UP_ARROW) {
-        moveup = true
-      }
-      if (p.keyCode === p.DOWN_ARROW) {
-        movedown = true
-      }
-      if (p.keyCode === 32) {
-        space_is_pressed = true
-        bullet_is_flying = true
-      }
+    if (spawntrigger == true) {
+      //obstacle_pos_vertical = getRndInteger(0 - obstacle1_height / 2, obstacle_spawn_area_vertical)
+      obstacles.push(createObstacle(p.windowHeight, p.windowWidth))
     }
 
-    //Handles All Keyrealeses
-    p.keyReleased = function () {
-      if (p.keyCode === p.LEFT_ARROW) {
-        moveleft = false
-      }
-      if (p.keyCode === p.RIGHT_ARROW) {
-        moveright = false
-      }
-      if (p.keyCode === p.UP_ARROW) {
-        moveup = false
-      }
-      if (p.keyCode === p.DOWN_ARROW) {
-        movedown = false
-      }
-      if (p.keyCode === 32) {
-        space_is_pressed = false
-      }
-    }
+    console.log(space)
 
-
-
-    //Obstacles Horizontal
-    p.fill(145, 71, 254)
-    p.rect(obstacle_position_horizontal, obstacle_position_vertical, obstacle_width, obstacle_height);
-    obstacle_position_vertical = obstacle_position_vertical + obstacle_speed
-    if (obstacle_position_vertical <= 0) {
-      obstacle_speed = obstacle_positive_speed
-    }
-    if (obstacle_position_vertical >= p.windowHeight - obstacle_height) {
-      obstacle_speed = obstacle_negative_speed
-    }
-
-
-    //Obstacles2 Horizontal
-    p.fill(145, 71, 254)
-    p.rect(obstacle2_position_horizontal, obstacle2_position_vertical, obstacle2_width, obstacle2_height);
-    obstacle2_position_vertical = obstacle2_position_vertical + obstacle2_speed
-    if (obstacle2_position_vertical <= 0) {
-      obstacle2_speed = obstacle2_positive_speed
-    }
-    if (obstacle2_position_vertical >= p.windowHeight - obstacle2_height) {
-      obstacle2_speed = obstacle2_negative_speed
-    }
-
-    //Obstacles3
-    p.fill(145, 71, 254)
-    p.rect(obstacle3_position_horizontal, obstacle3_position_vertical, obstacle3_width, obstacle3_height);
-    obstacle3_position_horizontal = obstacle3_position_horizontal + obstacle3_speed
-    if (obstacle3_position_horizontal <= 0) {
-      obstacle3_speed = obstacle3_positive_speed
-    }
-    if (obstacle3_position_horizontal >= p.windowWidth - obstacle3_height) {
-      obstacle3_speed = obstacle3_negative_speed
-    }
-
-    //Obstacles4
-    p.fill(145, 71, 254)
-    p.rect(obstacle4_position_horizontal, obstacle4_position_vertical, obstacle4_width, obstacle4_height);
-    obstacle4_position_horizontal = obstacle4_position_horizontal + obstacle4_speed
-    if (obstacle4_position_horizontal <= 0) {
-      obstacle4_speed = obstacle4_positive_speed
-    }
-    if (obstacle4_position_horizontal >= p.windowWidth - obstacle4_height) {
-      obstacle4_speed = obstacle4_negative_speed
-    }
-
-
-    //Collectible
-    p.fill(225, 0, 127)
-    p.rect(collectible_position_horizontal, collectible_position_vertical, collectible_width, collectible_height);
-
-
-
-    //Scoreboard
+    p.background(0, 0, 0)//img für bild
+    p.textSize(20)
+    p.fill(255, 255, 255)
     p.textAlign(p.LEFT)
-    p.textSize(14)
-    p.fill(255, 255, 255)
-    p.fill(255, 255, 255)
-    p.text("Highscore: " + highscore, 25, 25)
-    p.text("Score: " + score_counter, 25, 50)
-    p.text("Obstacle Speed: " + obstacle_positive_speed, 25, 75)
-    p.text("Speed: " + scoreboard_speed_player, 25, 100)
-    if (player_health == 3) {
-      p.fill("green")
-    }
-    if (player_health == 2) {
-      p.fill("orange")
-    }
-    if (player_health == 1) {
-      p.fill(125, 0, 0)
-    }
-    p.text("Health: " + player_health, 25, 125)
+    p.text("Lives: " + lives, 25, 35)
 
-    //Heal Collectible
-    p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
-
-
-
+    console.log('Objektanzahl: ', obstacles.length);
 
     //Player
-    if (player_health == 3) {
-      p.fill("green")
+    p.fill(0, 200, 250)
+    p.rect(Player_Position_Horizontal, Player_Position_Vertikal, Player_Width, Player_height)
+
+    if (up == true) {
+      Player_Position_Vertikal = Player_Position_Vertikal - speed
     }
-    if (player_health == 2) {
-      p.fill("orange")
+
+    if (up == false) {
+      Player_Position_Vertikal = Player_Position_Vertikal + speed
     }
-    if (player_health == 1) {
-      p.fill(125, 0, 0)
+
+    if (Player_Position_Vertikal > p.windowHeight - Player_height) {
+      Player_Position_Vertikal = p.windowHeight - Player_height
     }
-    p.rect(player_position_horizontal, player_position_vertical, player_width, player_height);
 
-
-    if ((player_width <= collectible_width) || (player_height <= collectible_height)) {
-      p.fill("red")
-      p.textSize(70)
-      p.text("WARNING!! SIZES NOT COMPATIBLE!!", 100, 85)
+    if (Player_Position_Vertikal < 0) {
+      Player_Position_Vertikal = 0
     }
-    //Healthbar
-    p.text(player_health, player_position_horizontal + player_width / 2 - p.textWidth(player_health.toString()) / 2, player_position_vertical - 10)
 
 
+    //Obstacles
+    p.fill(255, 50, 30)
 
-    //Deathscreen
-    if (player_health == 0) {
+    //p.rect(obstacle_pos_horizontal, obstacle_pos_vertical, obstacle1_width, obstacle1_height)
+    // obstacle_pos_horizontal = obstacle_pos_horizontal - speed_obstackle
 
 
+    for (const obstacle of obstacles) {
+      obstacle.update()
+      obstacle.draw(p)
+      if (obstacle.collide(Player_Position_Horizontal, Player_Position_Vertikal, Player_Width, Player_height)) {
+
+      }
+    }
+
+
+    //Damage
+    /*if (Player_Position_Horizontal + Player_Width >= obstacle_pos_horizontal + obstacle1_width && Player_Position_Horizontal <= obstacle_pos_horizontal) {
+      if (Player_Position_Vertikal + Player_height >= obstacle_pos_vertical + obstacle1_height && Player_Position_Vertikal <= obstacle_pos_vertical) {
+
+        spawntrigger = true
+
+        obstacle_pos_horizontal = p.windowWidth + obstacle1_width
+
+        lives = lives - 1
+
+        console.log("Damage")
+        console.log(lives)
+      }
+    }*/
+
+
+    //Death
+    if (lives == 0) {
       p.fill(0, 0, 0)
-      p.rect(0, 0, p.windowWidth, p.windowHeight)
+      p.rect(deathscreen_pos_horizontal, deathscreen_pos_vertikal, deathscreen_width, deathscreen_height)
+      p.fill(600, 50, 30)
+      p.textSize(90)
       p.textAlign(p.CENTER)
-      p.textSize(50)
-      p.fill(153, 0, 0)
-      p.text("You Died", p.windowWidth / 2, p.windowHeight / 2 - 100)
-      p.fill(255, 255, 255)
-      p.text("You had a famous score of " + score_counter, p.windowWidth / 2, p.windowHeight / 2)
-      p.text("Press Space to restart", p.windowWidth / 2, p.windowHeight / 2 + 200)
-      if (score_counter > highscore) {
-        highscore = score_counter
-      }
+      p.text("You Died", p.windowWidth / 2, p.windowHeight / 2)
 
 
-      if (space_is_pressed == true) {
-        player_health = 3
-        score_counter = 0
-        framerate = 50
-
+      if (space == true) {
+        lives = 3
       }
     }
-
-    //Collectible Position Debug:
-    //console.log(collectible_position_horizontal, collectible_position_vertical);
-
-
-    //Movement Checks
-    if (moveleft == true) {
-      player_position_horizontal = player_position_horizontal - speed
-      //console.log(player_position_horizontal);
-      if (player_position_horizontal <= player_runoff_width) {
-        player_position_horizontal = p.windowWidth
-      }
-    }
-    if (moveright == true) {
-      player_position_horizontal = player_position_horizontal + speed
-      //console.log(player_position_horizontal);
-      if (player_position_horizontal >= p.windowWidth) {
-        player_position_horizontal = player_runoff_width
-      }
-    }
-    if (moveup == true) {
-      player_position_vertical = player_position_vertical - speed
-      //console.log(player_position_vertical);
-      if (player_position_vertical <= player_runoff_height) {
-        player_position_vertical = p.windowHeight
-      }
-    }
-    if (movedown == true) {
-      player_position_vertical = player_position_vertical + speed
-      //console.log(player_position_vertical);
-      if (player_position_vertical >= p.windowHeight) {
-        player_position_vertical = player_runoff_height
-      }
-    }
-
-    //Collectible Checks
-    if (player_position_horizontal + player_width >= collectible_position_horizontal + collectible_width && player_position_horizontal <= collectible_position_horizontal) {
-      if (player_position_vertical + player_height >= collectible_position_vertical + collectible_height && player_position_vertical <= collectible_position_vertical) {
-
-
-        //Obstacle Spawntrigger
-        object_spawntrigger = true
-
-        //Incremeants Scoreboard by 1
-        score_counter = score_counter + 1
-        framerate = framerate + 20
-        scoreboard_speed_player = scoreboard_speed_player + 1
-
-        //Obstacle speed+ 1
-        obstacle_negative_speed - 0.05
-        obstacle2_negative_speed - 0.05
-        obstacle3_negative_speed - 0.05
-        obstacle4_negative_speed - 0.05
-
-        obstacle_positive_speed - 0.05
-        obstacle2_positive_speed - 0.05
-        obstacle3_positive_speed - 0.05
-        obstacle4_positive_speed - 0.05
-        console.log(framerate)
-
-        console.log("hit");
-      }
-    }
-    //Heal Collectible Checks
-    if (player_health < 3) {
-      if (player_position_horizontal + player_width >= heal_collectible_position_horizontal + heal_collectible_width && player_position_horizontal <= heal_collectible_position_horizontal) {
-        if (player_position_vertical + player_height >= heal_collectible_position_vertical + heal_collectible_height && player_position_vertical <= heal_collectible_position_vertical) {
-
-
-          //Obstacle Spawntrigger
-          object_spawntrigger = true
-
-          //Incremeants Health by 1
-          if (player_health < 3) {
-            player_health = player_health + 1
-          }
-          console.log("Heal");
-        }
-      }
-    }
-
-
-    //Obstacle Checks
-
-    //obstacle
-    if (player_position_horizontal + player_width + obstacle_width >= obstacle_position_horizontal + obstacle_width && player_position_horizontal - obstacle_width <= obstacle_position_horizontal) {
-      if (player_position_vertical + player_height + obstacle_height >= obstacle_position_vertical + obstacle_height && player_position_vertical - obstacle_height <= obstacle_position_vertical) {
-
-        //obstacle spawntrigger for 1 & 2
-        object_spawntrigger = true
-
-        player_health = player_health - 1
-
-
-
-        console.log("Obstacle!");
-      }
-    }
-    //obstacle2
-    if (player_position_horizontal + player_width + obstacle2_width >= obstacle2_position_horizontal + obstacle2_width && player_position_horizontal - obstacle2_width <= obstacle2_position_horizontal) {
-      if (player_position_vertical + player_height + obstacle2_height >= obstacle2_position_vertical + obstacle2_height && player_position_vertical - obstacle2_height <= obstacle2_position_vertical) {
-
-        //obstacle spawntrigger for 1 & 2
-        object_spawntrigger = true
-
-        player_health = player_health - 1
-
-
-        console.log("Obstacle!");
-      }
-    }
-    //obstacle3
-    if (player_position_horizontal + player_width + obstacle3_width >= obstacle3_position_horizontal + obstacle3_width && player_position_horizontal - obstacle3_width <= obstacle3_position_horizontal) {
-      if (player_position_vertical + player_height + obstacle3_height >= obstacle3_position_vertical + obstacle3_height && player_position_vertical - obstacle3_height <= obstacle3_position_vertical) {
-
-        //obstacle spawntrigger for 1 & 2 & 3
-        object_spawntrigger = true
-
-        player_health = player_health - 1
-
-
-
-        console.log("Obstacle!");
-      }
-    }
-    //obstacle4
-    if (player_position_horizontal + player_width + obstacle4_width >= obstacle4_position_horizontal + obstacle4_width && player_position_horizontal - obstacle4_width <= obstacle4_position_horizontal) {
-      if (player_position_vertical + player_height + obstacle4_height >= obstacle4_position_vertical + obstacle4_height && player_position_vertical - obstacle4_height <= obstacle4_position_vertical) {
-
-        //obstacle spawntrigger for 1 & 2
-        object_spawntrigger = true
-
-        player_health = player_health - 1
-
-
-
-
-        console.log("Obstacle!");
-      }
-    }
-    //obstacle spawntrigger
-    if (object_spawntrigger == true) {
-
-      //Random Position for Collectible
-      collectible_position_horizontal = getRndInteger(0, collectible_spawn_area_horizontal)
-      collectible_position_vertical = getRndInteger(0, collectible_spawn_area_vertical)
-
-      //Random Position for Heal Collectible
-      heal_collectible_position_horizontal = getRndInteger(0, heal_collectible_spawn_area_horizontal)
-      heal_collectible_position_vertical = getRndInteger(0, heal_collectible_spawn_area_vertical)
-
-      //Random Location for Obstacle 1
-      obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
-      obstacle_position_vertical = getRndInteger(0 - obstacle_height, obstacle_spawn_area_vertical)
-
-      //Random Location for Obstacle 2
-      obstacle2_position_horizontal = getRndInteger(0 - obstacle2_width, obstacle2_spawn_area_horizontal)
-      obstacle2_position_vertical = getRndInteger(0 - obstacle2_height, obstacle2_spawn_area_vertical)
-
-      //Random Location for Obstacle 3
-      obstacle3_position_horizontal = getRndInteger(0 - obstacle3_width, obstacle3_spawn_area_horizontal)
-      obstacle3_position_vertical = getRndInteger(0 - obstacle3_height, obstacle3_spawn_area_vertical)
-
-      //Random Location for Obstacle4
-      obstacle4_position_horizontal = getRndInteger(0 - obstacle4_width, obstacle4_spawn_area_horizontal)
-      obstacle4_position_vertical = getRndInteger(0 - obstacle4_height, obstacle4_spawn_area_vertical)
-
-
-      object_spawntrigger = false
-
-
-
-
-
-
-    }
-
-
-    //Bullets
-
-    if (space_is_pressed == true) {
-
-      bullet_flight_direction_verhältniss = p.mouseY / p.mouseX
-
-
-    }
-    if (bullet_is_flying == true) {
-      p.fill("blue")
-      p.rect(bullet_position_horizontal, bullet_position_vertical, bullet_width, bullet_height)
-      bullet_position_horizontal = bullet_position_horizontal + bullet_speed
-      bullet_position_vertical = bullet_position_vertical + bullet_speed * bullet_flight_direction_verhältniss
-      if (bullet_position_horizontal <= 0 - bullet_width || bullet_position_horizontal >= p.windowWidth) {
-        bullet_is_flying = false
-      }
-      if (bullet_position_vertical <= 0 - bullet_height || bullet_position_vertical >= p.windowHeight) {
-        bullet_is_flying = false
-      }
-    }
-    if (space_is_pressed == true) {
-      console.log(bullet_is_flying, "h" + bullet_position_horizontal, "v" + bullet_position_vertical)
-    }
-
-
-
-
-  };
-
-
+  }
 }, document.getElementById('app')!);
 
 
-/*if (p.mouseX > bullet_position_horizontal && p.mouseY > bullet_position_vertical) {
-     bullet_position_horizontal = bullet_position_horizontal + bullet_speed
-     bullet_position_vertical = bullet_position_vertical + bullet_speed * bullet_flight_direction_verhältniss
-   }
-   if (p.mouseX < bullet_position_horizontal && p.mouseY > bullet_position_vertical) {
-     bullet_position_horizontal = 0 - bullet_position_horizontal - bullet_speed
-     bullet_position_vertical = bullet_position_vertical + bullet_speed * bullet_flight_direction_verhältniss
-   }
-   if (p.mouseX > bullet_position_horizontal && p.mouseY < bullet_position_vertical) {
-     bullet_position_horizontal =  bullet_position_horizontal + bullet_speed
-     bullet_position_vertical =0 - bullet_position_vertical - bullet_speed * bullet_flight_direction_verhältniss
-   }
-   if (p.mouseX < bullet_position_horizontal && p.mouseY < bullet_position_vertical) {
-     bullet_position_horizontal = 0 - bullet_position_horizontal - bullet_speed
-     bullet_position_vertical = 0 - bullet_position_vertical - bullet_speed * bullet_flight_direction_verhältniss
-   }*/
+class Obstacle {
+  constructor(private x: number, private y: number,private w: number,private h: number,private speed: number) {
 
+  }
+
+  draw(p: p5) {
+    p.fill(0,125,21)
+    p.rect(this.x, this.y, this.w, this.h)
+  }
+
+  update() {
+    this.x -= this.speed
+  }
+
+  collide(x_other: number, y_other: number, w_other: number, h_other: number): boolean {
+    if (x_other + w_other >= this.x + this.w && x_other <= this.x) {
+      if (y_other + h_other >= this.y + this.h && y_other <= this.y) {
+
+        return true
+      }
+    }
+    return false
+  }
+}
+
+
+function createObstacle(windowHeight: number, windowWidth: number) {
+  let obstacle_spawn_area_vertical = windowHeight - obstacle1_height / 2
+  let x =  windowWidth + obstacle1_width
+  let y = getRndInteger(0 - obstacle1_height / 2, obstacle_spawn_area_vertical)
+  
+  return new Obstacle(x, y, 20, 20, speed_obstackle)
+}
