@@ -16,6 +16,9 @@ const _app = new p5(p5Instance => {
   var farbe5=125 //grün
   var farbe6=125 //blau
   
+  var axisX=1
+  var axisY=2
+  
 
   var ßw=87
   var ßa=65
@@ -43,6 +46,8 @@ const _app = new p5(p5Instance => {
     if (p.keyCode == ßpfeiltastelinks) {farbe4 = farbe4 -50}
     if (p.keyCode == ßpfeiltasteoben) {farbe1 = 250}
     if (p.keyCode == ßpfeiltasteunten) {farbe1 = 0}
+    
+    if (p.keyCode == ßd) {axis X = axis X + 10
   }
 
 
