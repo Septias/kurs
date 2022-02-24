@@ -26,8 +26,8 @@ const _app = new p5(p5Instance => {
 
   //Background  
   p.setup = function setup() {
-    p.createCanvas(p.windowWidth, p.windowHeight,)
-    
+    p.createCanvas(p.windowWidth, p.windowHeight)
+    p.textFont("Calibri")
   }
   
   //Deathscreen
@@ -81,12 +81,12 @@ const _app = new p5(p5Instance => {
     console.log(space)
 
     p.background(0, 0, 0)//img für bild
-    p.textFont("Calibri")
     p.textSize(20)
     p.fill(255, 255, 255)
     p.textAlign(p.LEFT)
     p.text("Lives: " + lives, 25, 35)
 
+    console.log('Objektanzahl: ', obstacles.length);
 
     //Player
     p.fill(0, 200, 250)
@@ -118,8 +118,8 @@ const _app = new p5(p5Instance => {
 
     for (const obstacle of obstacles) {
       obstacle.update()
-      obstacle.draw()
-      if (obstacle.collide(/* spielerposition */)) {
+      obstacle.draw(p)
+      if (obstacle.collide(Player_Position_Horizontal, Player_Position_Vertikal, Player_Width, Player_height)) {
 
       }
     }
@@ -160,19 +160,27 @@ const _app = new p5(p5Instance => {
 
 
 class Obstacle {
+  constructor(private x: number, private y: number,private w: number,private h: number,private speed: number) {
 
-  constructor(private position: [number, number], private speed: number) {}
+  }
 
-  draw() {
-
+  draw(p: p5) {
+    p.fill(0,125,21)
+    p.rect(this.x, this.y, this.w, this.h)
   }
 
   update() {
-
+    this.x -= this.speed
   }
 
-  collide(): boolean {
-    return true
+  collide(x_other: number, y_other: number, w_other: number, h_other: number): boolean {
+    if (x_other + w_other >= this.x + this.w && x_other <= this.x) {
+      if (y_other + h_other >= this.y + this.h && y_other <= this.y) {
+
+        return true
+      }
+    }
+    return false
   }
 }
 
@@ -182,5 +190,5 @@ function createObstacle(windowHeight: number, windowWidth: number) {
   let x =  windowWidth + obstacle1_width
   let y = getRndInteger(0 - obstacle1_height / 2, obstacle_spawn_area_vertical)
   
-  return new Obstacle([x, y], speed_obstackle)
+  return new Obstacle(x, y, 20, 20, speed_obstackle)
 }
