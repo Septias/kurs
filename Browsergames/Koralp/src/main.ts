@@ -51,6 +51,11 @@ const _app = new p5(p5Instance => {
     if (p.keyCode == ßa) {axisY = axisY + 10}
     if (p.keyCode == ßw) {axisX = axisX - 10}
     if (p.keyCode == ßs) {axisY = axisY - 10}
+    if (p.keyCode == ßd;ßw) {axisX = axisX + 10; axisY = axisY + 10}
+    if (p.keyCode == ßd;ßs) {axisY = axisY + 10; axisY = axisY - 10}
+    if (p.keyCode == ßa;ßw) {axisX = axisX - 10; axisY = axisY + 10}
+    if (p.keyCode == ßa;ßs) {axisY = axisY - 10; axisY = axisY - 10}
+    
   }
 
 
