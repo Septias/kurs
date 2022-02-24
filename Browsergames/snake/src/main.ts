@@ -1,35 +1,26 @@
 import p5, { Vector } from 'p5';
-
 import './style.css';
 
 //Obstacles
 let speed_obstackle = 4
 let spawntrigger = true
-
-//Obstacle Size
 let obstacle1_width = 35
 let obstacle1_height = 35
 
-let obstackle2_width = 35
-let obstackle2_height = 35
-
-
-  //Randomizer
-  function getRndInteger(min: any, max: any) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
+//Randomizer
+function getRndInteger(min: any, max: any) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
-
 
   //Background  
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight)
     p.textFont("Calibri")
   }
-  
+
   //Deathscreen
   let deathscreen_width = p.windowWidth
   let deathscreen_height = p.windowHeight
@@ -43,16 +34,13 @@ const _app = new p5(p5Instance => {
   let Player_Position_Horizontal = p.windowWidth / 2 - Player_Width / 2
   let Player_Position_Vertikal = p.windowHeight / 2 - Player_height / 2
   let lives = 3
-
-  //Movement Player
   let speed = 6
   let up = false
 
-
+  //Keys
   p.keyPressed = function () {
     if (p.keyCode === p.UP_ARROW)
       up = true
-
     if (p.keyCode === 32) {
       space = true
     }
@@ -62,7 +50,6 @@ const _app = new p5(p5Instance => {
     if (p.keyCode === p.UP_ARROW) {
       up = false
     }
-
     if (p.keyCode === 32) {
       space = false
     }
@@ -70,15 +57,12 @@ const _app = new p5(p5Instance => {
 
   let obstacles: Obstacle[] = []
 
-
   //Draw
   p.draw = function draw() {
     if (spawntrigger == true) {
       //obstacle_pos_vertical = getRndInteger(0 - obstacle1_height / 2, obstacle_spawn_area_vertical)
       obstacles.push(createObstacle(p.windowHeight, p.windowWidth))
     }
-
-    console.log(space)
 
     p.background(0, 0, 0)//img für bild
     p.textSize(20)
@@ -108,13 +92,11 @@ const _app = new p5(p5Instance => {
       Player_Position_Vertikal = 0
     }
 
-
     //Obstacles
     p.fill(255, 50, 30)
 
     //p.rect(obstacle_pos_horizontal, obstacle_pos_vertical, obstacle1_width, obstacle1_height)
     // obstacle_pos_horizontal = obstacle_pos_horizontal - speed_obstackle
-
 
     for (const obstacle of obstacles) {
       obstacle.update()
@@ -123,7 +105,6 @@ const _app = new p5(p5Instance => {
 
       }
     }
-
 
     //Damage
     /*if (Player_Position_Horizontal + Player_Width >= obstacle_pos_horizontal + obstacle1_width && Player_Position_Horizontal <= obstacle_pos_horizontal) {
@@ -140,7 +121,6 @@ const _app = new p5(p5Instance => {
       }
     }*/
 
-
     //Death
     if (lives == 0) {
       p.fill(0, 0, 0)
@@ -150,22 +130,19 @@ const _app = new p5(p5Instance => {
       p.textAlign(p.CENTER)
       p.text("You Died", p.windowWidth / 2, p.windowHeight / 2)
 
-
       if (space == true) {
         lives = 3
       }
     }
   }
 }, document.getElementById('app')!);
-
-
 class Obstacle {
-  constructor(private x: number, private y: number,private w: number,private h: number,private speed: number) {
+  constructor(private x: number, private y: number, private w: number, private h: number, private speed: number) {
 
   }
 
   draw(p: p5) {
-    p.fill(0,125,21)
+    p.fill(0, 125, 21)
     p.rect(this.x, this.y, this.w, this.h)
   }
 
@@ -184,11 +161,10 @@ class Obstacle {
   }
 }
 
-
 function createObstacle(windowHeight: number, windowWidth: number) {
   let obstacle_spawn_area_vertical = windowHeight - obstacle1_height / 2
-  let x =  windowWidth + obstacle1_width
+  let x = windowWidth + obstacle1_width
   let y = getRndInteger(0 - obstacle1_height / 2, obstacle_spawn_area_vertical)
-  
+
   return new Obstacle(x, y, 20, 20, speed_obstackle)
 }
