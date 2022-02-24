@@ -47,7 +47,10 @@ const _app = new p5(p5Instance => {
     if (p.keyCode == ßpfeiltasteoben) {farbe1 = 250}
     if (p.keyCode == ßpfeiltasteunten) {farbe1 = 0}
     
-    if (p.keyCode == ßd) {axis X = axis X + 10
+    if (p.keyCode == ßd) {axisX = axisX + 10}
+    if (p.keyCode == ßa) {axisY = axisY + 10}
+    if (p.keyCode == ßw) {axisX = axisX - 10}
+    if (p.keyCode == ßs) {axisY = axisY - 10}
   }
 
 
