@@ -2,59 +2,63 @@ import p5 from 'p5';
 
 import './style.css';
 
-const _app = new p5(p5Instance => {
+const app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
-  const x = 0;
-  const y = 48;
+  let axisX=0
+  let axisY=0
 
-  var farbe1=50 //rot
-  var farbe2=0 //grün
-  var farbe3=50 //blau
+  let speed=1
+  let colorspeed=10
 
-  var farbe4=255 //rot
-  var farbe5=125 //grün
-  var farbe6=125 //blau
+  let sizeX=100
+  let sizeY=200
+
+  let farbe1=0 //rot
+  let farbe2=0 //grün
+  let farbe3=0 //blau
+
+  let farbe4=0 //rot
+  var farbe5=0 //grün
+  let farbe6=0 //blau
   
-  var axisX=1
-  var axisY=2
-  
-
-  var ßw=87
-  var ßa=65
-  var ßs=83
-  var ßd=68
-  var ßpfeiltasterechts=39
-  var ßpfeiltastelinks=37
-  var ßpfeiltasteoben=38
-  var ßpfeiltasteunten=40
+  let ßw=87
+  let ßa=65
+  let ßs=83
+  let ßd=68
+  let ßpfeiltasterechts=39
+  let ßpfeiltastelinks=37
+  let ßpfeiltasteoben=38
+  let ßpfeiltasteunten=40
 
   p.setup = function setup() {
-    p.createCanvas(64, 64);
+    p.createCanvas(400, 400);
   };
 
   p.draw = function draw() {
     p.background(farbe1, farbe2, farbe3);
     p.fill(farbe4,farbe5,farbe6);
-    p.rect(x, y, 16, 16);
+    p.rect(axisX, axisY, sizeX, sizeY);
+
+
+    if (p.keyIsDown(ßd)) {axisX = axisX + speed}
+    if (p.keyIsDown(ßs)) {axisY = axisY + speed}
+    if (p.keyIsDown(ßa)) {axisX = axisX - speed}
+    if (p.keyIsDown(ßw)) {axisY = axisY - speed}
+
+    if (p.keyIsDown(ßpfeiltasterechts)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
+    if (p.keyIsDown(ßpfeiltastelinks)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
+    if (p.keyIsDown(ßpfeiltasteoben)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
+    if (p.keyIsDown(ßpfeiltasteunten)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
+
   };
+
+  
 
   p.keyPressed = () => {
     console.log(p.keyCode);
     
-    if (p.keyCode == ßpfeiltasterechts) {farbe4 = farbe4 +50}
-    if (p.keyCode == ßpfeiltastelinks) {farbe4 = farbe4 -50}
-    if (p.keyCode == ßpfeiltasteoben) {farbe1 = 250}
-    if (p.keyCode == ßpfeiltasteunten) {farbe1 = 0}
-    
-    if (p.keyCode == ßd) {axisX = axisX + 10}
-    if (p.keyCode == ßa) {axisY = axisY + 10}
-    if (p.keyCode == ßw) {axisX = axisX - 10}
-    if (p.keyCode == ßs) {axisY = axisY - 10}
-    if (p.keyCode == ßd;ßw) {axisX = axisX + 10; axisY = axisY + 10}
-    if (p.keyCode == ßd;ßs) {axisY = axisY + 10; axisY = axisY - 10}
-    if (p.keyCode == ßa;ßw) {axisX = axisX - 10; axisY = axisY + 10}
-    if (p.keyCode == ßa;ßs) {axisY = axisY - 10; axisY = axisY - 10}
+  
     
   }
 
