@@ -5,65 +5,65 @@ import './style.css';
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
-  
+
   //Obstacle 1
   let obstacle1_width = 35
-  let obstacle1_hight = 35
+  let obstacle1_height = 35
   let spawntrigger1 = true
   let rnd_number1 = p.random(200)
   let rnd_speed1 = p.random(3, 5)
   let obstacle1_spawn_pos_horizontal = p.windowWidth + obstacle1_width + rnd_number1 * 2
-  let obstacle1_spawn_area_vertical = p.windowHeight - obstacle1_hight / 2
+  let obstacle1_spawn_area_vertical = p.windowHeight - obstacle1_height / 2
   let obstacle1_pos_horizontal = obstacle1_spawn_pos_horizontal
-  let obstacle1_pos_vertical = getRndInteger(0 - obstacle1_hight / 2, obstacle1_spawn_area_vertical)
+  let obstacle1_pos_vertical = getRndInteger(0 - obstacle1_height / 2, obstacle1_spawn_area_vertical)
 
   //Obstacle 2
   let obstacle2_width = 35
-  let obstacle2_hight = 35
+  let obstacle2_height = 35
   let spawntrigger2 = true
   let rnd_number2 = p.random(200)
   let rnd_speed2 = p.random(3, 5)
   let obstacle2_spawn_pos_horizontal = p.windowWidth + obstacle2_width + rnd_number2 * 2
-  let obstacle2_spawn_area_vertical = p.windowHeight - obstacle2_hight / 2
+  let obstacle2_spawn_area_vertical = p.windowHeight - obstacle2_height / 2
   let obstacle2_pos_horizontal = obstacle2_spawn_pos_horizontal
-  let obstacle2_pos_vertical = getRndInteger(0 - obstacle2_hight / 2, obstacle2_spawn_area_vertical)
+  let obstacle2_pos_vertical = getRndInteger(0 - obstacle2_height / 2, obstacle2_spawn_area_vertical)
 
   //Obstacle 3
   let obstacle3_width = 35
-  let obstacle3_hight = 35
+  let obstacle3_height = 35
   let spawntrigger3 = true
   let rnd_number3 = p.random(200)
   let rnd_speed3 = p.random(3, 5)
   let obstacle3_spawn_pos_horizontal = p.windowWidth + obstacle3_width + rnd_number3 * 2
-  let obstacle3_spawn_area_vertical = p.windowHeight - obstacle3_hight / 2
+  let obstacle3_spawn_area_vertical = p.windowHeight - obstacle3_height / 2
   let obstacle3_pos_horizontal = obstacle3_spawn_pos_horizontal
-  let obstacle3_pos_vertical = getRndInteger(0 - obstacle3_hight / 2, obstacle3_spawn_area_vertical)
+  let obstacle3_pos_vertical = getRndInteger(0 - obstacle3_height / 2, obstacle3_spawn_area_vertical)
 
   //Obstacle 4
   let obstacle4_width = 35
-  let obstacle4_hight = 35
+  let obstacle4_height = 35
   let spawntrigger4 = true
   let rnd_number4 = p.random(200)
   let rnd_speed4 = p.random(3, 5)
   let obstacle4_spawn_pos_horizontal = p.windowWidth + obstacle4_width + rnd_number4 * 2
-  let obstacle4_spawn_area_vertical = p.windowHeight - obstacle4_hight / 2
+  let obstacle4_spawn_area_vertical = p.windowHeight - obstacle4_height / 2
   let obstacle4_pos_horizontal = obstacle4_spawn_pos_horizontal
-  let obstacle4_pos_vertical = getRndInteger(0 - obstacle4_hight / 2, obstacle4_spawn_area_vertical)
+  let obstacle4_pos_vertical = getRndInteger(0 - obstacle4_height / 2, obstacle4_spawn_area_vertical)
 
   //Obstacle 5
   let obstacle5_width = 35
-  let obstacle5_hight = 35
+  let obstacle5_height = 35
   let spawntrigger5 = true
   let rnd_number5 = p.random(200)
   let rnd_speed5 = p.random(3, 5)
   let obstacle5_spawn_pos_horizontal = p.windowWidth + obstacle5_width + rnd_number5 * 2
-  let obstacle5_spawn_area_vertical = p.windowHeight - obstacle5_hight / 2
+  let obstacle5_spawn_area_vertical = p.windowHeight - obstacle5_height / 2
   let obstacle5_pos_horizontal = obstacle5_spawn_pos_horizontal
-  let obstacle5_pos_vertical = getRndInteger(0 - obstacle5_hight / 2, obstacle5_spawn_area_vertical)
+  let obstacle5_pos_vertical = getRndInteger(0 - obstacle5_height / 2, obstacle5_spawn_area_vertical)
 
   //Deathscreen
   let deathscreen_width = p.windowWidth
-  let deathscreen_hight = p.windowHeight
+  let deathscreen_height = p.windowHeight
   let deathscreen_pos_horizontal = 0
   let deathscreen_pos_vertikal = 0
   let space = false
@@ -89,9 +89,9 @@ const _app = new p5(p5Instance => {
 
   //Player
   let Player_Width = 90
-  let Player_Hight = 90
+  let Player_height = 90
   let Player_Position_Horizontal = p.windowWidth / 2 - Player_Width / 2
-  let Player_Position_Vertikal = p.windowHeight / 2 - Player_Hight / 2
+  let Player_Position_Vertikal = p.windowHeight / 2 - Player_height / 2
   let lives = 3
   let speed = 6
   let up = false
@@ -141,26 +141,26 @@ const _app = new p5(p5Instance => {
 
     //Spawn
     if (spawntrigger1 == true) {
-      obstacle1_pos_vertical = getRndInteger(0 - obstacle1_hight / 2, obstacle1_spawn_area_vertical)
+      obstacle1_pos_vertical = getRndInteger(0 - obstacle1_height / 2, obstacle1_spawn_area_vertical)
     }
     if (spawntrigger2 == true) {
-      obstacle2_pos_vertical = getRndInteger(0 - obstacle1_hight / 2, obstacle1_spawn_area_vertical)
+      obstacle2_pos_vertical = getRndInteger(0 - obstacle1_height / 2, obstacle1_spawn_area_vertical)
     }
     if (spawntrigger3 == true) {
-      obstacle3_pos_vertical = getRndInteger(0 - obstacle1_hight / 2, obstacle1_spawn_area_vertical)
+      obstacle3_pos_vertical = getRndInteger(0 - obstacle1_height / 2, obstacle1_spawn_area_vertical)
     }
     if (spawntrigger4 == true) {
-      obstacle4_pos_vertical = getRndInteger(0 - obstacle1_hight / 2, obstacle1_spawn_area_vertical)
+      obstacle4_pos_vertical = getRndInteger(0 - obstacle1_height / 2, obstacle1_spawn_area_vertical)
     }
     if (spawntrigger5 == true) {
-      obstacle5_pos_vertical = getRndInteger(0 - obstacle1_hight / 2, obstacle1_spawn_area_vertical)
+      obstacle5_pos_vertical = getRndInteger(0 - obstacle1_height / 2, obstacle1_spawn_area_vertical)
     }
 
     p.background(0, 0, 0)//img für bild
 
     //Player
     p.fill(0, 200, 250)
-    p.rect(Player_Position_Horizontal, Player_Position_Vertikal, Player_Width, Player_Hight)
+    p.rect(Player_Position_Horizontal, Player_Position_Vertikal, Player_Width, Player_height)
 
     if (up == true) {
       Player_Position_Vertikal = Player_Position_Vertikal - speed
@@ -168,8 +168,8 @@ const _app = new p5(p5Instance => {
     if (up == false) {
       Player_Position_Vertikal = Player_Position_Vertikal + speed
     }
-    if (Player_Position_Vertikal > p.windowHeight - Player_Hight) {
-      Player_Position_Vertikal = p.windowHeight - Player_Hight
+    if (Player_Position_Vertikal > p.windowHeight - Player_height) {
+      Player_Position_Vertikal = p.windowHeight - Player_height
     }
     if (Player_Position_Vertikal < 0) {
       Player_Position_Vertikal = 0
@@ -177,7 +177,7 @@ const _app = new p5(p5Instance => {
 
     //Obstacle 1
     p.fill(600, 50, 30)
-    p.rect(obstacle1_pos_horizontal, obstacle1_pos_vertical, obstacle1_width, obstacle1_hight)
+    p.rect(obstacle1_pos_horizontal, obstacle1_pos_vertical, obstacle1_width, obstacle1_height)
     obstacle1_pos_horizontal = obstacle1_pos_horizontal - rnd_speed1
     if (obstacle1_pos_horizontal > 0) {
       spawntrigger1 = false
@@ -189,7 +189,7 @@ const _app = new p5(p5Instance => {
 
     //Obstacle 2
     p.fill(600, 50, 30)
-    p.rect(obstacle2_pos_horizontal, obstacle2_pos_vertical, obstacle2_width, obstacle2_hight)
+    p.rect(obstacle2_pos_horizontal, obstacle2_pos_vertical, obstacle2_width, obstacle2_height)
     obstacle2_pos_horizontal = obstacle2_pos_horizontal - rnd_speed2
     if (obstacle2_pos_horizontal > 0) {
       spawntrigger2 = false
@@ -201,7 +201,7 @@ const _app = new p5(p5Instance => {
 
     //Obstacle 3
     p.fill(600, 50, 30)
-    p.rect(obstacle3_pos_horizontal, obstacle3_pos_vertical, obstacle3_width, obstacle3_hight)
+    p.rect(obstacle3_pos_horizontal, obstacle3_pos_vertical, obstacle3_width, obstacle3_height)
     obstacle3_pos_horizontal = obstacle3_pos_horizontal - rnd_speed3
     if (obstacle3_pos_horizontal > 0) {
       spawntrigger3 = false
@@ -213,7 +213,7 @@ const _app = new p5(p5Instance => {
 
     //Obstacle 4
     p.fill(600, 50, 30)
-    p.rect(obstacle4_pos_horizontal, obstacle4_pos_vertical, obstacle4_width, obstacle4_hight)
+    p.rect(obstacle4_pos_horizontal, obstacle4_pos_vertical, obstacle4_width, obstacle4_height)
     obstacle4_pos_horizontal = obstacle4_pos_horizontal - rnd_speed4
     if (obstacle4_pos_horizontal > 0) {
       spawntrigger4 = false
@@ -225,7 +225,7 @@ const _app = new p5(p5Instance => {
 
     //Obstacle 5
     p.fill(600, 50, 30)
-    p.rect(obstacle5_pos_horizontal, obstacle5_pos_vertical, obstacle5_width, obstacle5_hight)
+    p.rect(obstacle5_pos_horizontal, obstacle5_pos_vertical, obstacle5_width, obstacle5_height)
     obstacle5_pos_horizontal = obstacle5_pos_horizontal - rnd_speed5
     if (obstacle5_pos_horizontal > 0) {
       spawntrigger5 = false
@@ -237,7 +237,7 @@ const _app = new p5(p5Instance => {
 
     //Damage 1
     if (Player_Position_Horizontal + Player_Width > obstacle1_pos_horizontal + obstacle1_width && Player_Position_Horizontal < obstacle1_pos_horizontal) {
-      if (Player_Position_Vertikal + Player_Hight > obstacle1_pos_vertical + obstacle1_hight && Player_Position_Vertikal < obstacle1_pos_vertical) {
+      if (Player_Position_Vertikal + Player_height > obstacle1_pos_vertical + obstacle1_height && Player_Position_Vertikal < obstacle1_pos_vertical) {
         obstacle1_pos_horizontal = p.windowWidth + obstacle1_width
         lives = lives - 1
         spawntrigger1 = true
@@ -248,7 +248,7 @@ const _app = new p5(p5Instance => {
 
     //Damage 2
     if (Player_Position_Horizontal + Player_Width > obstacle2_pos_horizontal + obstacle2_width && Player_Position_Horizontal < obstacle2_pos_horizontal) {
-      if (Player_Position_Vertikal + Player_Hight > obstacle2_pos_vertical + obstacle2_hight && Player_Position_Vertikal < obstacle2_pos_vertical) {
+      if (Player_Position_Vertikal + Player_height > obstacle2_pos_vertical + obstacle2_height && Player_Position_Vertikal < obstacle2_pos_vertical) {
         obstacle2_pos_horizontal = p.windowWidth + obstacle2_width
         lives = lives - 1
         spawntrigger2 = true
@@ -259,7 +259,7 @@ const _app = new p5(p5Instance => {
 
     //Damage 3
     if (Player_Position_Horizontal + Player_Width > obstacle3_pos_horizontal + obstacle3_width && Player_Position_Horizontal < obstacle3_pos_horizontal) {
-      if (Player_Position_Vertikal + Player_Hight > obstacle3_pos_vertical + obstacle3_hight && Player_Position_Vertikal < obstacle3_pos_vertical) {
+      if (Player_Position_Vertikal + Player_height > obstacle3_pos_vertical + obstacle3_height && Player_Position_Vertikal < obstacle3_pos_vertical) {
         obstacle3_pos_horizontal = p.windowWidth + obstacle3_width
         lives = lives - 1
         spawntrigger3 = true
@@ -270,7 +270,7 @@ const _app = new p5(p5Instance => {
 
     //Damage 4
     if (Player_Position_Horizontal + Player_Width > obstacle4_pos_horizontal + obstacle4_width && Player_Position_Horizontal < obstacle4_pos_horizontal) {
-      if (Player_Position_Vertikal + Player_Hight > obstacle4_pos_vertical + obstacle4_hight && Player_Position_Vertikal < obstacle4_pos_vertical) {
+      if (Player_Position_Vertikal + Player_height > obstacle4_pos_vertical + obstacle4_height && Player_Position_Vertikal < obstacle4_pos_vertical) {
         obstacle4_pos_horizontal = p.windowWidth + obstacle4_width
         lives = lives - 1
         spawntrigger4 = true
@@ -281,7 +281,7 @@ const _app = new p5(p5Instance => {
 
     //Damage 5
     if (Player_Position_Horizontal + Player_Width > obstacle5_pos_horizontal + obstacle5_width && Player_Position_Horizontal < obstacle5_pos_horizontal) {
-      if (Player_Position_Vertikal + Player_Hight > obstacle5_pos_vertical + obstacle5_hight && Player_Position_Vertikal < obstacle5_pos_vertical) {
+      if (Player_Position_Vertikal + Player_height > obstacle5_pos_vertical + obstacle5_height && Player_Position_Vertikal < obstacle5_pos_vertical) {
         obstacle5_pos_horizontal = p.windowWidth + obstacle5_width
         lives = lives - 1
         spawntrigger5 = true
@@ -342,13 +342,15 @@ const _app = new p5(p5Instance => {
     //Death
     if (lives < 1) {
       p.fill(0, 0, 0)
-      p.rect(deathscreen_pos_horizontal, deathscreen_pos_vertikal, deathscreen_width, deathscreen_hight)
+      p.rect(deathscreen_pos_horizontal, deathscreen_pos_vertikal, deathscreen_width, deathscreen_height)
       p.fill(600, 50, 30)
       p.textSize(90)
       p.textAlign(p.CENTER)
       p.text("You Died", p.windowWidth / 2, p.windowHeight / 2)
       if (space == true) {
         lives = 3
+        time = 0
+        real_time = 0
       }
     }
 
