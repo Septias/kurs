@@ -5,7 +5,7 @@ import './style.css';
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
-
+  
   //Obstacle 1
   let obstacle1_width = 35
   let obstacle1_hight = 35
@@ -72,11 +72,20 @@ const _app = new p5(p5Instance => {
   let menu = false
   let enemy_width = 25
   let enemy_height = 25
-  let enemy_pos_horiozontal = p.windowWidth / 2 - 45
-  let enemy_pos_vertical = p.windowHeight / 2 - 88
+  let enemy_pos_horiozontal = p.windowWidth / 2 - 48
+  let enemy_pos_vertical = p.windowHeight / 2 - 107
+  let menu_width = 300
+  let menu_height = 400
+  let menu_pos_horizontal = p.windowWidth / 2 - menu_width / 2
+  let menu_pos_vertical = p.windowHeight / 2 - menu_height / 2
 
   //Music
-  let mySound;
+  //let mySound;
+
+  //Timer/Coins
+  let timer_active = true
+  let time = 0
+  let real_time = 0
 
   //Player
   let Player_Width = 90
@@ -86,7 +95,6 @@ const _app = new p5(p5Instance => {
   let lives = 3
   let speed = 6
   let up = false
-  let hit = false
 
   //Randomizer
   function getRndInteger(min: any, max: any) {
@@ -114,6 +122,9 @@ const _app = new p5(p5Instance => {
     if (p.keyCode === 27) {
       menu = true
     }
+    if (p.keyCode === 32) {
+      menu = false
+    }
   }
 
   p.keyReleased = function () {
@@ -123,11 +134,7 @@ const _app = new p5(p5Instance => {
     if (p.keyCode === 32) {
       space = false
     }
-    if (p.keyCode === 27)
-      menu = false
   }
-
-
 
   //Draw
   p.draw = function draw() {
@@ -151,16 +158,9 @@ const _app = new p5(p5Instance => {
 
     p.background(0, 0, 0)//img für bild
 
-
     //Player
-    if (hit == true) {
-      p.fill(255, 215, 0)
-    }
-    if (hit == false) {
-      p.fill(0, 200, 250)
-    }
+    p.fill(0, 200, 250)
     p.rect(Player_Position_Horizontal, Player_Position_Vertikal, Player_Width, Player_Hight)
-
 
     if (up == true) {
       Player_Position_Vertikal = Player_Position_Vertikal - speed
@@ -241,7 +241,6 @@ const _app = new p5(p5Instance => {
         obstacle1_pos_horizontal = p.windowWidth + obstacle1_width
         lives = lives - 1
         spawntrigger1 = true
-        hit = true
         console.log("Damage")
         console.log(lives)
       }
@@ -253,7 +252,6 @@ const _app = new p5(p5Instance => {
         obstacle2_pos_horizontal = p.windowWidth + obstacle2_width
         lives = lives - 1
         spawntrigger2 = true
-        hit = true
         console.log("Damage")
         console.log(lives)
       }
@@ -265,7 +263,6 @@ const _app = new p5(p5Instance => {
         obstacle3_pos_horizontal = p.windowWidth + obstacle3_width
         lives = lives - 1
         spawntrigger3 = true
-        hit = true
         console.log("Damage")
         console.log(lives)
       }
@@ -277,7 +274,6 @@ const _app = new p5(p5Instance => {
         obstacle4_pos_horizontal = p.windowWidth + obstacle4_width
         lives = lives - 1
         spawntrigger4 = true
-        hit = true
         console.log("Damage")
         console.log(lives)
       }
@@ -289,10 +285,18 @@ const _app = new p5(p5Instance => {
         obstacle5_pos_horizontal = p.windowWidth + obstacle5_width
         lives = lives - 1
         spawntrigger5 = true
-        hit = true
         console.log("Damage")
         console.log(lives)
       }
+    }
+
+    //Timer/Coins
+    if (timer_active == true) {
+      time = time + 1
+    }
+    if (time >= 60) {
+      real_time = real_time + 1
+      time = 0
     }
 
     //Text
@@ -300,26 +304,33 @@ const _app = new p5(p5Instance => {
     p.textSize(20)
     p.fill(255, 255, 255)
     p.textAlign(p.LEFT)
-    p.text("Lives: " + lives, 25, 55)
     p.text("Press [ESC] for menu", 25, 30)
+    p.text("Lives: " + lives, 25, 60)
+    p.text("Time survived: " + real_time, 25, 90)
 
     //Menu
     if (menu == true) {
+      timer_active = false
       speed = 0
       rnd_speed1 = 0
       rnd_speed2 = 0
       rnd_speed3 = 0
       rnd_speed4 = 0
       rnd_speed5 = 0
+      p.fill(87, 87, 87)
+      p.rect(menu_pos_horizontal, menu_pos_vertical, menu_width, menu_height)
       p.textSize(40)
       p.fill(255, 255, 255)
       p.textAlign(p.CENTER)
-      p.text("MENU", p.windowWidth / 2, p.windowHeight / 2 - 100)
+      p.text("MENU", p.windowWidth / 2, p.windowHeight / 2 - 140)
       p.textSize(20)
-      p.text("enemy", p.windowWidth / 2 + 23, p.windowHeight / 2 - 70)
+      p.text("enemy", p.windowWidth / 2 + 17, p.windowHeight / 2 - 90)
       p.fill(600, 50, 30)
       p.rect(enemy_pos_horiozontal, enemy_pos_vertical, enemy_width, enemy_height)
+      p.fill(255, 255, 255)
+      p.text("[Space] to close the menu", p.windowWidth / 2 + 3, p.windowHeight / 2 + 180)
     } else {
+      timer_active = true
       speed = 6
       rnd_speed1 = p.random(3, 5)
       rnd_speed2 = p.random(3, 5)
