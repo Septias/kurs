@@ -70,6 +70,13 @@ const _app = new p5(p5Instance => {
 
   //Menu
   let menu = false
+  let enemy_width = 25
+  let enemy_height = 25
+  let enemy_pos_horiozontal = p.windowWidth / 2 - 45
+  let enemy_pos_vertical = p.windowHeight / 2 - 88
+
+  //Music
+  let mySound;
 
   //Player
   let Player_Width = 90
@@ -81,16 +88,19 @@ const _app = new p5(p5Instance => {
   let up = false
   let hit = false
 
-
   //Randomizer
   function getRndInteger(min: any, max: any) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
+  /*function preload() {
+    p.soundFormats('mp3', 'ogg');
+    mySound = p.loadSound('assets/doorbell');
+  }*/
+
   //Background  
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight,)
-
   }
   //let img = p.loadImage("https://tse4.mm.bing.net/th?id=OIP.3Ig2q6rJvm_RRlAHZathMAHaEW&pid=Api")
 
@@ -114,7 +124,7 @@ const _app = new p5(p5Instance => {
       space = false
     }
     if (p.keyCode === 27)
-    menu = false
+      menu = false
   }
 
 
@@ -140,6 +150,7 @@ const _app = new p5(p5Instance => {
     }
 
     p.background(0, 0, 0)//img für bild
+
 
     //Player
     if (hit == true) {
@@ -284,7 +295,6 @@ const _app = new p5(p5Instance => {
       }
     }
 
-
     //Text
     p.textFont("Calibri")
     p.textSize(20)
@@ -302,9 +312,20 @@ const _app = new p5(p5Instance => {
       rnd_speed4 = 0
       rnd_speed5 = 0
       p.textSize(40)
-      p.fill(255,255,255)
+      p.fill(255, 255, 255)
       p.textAlign(p.CENTER)
       p.text("MENU", p.windowWidth / 2, p.windowHeight / 2 - 100)
+      p.textSize(20)
+      p.text("enemy", p.windowWidth / 2 + 23, p.windowHeight / 2 - 70)
+      p.fill(600, 50, 30)
+      p.rect(enemy_pos_horiozontal, enemy_pos_vertical, enemy_width, enemy_height)
+    } else {
+      speed = 6
+      rnd_speed1 = p.random(3, 5)
+      rnd_speed2 = p.random(3, 5)
+      rnd_speed3 = p.random(3, 5)
+      rnd_speed4 = p.random(3, 5)
+      rnd_speed5 = p.random(3, 5)
     }
 
     //Death
