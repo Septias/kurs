@@ -159,6 +159,19 @@ const _app = new p5(p5Instance => {
   let speed = 6
   let up = false
 
+  //Superpower
+  let power_menu = true
+  let power_menu_width = 900
+  let power_menu_height = 500
+  let power_menu_pos_horizontal = p.windowWidth / 2 - power_menu_width / 2
+  let power_menu_pos_vertical = p.windowHeight / 2 - power_menu_height / 2
+  let flash_width = 80
+  let flash_height = 80
+  let flash_pos_horizontal = p.windowWidth / 2 - Player_Width / 2 - 250
+  let flash_pos_vertical = p.windowHeight / 2 - Player_height / 2 + 30
+
+  let flash = false
+
   //Randomizer
   function getRndInteger(min: any, max: any) {
     return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -188,6 +201,11 @@ const _app = new p5(p5Instance => {
     }
     if (p.keyCode === 32) {
       menu = false
+      power_menu = false
+    }
+    if (p.keyCode === 49) {
+      power_menu = false
+      flash = true
     }
   }
 
@@ -505,23 +523,6 @@ const _app = new p5(p5Instance => {
       time = 0
     }
 
-    //Coins/Level
-    if (coins == coins_goal) {
-      coins = 0
-      coins_goal = coins_goal * 2
-      level = level + 1
-      speed1 = speed1 + 1
-      speed2 = speed2 + 1
-      speed3 = speed3 + 1
-      speed4 = speed4 + 1
-      speed5 = speed5 + 1
-      speed6 = speed6 + 1
-      speed7 = speed7 + 1
-      speed8 = speed8 + 1
-      speed9 = speed9 + 1
-      speed10 = speed10 + 1
-    }
-
     //Text
     p.textFont("Calibri")
     p.textSize(20)
@@ -542,6 +543,11 @@ const _app = new p5(p5Instance => {
       speed3 = 0
       speed4 = 0
       speed5 = 0
+      speed6 = 0
+      speed7 = 0
+      speed8 = 0
+      speed9 = 0
+      speed10 = 0
       speed_coin1 = 0
       p.fill(87, 87, 87)
       p.rect(menu_pos_horizontal, menu_pos_vertical, menu_width, menu_height)
@@ -575,6 +581,45 @@ const _app = new p5(p5Instance => {
       speed_coin1 = 5
     }
 
+    //Coins/Level
+    if (coins == coins_goal) {
+      coins = 0
+      coins_goal = coins_goal * 2
+      level = level + 1
+    }
+
+    //Superpower
+    if (power_menu == true) {
+      timer_active = false
+      speed = 0
+      speed1 = 0
+      speed2 = 0
+      speed3 = 0
+      speed4 = 0
+      speed5 = 0
+      speed6 = 0
+      speed7 = 0
+      speed8 = 0
+      speed9 = 0
+      speed10 = 0
+      speed_coin1 = 0
+      p.fill(87, 87, 87)
+      p.rect(power_menu_pos_horizontal, power_menu_pos_vertical, power_menu_width, power_menu_height)
+      p.fill(255, 255, 255)
+      p.textSize(60)
+      p.text("Choose a Superpower", p.windowWidth / 2 - 255, p.windowHeight / 2 - 100)
+      p.fill(600, 50, 30)
+      p.rect(flash_pos_horizontal, flash_pos_vertical, flash_width, flash_height)
+      p.fill(255, 255, 255)
+      p.textSize(20)
+      p.text("Flash", p.windowWidth / 2 - 278, p.windowHeight / 2 + 105)
+      p.text("[1]", p.windowWidth / 2 - 267, p.windowHeight / 2 + 32)
+    }
+
+    if (flash == true) {
+      speed = speed * 1.5
+    }
+
     //Death
     if (lives < 1) {
       p.fill(0, 0, 0)
@@ -591,6 +636,9 @@ const _app = new p5(p5Instance => {
         lives = 3
         time = 0
         real_time = 0
+        coins = 0
+        coins_goal = 5
+        power_menu = true
       }
     }
 
