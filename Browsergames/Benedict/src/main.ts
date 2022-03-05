@@ -190,11 +190,41 @@ const _app = new p5(p5Instance => {
     }
   }
 
+  let obstacles: Obstacle_horizontal_movement[] = []
+
+  for (const obstacle of obstacles) {
+
+    obstacle.randomizer()
+
+  }
 
 
 
   p.draw = function draw() {
     p.background(0, 0, 0);
+
+
+
+
+
+    for (const obstacle of obstacles) {
+
+      obstacle.update()
+
+
+      obstacle.draw(p)
+
+      obstacle.collide(player_position_horizontal, player_position_vertical, player_width, player_height)
+
+      if (obstacle.collide(player_position_horizontal, player_position_vertical, player_width, player_height) == true) {
+        object_spawntrigger = true
+      }
+      else object_spawntrigger = false
+    }
+
+
+    
+
 
 
 
@@ -238,7 +268,7 @@ const _app = new p5(p5Instance => {
 
 
 
-    //Obstacles Horizontal
+    /*//Obstacles Horizontal
     p.fill(145, 71, 254)
     p.rect(obstacle_position_horizontal, obstacle_position_vertical, obstacle_width, obstacle_height);
     obstacle_position_vertical = obstacle_position_vertical + obstacle_speed
@@ -259,9 +289,9 @@ const _app = new p5(p5Instance => {
     }
     if (obstacle2_position_vertical >= p.windowHeight - obstacle2_height) {
       obstacle2_speed = obstacle2_negative_speed
-    }
+    }*/
 
-    //Obstacles3
+    /*//Obstacles3
     p.fill(145, 71, 254)
     p.rect(obstacle3_position_horizontal, obstacle3_position_vertical, obstacle3_width, obstacle3_height);
     obstacle3_position_horizontal = obstacle3_position_horizontal + obstacle3_speed
@@ -281,7 +311,7 @@ const _app = new p5(p5Instance => {
     }
     if (obstacle4_position_horizontal >= p.windowWidth - obstacle4_height) {
       obstacle4_speed = obstacle4_negative_speed
-    }
+    }*/
 
 
     //Collectible
@@ -448,7 +478,7 @@ const _app = new p5(p5Instance => {
 
     //Obstacle Checks
 
-    //obstacle
+    /*//obstacle
     if (player_position_horizontal + player_width + obstacle_width >= obstacle_position_horizontal + obstacle_width && player_position_horizontal - obstacle_width <= obstacle_position_horizontal) {
       if (player_position_vertical + player_height + obstacle_height >= obstacle_position_vertical + obstacle_height && player_position_vertical - obstacle_height <= obstacle_position_vertical) {
 
@@ -503,7 +533,7 @@ const _app = new p5(p5Instance => {
 
         console.log("Obstacle!");
       }
-    }
+    }*/
     //obstacle spawntrigger
     if (object_spawntrigger == true) {
 
@@ -515,7 +545,7 @@ const _app = new p5(p5Instance => {
       heal_collectible_position_horizontal = getRndInteger(0, heal_collectible_spawn_area_horizontal)
       heal_collectible_position_vertical = getRndInteger(0, heal_collectible_spawn_area_vertical)
 
-      //Random Location for Obstacle 1
+      /*//Random Location for Obstacle 1
       obstacle_position_horizontal = getRndInteger(0 - obstacle_width, obstacle_spawn_area_horizontal)
       obstacle_position_vertical = getRndInteger(0 - obstacle_height, obstacle_spawn_area_vertical)
 
@@ -531,40 +561,41 @@ const _app = new p5(p5Instance => {
       obstacle4_position_horizontal = getRndInteger(0 - obstacle4_width, obstacle4_spawn_area_horizontal)
       obstacle4_position_vertical = getRndInteger(0 - obstacle4_height, obstacle4_spawn_area_vertical)
 
-
+      */
       object_spawntrigger = false
-
-
-
-
-
-
     }
+
+
+
+
+
+
+
 
 
     //Bullets
 
-    if (space_is_pressed == true) {
-
-      bullet_flight_direction_verhältniss = p.mouseY / p.mouseX
-
-
-    }
-    if (bullet_is_flying == true) {
-      p.fill("blue")
-      p.rect(bullet_position_horizontal, bullet_position_vertical, bullet_width, bullet_height)
-      bullet_position_horizontal = bullet_position_horizontal + bullet_speed
-      bullet_position_vertical = bullet_position_vertical + bullet_speed * bullet_flight_direction_verhältniss
-      if (bullet_position_horizontal <= 0 - bullet_width || bullet_position_horizontal >= p.windowWidth) {
-        bullet_is_flying = false
-      }
-      if (bullet_position_vertical <= 0 - bullet_height || bullet_position_vertical >= p.windowHeight) {
-        bullet_is_flying = false
-      }
-    }
-    if (space_is_pressed == true) {
-      console.log(bullet_is_flying, "h" + bullet_position_horizontal, "v" + bullet_position_vertical)
-    }
+    /* if (space_is_pressed == true) {
+ 
+     bullet_flight_direction_verhältniss = p.mouseY / p.mouseX
+ 
+ 
+   }
+   if (bullet_is_flying == true) {
+     p.fill("blue")
+     p.rect(bullet_position_horizontal, bullet_position_vertical, bullet_width, bullet_height)
+     bullet_position_horizontal = bullet_position_horizontal + bullet_speed
+     bullet_position_vertical = bullet_position_vertical + bullet_speed * bullet_flight_direction_verhältniss
+     if (bullet_position_horizontal <= 0 - bullet_width || bullet_position_horizontal >= p.windowWidth) {
+       bullet_is_flying = false
+     }
+     if (bullet_position_vertical <= 0 - bullet_height || bullet_position_vertical >= p.windowHeight) {
+       bullet_is_flying = false
+     }
+   }
+   if (space_is_pressed == true) {
+     console.log(bullet_is_flying, "h" + bullet_position_horizontal, "v" + bullet_position_vertical)
+   }*/
 
 
 
@@ -572,7 +603,58 @@ const _app = new p5(p5Instance => {
   };
 
 
+  function createObstacle(windowHeight: number, windowWidth: number) {
+
+
+    return new Obstacle_horizontal_movement(1, windowWidth, 1, windowHeight, 30, 30, 4, 1, 1)
+  }
+
+
 }, document.getElementById('app')!);
+class Obstacle_horizontal_movement {
+  constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private speed: number, private x: number, private y: number) {
+  }
+
+  randomizer() {
+    function getRndInteger(min: any, max: any) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    this.x = getRndInteger(this.x_min, this.x_max - this.w)
+    this.y = getRndInteger(this.y_min, this.y_max - this.h)
+    console.log(this.y, this.x)
+  }
+  draw(p: p5) {
+    p.fill(145, 71, 254)
+    p.rect(this.x, this.y, this.w, this.h)
+
+  }
+  update() {
+
+    this.x = this.x + this.speed
+
+    if (this.x <= 0) {
+      this.speed = 0 - this.speed
+    }
+    if (this.speed >= 0) {
+      this.speed = 0 + this.speed
+    }
+  }
+  collide(x_player: number, y_player: number, w_player: number, h_player: number): boolean {
+
+    function getRndInteger(min: any, max: any) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+
+    if (x_player + w_player >= this.x + this.w && x_player <= this.x) {
+      if (y_player + h_player >= this.y + this.h && y_player <= this.y) {
+        this.x = getRndInteger(this.x_min, this.x_max)
+        this.y = getRndInteger(this.y_min, this.y_max)
+        return true
+      }
+    }
+    return false
+  } 
+}
 
 
 /*if (p.mouseX > bullet_position_horizontal && p.mouseY > bullet_position_vertical) {
