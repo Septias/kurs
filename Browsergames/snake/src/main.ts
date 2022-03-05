@@ -9,100 +9,100 @@ const _app = new p5(p5Instance => {
   let obstacle1_width = 35
   let obstacle1_height = 35
   let spawntrigger1 = true
-  let rnd_number1 = p.random(300)
-  let speed1 = 5
+  let rnd_number1 = p.random(400)
+  let speed1 = 6
   let obstacle1_spawn_pos_horizontal = p.windowWidth + obstacle1_width + rnd_number1 * 2
-  let obstacle1_spawn_area_vertical = p.windowHeight - obstacle1_height / 2
+  let obstacle1_spawn_area_vertical = p.windowHeight - obstacle1_height
   let obstacle1_pos_horizontal = obstacle1_spawn_pos_horizontal
   let obstacle1_pos_vertical = getRndInteger(0 - obstacle1_height / 2, obstacle1_spawn_area_vertical)
   //Obstacle 2
   let obstacle2_width = 35
   let obstacle2_height = 35
   let spawntrigger2 = true
-  let rnd_number2 = p.random(300)
-  let speed2 = 5
+  let rnd_number2 = p.random(400)
+  let speed2 = 6
   let obstacle2_spawn_pos_horizontal = p.windowWidth + obstacle2_width + rnd_number2 * 2
-  let obstacle2_spawn_area_vertical = p.windowHeight - obstacle2_height / 2
+  let obstacle2_spawn_area_vertical = p.windowHeight - obstacle2_height
   let obstacle2_pos_horizontal = obstacle2_spawn_pos_horizontal
   let obstacle2_pos_vertical = getRndInteger(0 - obstacle2_height / 2, obstacle2_spawn_area_vertical)
   //Obstacle 3
   let obstacle3_width = 35
   let obstacle3_height = 35
   let spawntrigger3 = true
-  let rnd_number3 = p.random(300)
-  let speed3 = 5
+  let rnd_number3 = p.random(400)
+  let speed3 = 6
   let obstacle3_spawn_pos_horizontal = p.windowWidth + obstacle3_width + rnd_number3 * 2
-  let obstacle3_spawn_area_vertical = p.windowHeight - obstacle3_height / 2
+  let obstacle3_spawn_area_vertical = p.windowHeight - obstacle3_height
   let obstacle3_pos_horizontal = obstacle3_spawn_pos_horizontal
   let obstacle3_pos_vertical = getRndInteger(0 - obstacle3_height / 2, obstacle3_spawn_area_vertical)
   //Obstacle 4
   let obstacle4_width = 35
   let obstacle4_height = 35
   let spawntrigger4 = true
-  let rnd_number4 = p.random(300)
-  let speed4 = 5
+  let rnd_number4 = p.random(400)
+  let speed4 = 6
   let obstacle4_spawn_pos_horizontal = p.windowWidth + obstacle4_width + rnd_number4 * 2
-  let obstacle4_spawn_area_vertical = p.windowHeight - obstacle4_height / 2
+  let obstacle4_spawn_area_vertical = p.windowHeight - obstacle4_height
   let obstacle4_pos_horizontal = obstacle4_spawn_pos_horizontal
   let obstacle4_pos_vertical = getRndInteger(0 - obstacle4_height / 2, obstacle4_spawn_area_vertical)
   //Obstacle 5
   let obstacle5_width = 35
   let obstacle5_height = 35
   let spawntrigger5 = true
-  let rnd_number5 = p.random(300)
-  let speed5 = 5
+  let rnd_number5 = p.random(400)
+  let speed5 = 6
   let obstacle5_spawn_pos_horizontal = p.windowWidth + obstacle5_width + rnd_number5 * 2
-  let obstacle5_spawn_area_vertical = p.windowHeight - obstacle5_height / 2
+  let obstacle5_spawn_area_vertical = p.windowHeight - obstacle5_height
   let obstacle5_pos_horizontal = obstacle5_spawn_pos_horizontal
   let obstacle5_pos_vertical = getRndInteger(0 - obstacle5_height / 2, obstacle5_spawn_area_vertical)
   //Obstacle 6
   let obstacle6_width = 35
   let obstacle6_height = 35
   let spawntrigger6 = true
-  let rnd_number6 = p.random(300, 400)
+  let rnd_number6 = p.random(400)
   let speed6 = 6
   let obstacle6_spawn_pos_horizontal = p.windowWidth + obstacle6_width + rnd_number6 * 2
-  let obstacle6_spawn_area_vertical = p.windowHeight - obstacle6_height / 2
+  let obstacle6_spawn_area_vertical = p.windowHeight - obstacle6_height
   let obstacle6_pos_horizontal = obstacle6_spawn_pos_horizontal
   let obstacle6_pos_vertical = getRndInteger(0 - obstacle6_height / 2, obstacle6_spawn_area_vertical)
   //Obstacle 7
   let obstacle7_width = 35
   let obstacle7_height = 35
   let spawntrigger7 = true
-  let rnd_number7 = p.random(300, 400)
-  let speed7 = 5
+  let rnd_number7 = p.random(400)
+  let speed7 = 6
   let obstacle7_spawn_pos_horizontal = p.windowWidth + obstacle7_width + rnd_number7 * 2
-  let obstacle7_spawn_area_vertical = p.windowHeight - obstacle7_height / 2
+  let obstacle7_spawn_area_vertical = p.windowHeight - obstacle7_height
   let obstacle7_pos_horizontal = obstacle7_spawn_pos_horizontal
   let obstacle7_pos_vertical = getRndInteger(0 - obstacle7_height / 2, obstacle7_spawn_area_vertical)
   //Obstacle 8
   let obstacle8_width = 35
   let obstacle8_height = 35
   let spawntrigger8 = true
-  let rnd_number8 = p.random(300, 400)
-  let speed8 = 5
+  let rnd_number8 = p.random(400)
+  let speed8 = 6
   let obstacle8_spawn_pos_horizontal = p.windowWidth + obstacle8_width + rnd_number8 * 2
-  let obstacle8_spawn_area_vertical = p.windowHeight - obstacle8_height / 2
+  let obstacle8_spawn_area_vertical = p.windowHeight - obstacle8_height
   let obstacle8_pos_horizontal = obstacle8_spawn_pos_horizontal
   let obstacle8_pos_vertical = getRndInteger(0 - obstacle8_height / 2, obstacle8_spawn_area_vertical)
   //Obstacle 9
   let obstacle9_width = 35
   let obstacle9_height = 35
   let spawntrigger9 = true
-  let rnd_number9 = p.random(300, 400)
-  let speed9 = 5
+  let rnd_number9 = p.random(400)
+  let speed9 = 6
   let obstacle9_spawn_pos_horizontal = p.windowWidth + obstacle9_width + rnd_number9 * 2
-  let obstacle9_spawn_area_vertical = p.windowHeight - obstacle9_height / 2
+  let obstacle9_spawn_area_vertical = p.windowHeight - obstacle9_height
   let obstacle9_pos_horizontal = obstacle9_spawn_pos_horizontal
   let obstacle9_pos_vertical = getRndInteger(0 - obstacle9_height / 2, obstacle9_spawn_area_vertical)
   //Obstacle 10
   let obstacle10_width = 35
   let obstacle10_height = 35
   let spawntrigger10 = true
-  let rnd_number10 = p.random(300, 400)
-  let speed10 = 5
+  let rnd_number10 = p.random(400)
+  let speed10 = 6
   let obstacle10_spawn_pos_horizontal = p.windowWidth + obstacle10_width + rnd_number10 * 2
-  let obstacle10_spawn_area_vertical = p.windowHeight - obstacle10_height / 2
+  let obstacle10_spawn_area_vertical = p.windowHeight - obstacle10_height
   let obstacle10_pos_horizontal = obstacle10_spawn_pos_horizontal
   let obstacle10_pos_vertical = getRndInteger(0 - obstacle10_height / 2, obstacle10_spawn_area_vertical)
 
@@ -111,7 +111,7 @@ const _app = new p5(p5Instance => {
   let coin1_height = 35
   let spawntrigger_coin1 = true
   let rnd_number_coin1 = p.random(200, 300)
-  let speed_coin1 = 5
+  let speed_coin1 = 6
   let coin1_spawn_pos_horizontal = p.windowWidth + coin1_width + rnd_number_coin1 * 2
   let coin1_spawn_area_vertical = p.windowHeight - coin1_height
   let coin1_pos_horizontal = coin1_spawn_pos_horizontal
@@ -212,9 +212,10 @@ const _app = new p5(p5Instance => {
       power_menu = false
       flash = true
     }
-    if (p.keyCode === 50)
+    if (p.keyCode === 50) {
       power_menu = false
-    coinmaster = true
+      coinmaster = true
+    }
   }
 
   p.keyReleased = function () {
@@ -275,7 +276,7 @@ const _app = new p5(p5Instance => {
       Player_Position_Vertical = Player_Position_Vertical - speed
     }
     if (up == false) {
-      Player_Position_Vertical = Player_Position_Vertical + speed
+      Player_Position_Vertical = Player_Position_Vertical + speed * 1.3
     }
     if (Player_Position_Vertical > p.windowHeight - Player_height) {
       Player_Position_Vertical = p.windowHeight - Player_height
@@ -585,17 +586,17 @@ const _app = new p5(p5Instance => {
     } else {
       timer_active = true
       speed = 6
-      speed1 = 5 + level
-      speed2 = 5 + level
-      speed3 = 5 + level
-      speed4 = 5 + level
-      speed5 = 5 + level
-      speed6 = 5 + level
-      speed7 = 5 + level
-      speed8 = 5 + level
-      speed9 = 5 + level
-      speed10 = 5 + level
-      speed_coin1 = 5  + level
+      speed1 = 6 + level
+      speed2 = 6 + level
+      speed3 = 6 + level
+      speed4 = 6 + level
+      speed5 = 6 + level
+      speed6 = 6 + level
+      speed7 = 6 + level
+      speed8 = 6 + level
+      speed9 = 6 + level
+      speed10 = 6 + level
+      speed_coin1 = 6 + level
     }
 
     //Coins/Level
@@ -663,6 +664,8 @@ const _app = new p5(p5Instance => {
       p.textSize(40)
       p.text("Press [Space] to continue", p.windowWidth / 2, p.windowHeight / 2 + 180)
       speed = 0
+      flash = false
+      coinmaster = false
       if (space == true) {
         lives = 3
         time = 0
@@ -673,7 +676,5 @@ const _app = new p5(p5Instance => {
         power_menu = true
       }
     }
-
   }
-
 }, document.getElementById('app')!);
