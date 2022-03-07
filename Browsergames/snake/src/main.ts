@@ -9,9 +9,9 @@ const _app = new p5(p5Instance => {
   let obstacle1_width = 35
   let obstacle1_height = 35
   let spawntrigger1 = true
-  let rnd_number1 = p.random(400)
+  let rnd_number1 = p.random(500)
   let speed1 = 6
-  let obstacle1_spawn_pos_horizontal = p.windowWidth + obstacle1_width + rnd_number1 * 2
+  let obstacle1_spawn_pos_horizontal = p.windowWidth + obstacle1_width + rnd_number1
   let obstacle1_spawn_area_vertical = p.windowHeight - obstacle1_height
   let obstacle1_pos_horizontal = obstacle1_spawn_pos_horizontal
   let obstacle1_pos_vertical = getRndInteger(0 - obstacle1_height / 2, obstacle1_spawn_area_vertical)
@@ -19,9 +19,9 @@ const _app = new p5(p5Instance => {
   let obstacle2_width = 35
   let obstacle2_height = 35
   let spawntrigger2 = true
-  let rnd_number2 = p.random(400)
+  let rnd_number2 = p.random(500)
   let speed2 = 6
-  let obstacle2_spawn_pos_horizontal = p.windowWidth + obstacle2_width + rnd_number2 * 2
+  let obstacle2_spawn_pos_horizontal = p.windowWidth + obstacle2_width + rnd_number2
   let obstacle2_spawn_area_vertical = p.windowHeight - obstacle2_height
   let obstacle2_pos_horizontal = obstacle2_spawn_pos_horizontal
   let obstacle2_pos_vertical = getRndInteger(0 - obstacle2_height / 2, obstacle2_spawn_area_vertical)
@@ -29,9 +29,9 @@ const _app = new p5(p5Instance => {
   let obstacle3_width = 35
   let obstacle3_height = 35
   let spawntrigger3 = true
-  let rnd_number3 = p.random(400)
+  let rnd_number3 = p.random(500)
   let speed3 = 6
-  let obstacle3_spawn_pos_horizontal = p.windowWidth + obstacle3_width + rnd_number3 * 2
+  let obstacle3_spawn_pos_horizontal = p.windowWidth + obstacle3_width + rnd_number3
   let obstacle3_spawn_area_vertical = p.windowHeight - obstacle3_height
   let obstacle3_pos_horizontal = obstacle3_spawn_pos_horizontal
   let obstacle3_pos_vertical = getRndInteger(0 - obstacle3_height / 2, obstacle3_spawn_area_vertical)
@@ -39,9 +39,9 @@ const _app = new p5(p5Instance => {
   let obstacle4_width = 35
   let obstacle4_height = 35
   let spawntrigger4 = true
-  let rnd_number4 = p.random(400)
+  let rnd_number4 = p.random(500)
   let speed4 = 6
-  let obstacle4_spawn_pos_horizontal = p.windowWidth + obstacle4_width + rnd_number4 * 2
+  let obstacle4_spawn_pos_horizontal = p.windowWidth + obstacle4_width + rnd_number4
   let obstacle4_spawn_area_vertical = p.windowHeight - obstacle4_height
   let obstacle4_pos_horizontal = obstacle4_spawn_pos_horizontal
   let obstacle4_pos_vertical = getRndInteger(0 - obstacle4_height / 2, obstacle4_spawn_area_vertical)
@@ -49,9 +49,9 @@ const _app = new p5(p5Instance => {
   let obstacle5_width = 35
   let obstacle5_height = 35
   let spawntrigger5 = true
-  let rnd_number5 = p.random(400)
+  let rnd_number5 = p.random(400, 800)
   let speed5 = 6
-  let obstacle5_spawn_pos_horizontal = p.windowWidth + obstacle5_width + rnd_number5 * 2
+  let obstacle5_spawn_pos_horizontal = p.windowWidth + obstacle5_width + rnd_number5
   let obstacle5_spawn_area_vertical = p.windowHeight - obstacle5_height
   let obstacle5_pos_horizontal = obstacle5_spawn_pos_horizontal
   let obstacle5_pos_vertical = getRndInteger(0 - obstacle5_height / 2, obstacle5_spawn_area_vertical)
@@ -59,9 +59,9 @@ const _app = new p5(p5Instance => {
   let obstacle6_width = 35
   let obstacle6_height = 35
   let spawntrigger6 = true
-  let rnd_number6 = p.random(400)
+  let rnd_number6 = p.random(400, 800)
   let speed6 = 6
-  let obstacle6_spawn_pos_horizontal = p.windowWidth + obstacle6_width + rnd_number6 * 2
+  let obstacle6_spawn_pos_horizontal = p.windowWidth + obstacle6_width + rnd_number6
   let obstacle6_spawn_area_vertical = p.windowHeight - obstacle6_height
   let obstacle6_pos_horizontal = obstacle6_spawn_pos_horizontal
   let obstacle6_pos_vertical = getRndInteger(0 - obstacle6_height / 2, obstacle6_spawn_area_vertical)
@@ -69,9 +69,9 @@ const _app = new p5(p5Instance => {
   let obstacle7_width = 35
   let obstacle7_height = 35
   let spawntrigger7 = true
-  let rnd_number7 = p.random(400)
+  let rnd_number7 = p.random(400, 800)
   let speed7 = 6
-  let obstacle7_spawn_pos_horizontal = p.windowWidth + obstacle7_width + rnd_number7 * 2
+  let obstacle7_spawn_pos_horizontal = p.windowWidth + obstacle7_width + rnd_number7
   let obstacle7_spawn_area_vertical = p.windowHeight - obstacle7_height
   let obstacle7_pos_horizontal = obstacle7_spawn_pos_horizontal
   let obstacle7_pos_vertical = getRndInteger(0 - obstacle7_height / 2, obstacle7_spawn_area_vertical)
@@ -79,9 +79,9 @@ const _app = new p5(p5Instance => {
   let obstacle8_width = 35
   let obstacle8_height = 35
   let spawntrigger8 = true
-  let rnd_number8 = p.random(400)
+  let rnd_number8 = p.random(400, 800)
   let speed8 = 6
-  let obstacle8_spawn_pos_horizontal = p.windowWidth + obstacle8_width + rnd_number8 * 2
+  let obstacle8_spawn_pos_horizontal = p.windowWidth + obstacle8_width + rnd_number8
   let obstacle8_spawn_area_vertical = p.windowHeight - obstacle8_height
   let obstacle8_pos_horizontal = obstacle8_spawn_pos_horizontal
   let obstacle8_pos_vertical = getRndInteger(0 - obstacle8_height / 2, obstacle8_spawn_area_vertical)
@@ -89,9 +89,9 @@ const _app = new p5(p5Instance => {
   let obstacle9_width = 35
   let obstacle9_height = 35
   let spawntrigger9 = true
-  let rnd_number9 = p.random(400)
+  let rnd_number9 = p.random(400, 800)
   let speed9 = 6
-  let obstacle9_spawn_pos_horizontal = p.windowWidth + obstacle9_width + rnd_number9 * 2
+  let obstacle9_spawn_pos_horizontal = p.windowWidth + obstacle9_width + rnd_number9
   let obstacle9_spawn_area_vertical = p.windowHeight - obstacle9_height
   let obstacle9_pos_horizontal = obstacle9_spawn_pos_horizontal
   let obstacle9_pos_vertical = getRndInteger(0 - obstacle9_height / 2, obstacle9_spawn_area_vertical)
@@ -99,20 +99,30 @@ const _app = new p5(p5Instance => {
   let obstacle10_width = 35
   let obstacle10_height = 35
   let spawntrigger10 = true
-  let rnd_number10 = p.random(400)
+  let rnd_number10 = p.random(400, 800)
   let speed10 = 6
-  let obstacle10_spawn_pos_horizontal = p.windowWidth + obstacle10_width + rnd_number10 * 2
+  let obstacle10_spawn_pos_horizontal = p.windowWidth + obstacle10_width + rnd_number10
   let obstacle10_spawn_area_vertical = p.windowHeight - obstacle10_height
   let obstacle10_pos_horizontal = obstacle10_spawn_pos_horizontal
   let obstacle10_pos_vertical = getRndInteger(0 - obstacle10_height / 2, obstacle10_spawn_area_vertical)
+  //Fast_Obstacle 1
+  let fast_obstacle1_width = 40
+  let fast_obstacle1_height = 40
+  let spawntrigger_fast_obstacle1 = false
+  let rnd_number_fast_obstacle1 = p.random(400, 800)
+  let speed_fast_obstacle1 = 15
+  let fast_obstacle1_spawn_pos_horizontal = p.windowWidth + fast_obstacle1_width + rnd_number_fast_obstacle1
+  let fast_obstacle1_spawn_area_vertical = p.windowHeight - fast_obstacle1_height
+  let fast_obstacle1_pos_horizontal = fast_obstacle1_spawn_pos_horizontal
+  let fast_obstacle1_pos_vertical = getRndInteger(0 - fast_obstacle1_height / 2, fast_obstacle1_spawn_area_vertical)
 
   //Coin 1
   let coin1_width = 35
   let coin1_height = 35
   let spawntrigger_coin1 = true
-  let rnd_number_coin1 = p.random(200, 300)
+  let rnd_number_coin1 = p.random(500)
   let speed_coin1 = 6
-  let coin1_spawn_pos_horizontal = p.windowWidth + coin1_width + rnd_number_coin1 * 2
+  let coin1_spawn_pos_horizontal = p.windowWidth + coin1_width + rnd_number_coin1
   let coin1_spawn_area_vertical = p.windowHeight - coin1_height
   let coin1_pos_horizontal = coin1_spawn_pos_horizontal
   let coin1_pos_vertical = getRndInteger(0 - coin1_height / 2, coin1_spawn_area_vertical)
@@ -148,7 +158,7 @@ const _app = new p5(p5Instance => {
   let real_time = 0
   let level = 1
   let coins = 0
-  let coins_goal = 5
+  let coins_goal = 10
 
   //Player
   let Player_Width = 90
@@ -261,10 +271,12 @@ const _app = new p5(p5Instance => {
     if (spawntrigger10 == true) {
       obstacle10_pos_vertical = getRndInteger(0 - obstacle1_height / 2, obstacle1_spawn_area_vertical)
     }
+    if (spawntrigger_fast_obstacle1 == true) {
+      fast_obstacle1_pos_vertical = getRndInteger(0 - fast_obstacle1_height / 2, fast_obstacle1_spawn_area_vertical)
+    }
     if (spawntrigger_coin1 == true) {
       coin1_pos_vertical = getRndInteger(0 - coin1_height / 2, coin1_spawn_area_vertical)
     }
-
 
     //Background
     p.background(0, 0, 0)//img für bild
@@ -406,103 +418,118 @@ const _app = new p5(p5Instance => {
     }
 
     //Damage 1
-    if (Player_Position_Horizontal + Player_Width > obstacle1_pos_horizontal + obstacle1_width && Player_Position_Horizontal < obstacle1_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height > obstacle1_pos_vertical + obstacle1_height && Player_Position_Vertical < obstacle1_pos_vertical) {
+    if (Player_Position_Horizontal + Player_Width >= obstacle1_pos_horizontal + obstacle1_width && Player_Position_Horizontal <= obstacle1_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= obstacle1_pos_vertical + obstacle1_height && Player_Position_Vertical <= obstacle1_pos_vertical) {
         obstacle1_pos_horizontal = p.windowWidth + obstacle1_width
         lives = lives - 1
         spawntrigger1 = true
         console.log("Damage")
-        console.log(lives)
       }
     }
     //Damage 2
-    if (Player_Position_Horizontal + Player_Width > obstacle2_pos_horizontal + obstacle2_width && Player_Position_Horizontal < obstacle2_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height > obstacle2_pos_vertical + obstacle2_height && Player_Position_Vertical < obstacle2_pos_vertical) {
+    if (Player_Position_Horizontal + Player_Width >= obstacle2_pos_horizontal + obstacle2_width && Player_Position_Horizontal <= obstacle2_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= obstacle2_pos_vertical + obstacle2_height && Player_Position_Vertical <= obstacle2_pos_vertical) {
         obstacle2_pos_horizontal = p.windowWidth + obstacle2_width
         lives = lives - 1
         spawntrigger2 = true
         console.log("Damage")
-        console.log(lives)
       }
     }
     //Damage 3
-    if (Player_Position_Horizontal + Player_Width > obstacle3_pos_horizontal + obstacle3_width && Player_Position_Horizontal < obstacle3_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height > obstacle3_pos_vertical + obstacle3_height && Player_Position_Vertical < obstacle3_pos_vertical) {
+    if (Player_Position_Horizontal + Player_Width >= obstacle3_pos_horizontal + obstacle3_width && Player_Position_Horizontal <= obstacle3_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= obstacle3_pos_vertical + obstacle3_height && Player_Position_Vertical <= obstacle3_pos_vertical) {
         obstacle3_pos_horizontal = p.windowWidth + obstacle3_width
         lives = lives - 1
         spawntrigger3 = true
         console.log("Damage")
-        console.log(lives)
       }
     }
     //Damage 4
-    if (Player_Position_Horizontal + Player_Width > obstacle4_pos_horizontal + obstacle4_width && Player_Position_Horizontal < obstacle4_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height > obstacle4_pos_vertical + obstacle4_height && Player_Position_Vertical < obstacle4_pos_vertical) {
+    if (Player_Position_Horizontal + Player_Width >= obstacle4_pos_horizontal + obstacle4_width && Player_Position_Horizontal <= obstacle4_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= obstacle4_pos_vertical + obstacle4_height && Player_Position_Vertical <= obstacle4_pos_vertical) {
         obstacle4_pos_horizontal = p.windowWidth + obstacle4_width
         lives = lives - 1
         spawntrigger4 = true
         console.log("Damage")
-        console.log(lives)
       }
     }
     //Damage 5
-    if (Player_Position_Horizontal + Player_Width > obstacle5_pos_horizontal + obstacle5_width && Player_Position_Horizontal < obstacle5_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height > obstacle5_pos_vertical + obstacle5_height && Player_Position_Vertical < obstacle5_pos_vertical) {
+    if (Player_Position_Horizontal + Player_Width >= obstacle5_pos_horizontal + obstacle5_width && Player_Position_Horizontal <= obstacle5_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= obstacle5_pos_vertical + obstacle5_height && Player_Position_Vertical <= obstacle5_pos_vertical) {
         obstacle5_pos_horizontal = p.windowWidth + obstacle5_width
         lives = lives - 1
         spawntrigger5 = true
         console.log("Damage")
-        console.log(lives)
       }
     }
     //Damage 6
-    if (Player_Position_Horizontal + Player_Width > obstacle6_pos_horizontal + obstacle6_width && Player_Position_Horizontal < obstacle6_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height > obstacle6_pos_vertical + obstacle6_height && Player_Position_Vertical < obstacle6_pos_vertical) {
+    if (Player_Position_Horizontal + Player_Width >= obstacle6_pos_horizontal + obstacle6_width && Player_Position_Horizontal <= obstacle6_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= obstacle6_pos_vertical + obstacle6_height && Player_Position_Vertical <= obstacle6_pos_vertical) {
         obstacle6_pos_horizontal = p.windowWidth + obstacle6_width
         lives = lives - 1
         spawntrigger6 = true
         console.log("Damage")
-        console.log(lives)
       }
     }
     //Damage 7
-    if (Player_Position_Horizontal + Player_Width > obstacle7_pos_horizontal + obstacle7_width && Player_Position_Horizontal < obstacle7_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height > obstacle7_pos_vertical + obstacle7_height && Player_Position_Vertical < obstacle7_pos_vertical) {
+    if (Player_Position_Horizontal + Player_Width >= obstacle7_pos_horizontal + obstacle7_width && Player_Position_Horizontal <= obstacle7_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= obstacle7_pos_vertical + obstacle7_height && Player_Position_Vertical <= obstacle7_pos_vertical) {
         obstacle7_pos_horizontal = p.windowWidth + obstacle7_width
         lives = lives - 1
         spawntrigger7 = true
         console.log("Damage")
-        console.log(lives)
       }
     }
     //Damage 8
-    if (Player_Position_Horizontal + Player_Width > obstacle8_pos_horizontal + obstacle8_width && Player_Position_Horizontal < obstacle8_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height > obstacle8_pos_vertical + obstacle8_height && Player_Position_Vertical < obstacle8_pos_vertical) {
+    if (Player_Position_Horizontal + Player_Width >= obstacle8_pos_horizontal + obstacle8_width && Player_Position_Horizontal <= obstacle8_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= obstacle8_pos_vertical + obstacle8_height && Player_Position_Vertical <= obstacle8_pos_vertical) {
         obstacle8_pos_horizontal = p.windowWidth + obstacle8_width
         lives = lives - 1
         spawntrigger8 = true
         console.log("Damage")
-        console.log(lives)
       }
     }
     //Damage 9
-    if (Player_Position_Horizontal + Player_Width > obstacle9_pos_horizontal + obstacle9_width && Player_Position_Horizontal < obstacle9_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height > obstacle9_pos_vertical + obstacle9_height && Player_Position_Vertical < obstacle9_pos_vertical) {
+    if (Player_Position_Horizontal + Player_Width >= obstacle9_pos_horizontal + obstacle9_width && Player_Position_Horizontal <= obstacle9_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= obstacle9_pos_vertical + obstacle9_height && Player_Position_Vertical <= obstacle9_pos_vertical) {
         obstacle9_pos_horizontal = p.windowWidth + obstacle9_width
         lives = lives - 1
         spawntrigger9 = true
         console.log("Damage")
-        console.log(lives)
       }
     }
     //Damage 10
-    if (Player_Position_Horizontal + Player_Width > obstacle10_pos_horizontal + obstacle10_width && Player_Position_Horizontal < obstacle10_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height > obstacle10_pos_vertical + obstacle10_height && Player_Position_Vertical < obstacle10_pos_vertical) {
+    if (Player_Position_Horizontal + Player_Width >= obstacle10_pos_horizontal + obstacle10_width && Player_Position_Horizontal <= obstacle10_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= obstacle10_pos_vertical + obstacle10_height && Player_Position_Vertical <= obstacle10_pos_vertical) {
         obstacle10_pos_horizontal = p.windowWidth + obstacle10_width
         lives = lives - 1
         spawntrigger10 = true
         console.log("Damage")
-        console.log(lives)
+      }
+    }
+
+    //Fast_Obstacle1
+    if (level > 1) {
+      //if ()
+      p.fill(139, 0, 0)
+      p.rect(fast_obstacle1_pos_horizontal, fast_obstacle1_pos_vertical, fast_obstacle1_width, fast_obstacle1_height)
+      fast_obstacle1_pos_horizontal = fast_obstacle1_pos_horizontal - speed_fast_obstacle1
+      if (fast_obstacle1_pos_horizontal > 0) {
+        spawntrigger_fast_obstacle1 = false
+      }
+      if (fast_obstacle1_pos_horizontal < 0) {
+        fast_obstacle1_pos_horizontal = p.windowWidth + fast_obstacle1_width
+        spawntrigger_fast_obstacle1 = true
+      }
+    }
+
+    //Damage Fast_Obstacle1
+    if (Player_Position_Horizontal + Player_Width >= fast_obstacle1_pos_horizontal + fast_obstacle1_width && Player_Position_Horizontal <= fast_obstacle1_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= fast_obstacle1_pos_vertical + fast_obstacle1_height && Player_Position_Vertical <= fast_obstacle1_pos_vertical) {
+        fast_obstacle1_pos_horizontal = p.windowWidth + fast_obstacle1_width
+        lives = lives - 1
+        spawntrigger_fast_obstacle1 = true
+        console.log("Damage")
       }
     }
 
@@ -519,8 +546,8 @@ const _app = new p5(p5Instance => {
     }
 
     //Collect Coin 1
-    if (Player_Position_Horizontal + Player_Width > coin1_pos_horizontal + coin1_width && Player_Position_Horizontal < coin1_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height > coin1_pos_vertical + coin1_height && Player_Position_Vertical < coin1_pos_vertical) {
+    if (Player_Position_Horizontal + Player_Width >= coin1_pos_horizontal + coin1_width && Player_Position_Horizontal <= coin1_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= coin1_pos_vertical + coin1_height && Player_Position_Vertical <= coin1_pos_vertical) {
         coin1_pos_horizontal = p.windowWidth + coin1_width
         spawntrigger_coin1 = true
         if (coinmaster == true) {
@@ -566,6 +593,7 @@ const _app = new p5(p5Instance => {
       speed8 = 0
       speed9 = 0
       speed10 = 0
+      speed_fast_obstacle1 = 0
       speed_coin1 = 0
       p.fill(87, 87, 87)
       p.rect(menu_pos_horizontal, menu_pos_vertical, menu_width, menu_height)
@@ -586,17 +614,19 @@ const _app = new p5(p5Instance => {
     } else {
       timer_active = true
       speed = 6
-      speed1 = 6 + level
-      speed2 = 6 + level
-      speed3 = 6 + level
-      speed4 = 6 + level
-      speed5 = 6 + level
-      speed6 = 6 + level
-      speed7 = 6 + level
-      speed8 = 6 + level
-      speed9 = 6 + level
-      speed10 = 6 + level
-      speed_coin1 = 6 + level
+      speed1 = 6 + level - 1
+      speed2 = 6 + level - 1
+      speed3 = 6 + level - 1
+      speed4 = 6 + level - 1
+      speed5 = 6 + level - 1
+      speed6 = 6 + level - 1
+      speed7 = 6 + level - 1
+      speed8 = 6 + level - 1
+      speed9 = 6 + level - 1
+      speed10 = 6 + level - 1
+      speed_fast_obstacle1 = 15
+      speed_coin1 = 6 + level - 1
+      console.log(speed10)
     }
 
     //Coins/Level
@@ -617,7 +647,7 @@ const _app = new p5(p5Instance => {
       speed_coin1 = speed_coin1 + 1
     }
 
-    //Superpower
+    //Superpower (Space um menu zu schließen ohne power zu wählen)
     if (power_menu == true) {
       timer_active = false
       speed = 0
