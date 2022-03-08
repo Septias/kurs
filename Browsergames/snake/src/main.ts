@@ -1,4 +1,4 @@
-import p5 from 'p5';
+import p5, { SoundFile } from 'p5';
 
 import './style.css';
 
@@ -109,7 +109,7 @@ const _app = new p5(p5Instance => {
   let fast_obstacle1_width = 40
   let fast_obstacle1_height = 40
   let spawntrigger_fast_obstacle1 = false
-  let rnd_number_fast_obstacle1 = p.random(400, 800)
+  let rnd_number_fast_obstacle1 = p.random(800, 1000)
   let speed_fast_obstacle1 = 15
   let fast_obstacle1_spawn_pos_horizontal = p.windowWidth + fast_obstacle1_width + rnd_number_fast_obstacle1
   let fast_obstacle1_spawn_area_vertical = p.windowHeight - fast_obstacle1_height
@@ -148,9 +148,6 @@ const _app = new p5(p5Instance => {
   let menu_height = 400
   let menu_pos_horizontal = p.windowWidth / 2 - menu_width / 2
   let menu_pos_vertical = p.windowHeight / 2 - menu_height / 2
-
-  //Music
-  //let mySound;
 
   //Timer/Level/Coins
   let timer_active = true
@@ -192,10 +189,20 @@ const _app = new p5(p5Instance => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  /*function preload() {
-    p.soundFormats('mp3', 'ogg');
-    mySound = p.loadSound('assets/doorbell');
+  //Music
+  let mySound;
+  let loopStart = 0.2;
+  let loopDuration = 0.8;
+  let please = false
+
+
+
+  /*let music;
+  p.setup = function setup() {
+    music = p.createAudio("K:/Bentiks Dateien/1-16 Electrodrome.mp3");
+    music.autoplay(true);
   }*/
+
 
   //Background  
   p.setup = function setup() {
@@ -226,6 +233,9 @@ const _app = new p5(p5Instance => {
       power_menu = false
       coinmaster = true
     }
+    if (p.keyCode === 53) {
+      please = true
+    }
   }
 
   p.keyReleased = function () {
@@ -239,6 +249,15 @@ const _app = new p5(p5Instance => {
 
   //Draw
   p.draw = function draw() {
+
+    p.setup = function preload() {
+      p.soundFormats("mp3");
+      mySound = p.loadSound("K:/Bentiks Dateien/1-16 Electrodrome.mp3")
+      if (please == true) {
+        mySound.play
+      }
+    }
+
 
     //Spawn
     if (spawntrigger1 == true) {
