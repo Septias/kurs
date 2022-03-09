@@ -220,6 +220,10 @@ const _app = new p5(p5Instance => {
   let coinmaster_height = 80
   let coinmaster_pos_horizontal = p.windowWidth / 2 - Player_Width / 2
   let coinmaster_pos_vertical = p.windowHeight / 2 - Player_height / 2 + 30
+  let menu_health_width = 80
+  let menu_health_height = 80
+  let menu_health_pos_horizontal = p.windowWidth / 2 - Player_Width / 2 + 245
+  let menu_health_pos_vertical = p.windowHeight / 2 - Player_height / 2 + 30
 
   let flash = false
   let coinmaster = false
@@ -315,18 +319,23 @@ const _app = new p5(p5Instance => {
     }
     if (spawntrigger_coin1 == true) {
       coin1_pos_vertical = getRndInteger(0 - coin1_height / 2, coin1_spawn_area_vertical)
+      coin1_pos_horizontal = coin1_spawn_pos_horizontal
     }
     if (spawntrigger_coin2 == true) {
       coin2_pos_vertical = getRndInteger(0 - coin2_height / 2, coin2_spawn_area_vertical)
+      coin2_pos_horizontal = coin2_spawn_pos_horizontal
     }
     if (spawntrigger_coin3 == true) {
       coin3_pos_vertical = getRndInteger(0 - coin3_height / 2, coin3_spawn_area_vertical)
+      coin3_pos_horizontal = coin3_spawn_pos_horizontal
     }
     if (spawntrigger_coin4 == true) {
       coin4_pos_vertical = getRndInteger(0 - coin4_height / 2, coin4_spawn_area_vertical)
+      coin4_pos_horizontal = coin4_spawn_pos_horizontal
     }
     if (spawntrigger_coin5 == true) {
       coin5_pos_vertical = getRndInteger(0 - coin5_height / 2, coin5_spawn_area_vertical)
+      coin5_pos_horizontal = coin5_spawn_pos_horizontal
     }
 
     //Background
@@ -706,9 +715,15 @@ const _app = new p5(p5Instance => {
     p.fill(255, 255, 255)
     p.textAlign(p.LEFT)
     p.text("Press [ESC] for menu", 25, 30)
-    p.text("Lives: " + lives, 25, 60)
-    p.text(coins + "/" + coins_goal + " Coins", 25, 90)
     p.text("Time survived: " + real_time, 25, 120)
+    p.text("Lives: " + lives, 25, 60)
+    if (coinmaster == true) {
+      p.fill(205, 149, 12)
+    } else {
+      p.fill(255, 255, 255)
+    }
+    p.text(coins + "/" + coins_goal + " Coins", 25, 90)
+    p.fill(255, 255, 255)
     p.textSize(45)
     p.text("Level: " + level, p.windowWidth / 2 - 100, 50)
 
@@ -818,9 +833,11 @@ const _app = new p5(p5Instance => {
       p.rect(flash_pos_horizontal, flash_pos_vertical, flash_width, flash_height)
       p.fill(205, 149, 12)
       p.rect(coinmaster_pos_horizontal, coinmaster_pos_vertical, coinmaster_width, coinmaster_height)
+      p.fill(130, 130, 130)
+      p.rect(menu_health_pos_horizontal, menu_health_pos_vertical, menu_health_width, menu_health_height)
       p.fill(255, 255, 255)
       p.textSize(60)
-      p.text("Choose a Superpower", p.windowWidth / 2 - 255, p.windowHeight / 2 - 100)
+      p.text("Choose a Superpower", p.windowWidth / 2 - 275, p.windowHeight / 2 - 100)
       p.textSize(20)
       p.text("Flash", p.windowWidth / 2 - 278, p.windowHeight / 2 + 105)
       p.text("[1]", p.windowWidth / 2 - 267, p.windowHeight / 2 + 32)
@@ -852,12 +869,3 @@ const _app = new p5(p5Instance => {
     }
   }
 }, document.getElementById('app')!);
-
-
-/*lives = 3
-        time = 0
-        real_time = 0
-        coins = 0
-        coins_goal = 10
-        level = 1
-        power_menu = true*/
