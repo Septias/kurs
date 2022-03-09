@@ -120,12 +120,52 @@ const _app = new p5(p5Instance => {
   let coin1_width = 35
   let coin1_height = 35
   let spawntrigger_coin1 = true
-  let rnd_number_coin1 = p.random(500)
+  let rnd_number_coin1 = p.random(0, 100)
   let speed_coin1 = 6
   let coin1_spawn_pos_horizontal = p.windowWidth + coin1_width + rnd_number_coin1
   let coin1_spawn_area_vertical = p.windowHeight - coin1_height
   let coin1_pos_horizontal = coin1_spawn_pos_horizontal
   let coin1_pos_vertical = getRndInteger(0 - coin1_height / 2, coin1_spawn_area_vertical)
+  //Coin 2
+  let coin2_width = 35
+  let coin2_height = 35
+  let spawntrigger_coin2 = true
+  let rnd_number_coin2 = p.random(1000, 1100)
+  let speed_coin2 = 6
+  let coin2_spawn_pos_horizontal = p.windowWidth + coin2_width + rnd_number_coin2
+  let coin2_spawn_area_vertical = p.windowHeight - coin2_height
+  let coin2_pos_horizontal = coin2_spawn_pos_horizontal
+  let coin2_pos_vertical = getRndInteger(0 - coin2_height / 2, coin2_spawn_area_vertical)
+  //Coin 3
+  let coin3_width = 35
+  let coin3_height = 35
+  let spawntrigger_coin3 = true
+  let rnd_number_coin3 = p.random(2000, 2100)
+  let speed_coin3 = 6
+  let coin3_spawn_pos_horizontal = p.windowWidth + coin3_width + rnd_number_coin3
+  let coin3_spawn_area_vertical = p.windowHeight - coin3_height
+  let coin3_pos_horizontal = coin3_spawn_pos_horizontal
+  let coin3_pos_vertical = getRndInteger(0 - coin3_height / 2, coin3_spawn_area_vertical)
+  //Coin 4
+  let coin4_width = 35
+  let coin4_height = 35
+  let spawntrigger_coin4 = true
+  let rnd_number_coin4 = p.random(3000, 3100)
+  let speed_coin4 = 6
+  let coin4_spawn_pos_horizontal = p.windowWidth + coin4_width + rnd_number_coin4
+  let coin4_spawn_area_vertical = p.windowHeight - coin4_height
+  let coin4_pos_horizontal = coin4_spawn_pos_horizontal
+  let coin4_pos_vertical = getRndInteger(0 - coin4_height / 2, coin4_spawn_area_vertical)
+  //Coin 5
+  let coin5_width = 35
+  let coin5_height = 35
+  let spawntrigger_coin5 = true
+  let rnd_number_coin5 = p.random(4000, 4100)
+  let speed_coin5 = 6
+  let coin5_spawn_pos_horizontal = p.windowWidth + coin5_width + rnd_number_coin5
+  let coin5_spawn_area_vertical = p.windowHeight - coin5_height
+  let coin5_pos_horizontal = coin5_spawn_pos_horizontal
+  let coin5_pos_vertical = getRndInteger(0 - coin5_height / 2, coin5_spawn_area_vertical)
 
   //Deathscreen
   let deathscreen_width = p.windowWidth
@@ -275,6 +315,18 @@ const _app = new p5(p5Instance => {
     }
     if (spawntrigger_coin1 == true) {
       coin1_pos_vertical = getRndInteger(0 - coin1_height / 2, coin1_spawn_area_vertical)
+    }
+    if (spawntrigger_coin2 == true) {
+      coin2_pos_vertical = getRndInteger(0 - coin2_height / 2, coin2_spawn_area_vertical)
+    }
+    if (spawntrigger_coin3 == true) {
+      coin3_pos_vertical = getRndInteger(0 - coin3_height / 2, coin3_spawn_area_vertical)
+    }
+    if (spawntrigger_coin4 == true) {
+      coin4_pos_vertical = getRndInteger(0 - coin4_height / 2, coin4_spawn_area_vertical)
+    }
+    if (spawntrigger_coin5 == true) {
+      coin5_pos_vertical = getRndInteger(0 - coin5_height / 2, coin5_spawn_area_vertical)
     }
 
     //Background
@@ -516,6 +568,50 @@ const _app = new p5(p5Instance => {
       coin1_pos_horizontal = p.windowWidth + coin1_width
       spawntrigger_coin1 = true
     }
+    //Coin2
+    p.fill(205, 149, 12)
+    p.rect(coin2_pos_horizontal, coin2_pos_vertical, coin2_width, coin2_height)
+    coin2_pos_horizontal = coin2_pos_horizontal - speed_coin2
+    if (coin2_pos_horizontal > 0) {
+      spawntrigger_coin2 = false
+    }
+    if (coin2_pos_horizontal < 0) {
+      coin2_pos_horizontal = p.windowWidth + coin2_width
+      spawntrigger_coin2 = true
+    }
+    //Coin3
+    p.fill(205, 149, 12)
+    p.rect(coin3_pos_horizontal, coin3_pos_vertical, coin3_width, coin3_height)
+    coin3_pos_horizontal = coin3_pos_horizontal - speed_coin3
+    if (coin3_pos_horizontal > 0) {
+      spawntrigger_coin3 = false
+    }
+    if (coin3_pos_horizontal < 0) {
+      coin3_pos_horizontal = p.windowWidth + coin3_width
+      spawntrigger_coin3 = true
+    }
+    //Coin4
+    p.fill(205, 149, 12)
+    p.rect(coin4_pos_horizontal, coin4_pos_vertical, coin4_width, coin4_height)
+    coin4_pos_horizontal = coin4_pos_horizontal - speed_coin4
+    if (coin4_pos_horizontal > 0) {
+      spawntrigger_coin4 = false
+    }
+    if (coin4_pos_horizontal < 0) {
+      coin4_pos_horizontal = p.windowWidth + coin4_width
+      spawntrigger_coin4 = true
+    }
+    //Coin5
+    p.fill(205, 149, 12)
+    p.rect(coin5_pos_horizontal, coin5_pos_vertical, coin5_width, coin5_height)
+    coin5_pos_horizontal = coin5_pos_horizontal - speed_coin5
+    if (coin5_pos_horizontal > 0) {
+      spawntrigger_coin5 = false
+    }
+    if (coin1_pos_horizontal < 0) {
+      coin5_pos_horizontal = p.windowWidth + coin5_width
+      spawntrigger_coin5 = true
+    }
 
     //Collect Coin 1
     if (Player_Position_Horizontal + Player_Width >= coin1_pos_horizontal + coin1_width && Player_Position_Horizontal <= coin1_pos_horizontal) {
@@ -529,6 +625,55 @@ const _app = new p5(p5Instance => {
         }
       }
     }
+    //Collect Coin 2
+    if (Player_Position_Horizontal + Player_Width >= coin2_pos_horizontal + coin2_width && Player_Position_Horizontal <= coin2_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= coin2_pos_vertical + coin2_height && Player_Position_Vertical <= coin2_pos_vertical) {
+        coin2_pos_horizontal = p.windowWidth + coin2_width
+        spawntrigger_coin2 = true
+        if (coinmaster == true) {
+          coins = coins + 2
+        } else {
+          coins = coins + 1
+        }
+      }
+    }
+    //Collect Coin 3
+    if (Player_Position_Horizontal + Player_Width >= coin3_pos_horizontal + coin3_width && Player_Position_Horizontal <= coin3_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= coin3_pos_vertical + coin3_height && Player_Position_Vertical <= coin3_pos_vertical) {
+        coin3_pos_horizontal = p.windowWidth + coin3_width
+        spawntrigger_coin3 = true
+        if (coinmaster == true) {
+          coins = coins + 2
+        } else {
+          coins = coins + 1
+        }
+      }
+    }
+    //Collect Coin 4
+    if (Player_Position_Horizontal + Player_Width >= coin4_pos_horizontal + coin4_width && Player_Position_Horizontal <= coin4_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= coin4_pos_vertical + coin4_height && Player_Position_Vertical <= coin4_pos_vertical) {
+        coin4_pos_horizontal = p.windowWidth + coin4_width
+        spawntrigger_coin4 = true
+        if (coinmaster == true) {
+          coins = coins + 2
+        } else {
+          coins = coins + 1
+        }
+      }
+    }
+    //Collect Coin 5
+    if (Player_Position_Horizontal + Player_Width >= coin5_pos_horizontal + coin5_width && Player_Position_Horizontal <= coin5_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= coin5_pos_vertical + coin5_height && Player_Position_Vertical <= coin5_pos_vertical) {
+        coin5_pos_horizontal = p.windowWidth + coin5_width
+        spawntrigger_coin5 = true
+        if (coinmaster == true) {
+          coins = coins + 2
+        } else {
+          coins = coins + 1
+        }
+      }
+    }
+
 
     //Player
     p.fill(160, 32, 240)
@@ -583,6 +728,10 @@ const _app = new p5(p5Instance => {
       speed10 = 0
       speed_fast_obstacle1 = 0
       speed_coin1 = 0
+      speed_coin2 = 0
+      speed_coin3 = 0
+      speed_coin4 = 0
+      speed_coin5 = 0
       p.fill(87, 87, 87)
       p.rect(menu_pos_horizontal, menu_pos_vertical, menu_width, menu_height)
       p.textSize(40)
@@ -614,14 +763,17 @@ const _app = new p5(p5Instance => {
       speed10 = 6 + level - 1
       speed_fast_obstacle1 = 14 + level - 1
       speed_coin1 = 6 + level - 1
+      speed_coin2 = 6 + level - 1
+      speed_coin3 = 6 + level - 1
+      speed_coin4 = 6 + level - 1
+      speed_coin5 = 6 + level - 1
       console.log(speed10)
     }
-    console.log(speed_fast_obstacle1)
 
     //Coins/Level
     if (coins >= coins_goal) {
       coins = 0
-      coins_goal = coins_goal * 2
+      coins_goal = coins_goal + 10
       level = level + 1
       speed1 = speed1 + 1
       speed2 = speed2 + 1
@@ -635,6 +787,10 @@ const _app = new p5(p5Instance => {
       speed10 = speed10 + 1
       speed_fast_obstacle1 = speed_fast_obstacle1 + 1
       speed_coin1 = speed_coin1 + 1
+      speed_coin2 = speed_coin2 + 1
+      speed_coin3 = speed_coin3 + 1
+      speed_coin4 = speed_coin4 + 1
+      speed_coin5 = speed_coin5 + 1
     }
 
     //Superpower (Space um menu zu schließen ohne power zu wählen)
@@ -652,6 +808,10 @@ const _app = new p5(p5Instance => {
       speed9 = 0
       speed10 = 0
       speed_coin1 = 0
+      speed_coin2 = 0
+      speed_coin3 = 0
+      speed_coin4 = 0
+      speed_coin5 = 0
       p.fill(87, 87, 87)
       p.rect(power_menu_pos_horizontal, power_menu_pos_vertical, power_menu_width, power_menu_height)
       p.fill(600, 50, 30)
