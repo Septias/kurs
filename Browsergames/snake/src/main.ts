@@ -10,7 +10,7 @@ const _app = new p5(p5Instance => {
   let obstacle1_height = 35
   let spawntrigger1 = true
   let rnd_number1 = p.random(500)
-  let speed1 = 6
+  let speed1 = 5
   let obstacle1_spawn_pos_horizontal = p.windowWidth + obstacle1_width + rnd_number1
   let obstacle1_spawn_area_vertical = p.windowHeight - obstacle1_height
   let obstacle1_pos_horizontal = obstacle1_spawn_pos_horizontal
@@ -30,7 +30,7 @@ const _app = new p5(p5Instance => {
   let obstacle3_height = 35
   let spawntrigger3 = true
   let rnd_number3 = p.random(500)
-  let speed3 = 6
+  let speed3 = 5
   let obstacle3_spawn_pos_horizontal = p.windowWidth + obstacle3_width + rnd_number3
   let obstacle3_spawn_area_vertical = p.windowHeight - obstacle3_height
   let obstacle3_pos_horizontal = obstacle3_spawn_pos_horizontal
@@ -40,7 +40,7 @@ const _app = new p5(p5Instance => {
   let obstacle4_height = 35
   let spawntrigger4 = true
   let rnd_number4 = p.random(500)
-  let speed4 = 6
+  let speed4 = 7
   let obstacle4_spawn_pos_horizontal = p.windowWidth + obstacle4_width + rnd_number4
   let obstacle4_spawn_area_vertical = p.windowHeight - obstacle4_height
   let obstacle4_pos_horizontal = obstacle4_spawn_pos_horizontal
@@ -50,7 +50,7 @@ const _app = new p5(p5Instance => {
   let obstacle5_height = 35
   let spawntrigger5 = true
   let rnd_number5 = p.random(400, 800)
-  let speed5 = 6
+  let speed5 = 8
   let obstacle5_spawn_pos_horizontal = p.windowWidth + obstacle5_width + rnd_number5
   let obstacle5_spawn_area_vertical = p.windowHeight - obstacle5_height
   let obstacle5_pos_horizontal = obstacle5_spawn_pos_horizontal
@@ -60,7 +60,7 @@ const _app = new p5(p5Instance => {
   let obstacle6_height = 35
   let spawntrigger6 = true
   let rnd_number6 = p.random(400, 800)
-  let speed6 = 6
+  let speed6 = 7
   let obstacle6_spawn_pos_horizontal = p.windowWidth + obstacle6_width + rnd_number6
   let obstacle6_spawn_area_vertical = p.windowHeight - obstacle6_height
   let obstacle6_pos_horizontal = obstacle6_spawn_pos_horizontal
@@ -90,7 +90,7 @@ const _app = new p5(p5Instance => {
   let obstacle9_height = 35
   let spawntrigger9 = true
   let rnd_number9 = p.random(400, 800)
-  let speed9 = 6
+  let speed9 = 7
   let obstacle9_spawn_pos_horizontal = p.windowWidth + obstacle9_width + rnd_number9
   let obstacle9_spawn_area_vertical = p.windowHeight - obstacle9_height
   let obstacle9_pos_horizontal = obstacle9_spawn_pos_horizontal
@@ -110,7 +110,7 @@ const _app = new p5(p5Instance => {
   let fast_obstacle1_height = 40
   let spawntrigger_fast_obstacle1 = false
   let rnd_number_fast_obstacle1 = p.random(800, 1000)
-  let speed_fast_obstacle1 = 15
+  let speed_fast_obstacle1 = 14
   let fast_obstacle1_spawn_pos_horizontal = p.windowWidth + fast_obstacle1_width + rnd_number_fast_obstacle1
   let fast_obstacle1_spawn_area_vertical = p.windowHeight - fast_obstacle1_height
   let fast_obstacle1_pos_horizontal = fast_obstacle1_spawn_pos_horizontal
@@ -189,26 +189,18 @@ const _app = new p5(p5Instance => {
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
 
-  //Music
-  let mySound;
-  let loopStart = 0.2;
-  let loopDuration = 0.8;
-  let please = false
-
-
-
-  /*let music;
-  p.setup = function setup() {
-    music = p.createAudio("K:/Bentiks Dateien/1-16 Electrodrome.mp3");
-    music.autoplay(true);
-  }*/
-
+  //Music C:/Users/Bentik/Documents/GitHub/kurs/Browsergames/snake/Sounds/1-16 Electrodrome.mp3
+  let hello: SoundFile
+  p.setup = function preload() {
+    hello = p.loadSound("C:/Users/Bentik/Documents/GitHub/kurs/Browsergames/snake/Sounds/1-16 Electrodrome.mp3");
+  }
 
   //Background  
   p.setup = function setup() {
     p.frameRate(60)
     p.createCanvas(p.windowWidth, p.windowHeight,)
   }
+
   //let img = p.loadImage("https://tse4.mm.bing.net/th?id=OIP.3Ig2q6rJvm_RRlAHZathMAHaEW&pid=Api")
 
   //Keys
@@ -233,9 +225,6 @@ const _app = new p5(p5Instance => {
       power_menu = false
       coinmaster = true
     }
-    if (p.keyCode === 53) {
-      please = true
-    }
   }
 
   p.keyReleased = function () {
@@ -249,15 +238,6 @@ const _app = new p5(p5Instance => {
 
   //Draw
   p.draw = function draw() {
-
-    p.setup = function preload() {
-      p.soundFormats("mp3");
-      mySound = p.loadSound("K:/Bentiks Dateien/1-16 Electrodrome.mp3")
-      if (please == true) {
-        mySound.play
-      }
-    }
-
 
     //Spawn
     if (spawntrigger1 == true) {
@@ -299,22 +279,6 @@ const _app = new p5(p5Instance => {
 
     //Background
     p.background(0, 0, 0)//img für bild
-
-    //Player
-    p.fill(160, 32, 240)
-    p.rect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height)
-    if (up == true) {
-      Player_Position_Vertical = Player_Position_Vertical - speed
-    }
-    if (up == false) {
-      Player_Position_Vertical = Player_Position_Vertical + speed * 1.3
-    }
-    if (Player_Position_Vertical > p.windowHeight - Player_height) {
-      Player_Position_Vertical = p.windowHeight - Player_height
-    }
-    if (Player_Position_Vertical < 0) {
-      Player_Position_Vertical = 0
-    }
 
     //Obstacle 1
     p.fill(600, 50, 30)
@@ -437,12 +401,11 @@ const _app = new p5(p5Instance => {
     }
 
     //Damage 1
-    if (Player_Position_Horizontal + Player_Width >= obstacle1_pos_horizontal + obstacle1_width && Player_Position_Horizontal <= obstacle1_pos_horizontal) {
+    if (Player_Position_Horizontal + Player_Width >= obstacle1_pos_horizontal + obstacle1_width + obstacle1_width && Player_Position_Horizontal <= obstacle1_pos_horizontal) {
       if (Player_Position_Vertical + Player_height >= obstacle1_pos_vertical + obstacle1_height && Player_Position_Vertical <= obstacle1_pos_vertical) {
         obstacle1_pos_horizontal = p.windowWidth + obstacle1_width
         lives = lives - 1
         spawntrigger1 = true
-        console.log("Damage")
       }
     }
     //Damage 2
@@ -451,7 +414,6 @@ const _app = new p5(p5Instance => {
         obstacle2_pos_horizontal = p.windowWidth + obstacle2_width
         lives = lives - 1
         spawntrigger2 = true
-        console.log("Damage")
       }
     }
     //Damage 3
@@ -460,7 +422,6 @@ const _app = new p5(p5Instance => {
         obstacle3_pos_horizontal = p.windowWidth + obstacle3_width
         lives = lives - 1
         spawntrigger3 = true
-        console.log("Damage")
       }
     }
     //Damage 4
@@ -469,7 +430,6 @@ const _app = new p5(p5Instance => {
         obstacle4_pos_horizontal = p.windowWidth + obstacle4_width
         lives = lives - 1
         spawntrigger4 = true
-        console.log("Damage")
       }
     }
     //Damage 5
@@ -478,7 +438,6 @@ const _app = new p5(p5Instance => {
         obstacle5_pos_horizontal = p.windowWidth + obstacle5_width
         lives = lives - 1
         spawntrigger5 = true
-        console.log("Damage")
       }
     }
     //Damage 6
@@ -487,7 +446,6 @@ const _app = new p5(p5Instance => {
         obstacle6_pos_horizontal = p.windowWidth + obstacle6_width
         lives = lives - 1
         spawntrigger6 = true
-        console.log("Damage")
       }
     }
     //Damage 7
@@ -496,7 +454,6 @@ const _app = new p5(p5Instance => {
         obstacle7_pos_horizontal = p.windowWidth + obstacle7_width
         lives = lives - 1
         spawntrigger7 = true
-        console.log("Damage")
       }
     }
     //Damage 8
@@ -505,7 +462,6 @@ const _app = new p5(p5Instance => {
         obstacle8_pos_horizontal = p.windowWidth + obstacle8_width
         lives = lives - 1
         spawntrigger8 = true
-        console.log("Damage")
       }
     }
     //Damage 9
@@ -514,7 +470,6 @@ const _app = new p5(p5Instance => {
         obstacle9_pos_horizontal = p.windowWidth + obstacle9_width
         lives = lives - 1
         spawntrigger9 = true
-        console.log("Damage")
       }
     }
     //Damage 10
@@ -523,7 +478,6 @@ const _app = new p5(p5Instance => {
         obstacle10_pos_horizontal = p.windowWidth + obstacle10_width
         lives = lives - 1
         spawntrigger10 = true
-        console.log("Damage")
       }
     }
 
@@ -548,7 +502,6 @@ const _app = new p5(p5Instance => {
         fast_obstacle1_pos_horizontal = p.windowWidth + fast_obstacle1_width
         lives = lives - 1
         spawntrigger_fast_obstacle1 = true
-        console.log("Damage")
       }
     }
 
@@ -575,6 +528,22 @@ const _app = new p5(p5Instance => {
           coins = coins + 1
         }
       }
+    }
+
+    //Player
+    p.fill(160, 32, 240)
+    p.rect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height)
+    if (up == true) {
+      Player_Position_Vertical = Player_Position_Vertical - speed
+    }
+    if (up == false) {
+      Player_Position_Vertical = Player_Position_Vertical + speed * 1.3
+    }
+    if (Player_Position_Vertical > p.windowHeight - Player_height) {
+      Player_Position_Vertical = p.windowHeight - Player_height
+    }
+    if (Player_Position_Vertical < 0) {
+      Player_Position_Vertical = 0
     }
 
     //Timer
@@ -633,20 +602,21 @@ const _app = new p5(p5Instance => {
     } else {
       timer_active = true
       speed = 6
-      speed1 = 6 + level - 1
+      speed1 = 5 + level - 1
       speed2 = 6 + level - 1
-      speed3 = 6 + level - 1
-      speed4 = 6 + level - 1
-      speed5 = 6 + level - 1
-      speed6 = 6 + level - 1
+      speed3 = 5 + level - 1
+      speed4 = 7 + level - 1
+      speed5 = 8 + level - 1
+      speed6 = 7 + level - 1
       speed7 = 6 + level - 1
       speed8 = 6 + level - 1
-      speed9 = 6 + level - 1
+      speed9 = 7 + level - 1
       speed10 = 6 + level - 1
-      speed_fast_obstacle1 = 15
+      speed_fast_obstacle1 = 14 + level - 1
       speed_coin1 = 6 + level - 1
       console.log(speed10)
     }
+    console.log(speed_fast_obstacle1)
 
     //Coins/Level
     if (coins >= coins_goal) {
@@ -663,6 +633,7 @@ const _app = new p5(p5Instance => {
       speed8 = speed8 + 1
       speed9 = speed9 + 1
       speed10 = speed10 + 1
+      speed_fast_obstacle1 = speed_fast_obstacle1 + 1
       speed_coin1 = speed_coin1 + 1
     }
 
@@ -716,14 +687,17 @@ const _app = new p5(p5Instance => {
       flash = false
       coinmaster = false
       if (space == true) {
-        lives = 3
-        time = 0
-        real_time = 0
-        coins = 0
-        coins_goal = 5
-        level = 1
-        power_menu = true
+        location.reload()
       }
     }
   }
 }, document.getElementById('app')!);
+
+
+/*lives = 3
+        time = 0
+        real_time = 0
+        coins = 0
+        coins_goal = 10
+        level = 1
+        power_menu = true*/
