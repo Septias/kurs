@@ -12,7 +12,7 @@ const app = new p5(p5Instance => {
   let colorspeed=10
 
   let sizeX=100
-  let sizeY=200
+  let sizeY=100
 
   let borderX=400
   let borderY=400
@@ -39,7 +39,7 @@ const app = new p5(p5Instance => {
   let ßzirkumflex=220
 
   p.setup = function setup() {
-    p.createCanvas(borderX, borderY);
+    p.createCanvas(borderX=borderX-1, borderY=borderY-1);
   };
 
   p.draw = function draw() {
