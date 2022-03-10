@@ -116,6 +116,27 @@ const _app = new p5(p5Instance => {
   let fast_obstacle1_pos_horizontal = fast_obstacle1_spawn_pos_horizontal
   let fast_obstacle1_pos_vertical = getRndInteger(0 - fast_obstacle1_height / 2, fast_obstacle1_spawn_area_vertical)
 
+  //Deathstar
+  let deathstar1_width = 75
+  let deathstar1_height = 75
+  let spawntrigger_deathstar1 = true
+  let speed_deathstar1 = 3
+  let deathstar1_spawn_pos_horizontal = p.windowWidth + deathstar1_width
+  let deathstar1_spawn_area_vertical = p.windowHeight - deathstar1_height
+  let deathstar1_pos_horizontal = deathstar1_spawn_pos_horizontal
+  let deathstar1_pos_vertical = p.windowHeight / 2 - deathstar1_width / 2
+
+  //Health 1
+  let health1_width = 35
+  let health1_height = 35
+  let spawntrigger_health1 = true
+  let rnd_number_health1 = p.random(0, 100)
+  let speed_health1 = 7
+  let health1_spawn_pos_horizontal = p.windowWidth + health1_width + rnd_number_health1
+  let health1_spawn_area_vertical = p.windowHeight - health1_height
+  let health1_pos_horizontal = health1_spawn_pos_horizontal
+  let health1_pos_vertical = getRndInteger(0 - health1_height / 2, health1_spawn_area_vertical)
+
   //Coin 1
   let coin1_width = 35
   let coin1_height = 35
@@ -235,9 +256,15 @@ const _app = new p5(p5Instance => {
 
   //Music C:/Users/Bentik/Documents/GitHub/kurs/Browsergames/snake/Sounds/1-16 Electrodrome.mp3
   let hello: SoundFile
-  p.setup = function preload() {
+  p.setup = () => {
     hello = p.loadSound("C:/Users/Bentik/Documents/GitHub/kurs/Browsergames/snake/Sounds/1-16 Electrodrome.mp3");
   }
+  
+  p.mousePressed = () =>  {
+  hello.play()
+  }
+  
+
 
   //Background  
   p.setup = function setup() {
@@ -337,10 +364,16 @@ const _app = new p5(p5Instance => {
       coin5_pos_vertical = getRndInteger(0 - coin5_height / 2, coin5_spawn_area_vertical)
       coin5_pos_horizontal = coin5_spawn_pos_horizontal
     }
+    if (spawntrigger_health1 == true) {
+      health1_pos_vertical = getRndInteger(0 - health1_height / 2, health1_spawn_area_vertical)
+      health1_pos_horizontal = health1_spawn_pos_horizontal
+    }
 
     //Background
     p.background(0, 0, 0)//img für bild
 
+   if (level < 4) {
+   
     //Obstacle 1
     p.fill(600, 50, 30)
     p.rect(obstacle1_pos_horizontal, obstacle1_pos_vertical, obstacle1_width, obstacle1_height)
@@ -544,7 +577,6 @@ const _app = new p5(p5Instance => {
 
     //Fast_Obstacle1
     if (level > 1) {
-      //if ()
       p.fill(139, 0, 0)
       p.rect(fast_obstacle1_pos_horizontal, fast_obstacle1_pos_vertical, fast_obstacle1_width, fast_obstacle1_height)
       fast_obstacle1_pos_horizontal = fast_obstacle1_pos_horizontal - speed_fast_obstacle1
@@ -566,17 +598,43 @@ const _app = new p5(p5Instance => {
       }
     }
 
-    //Coin1
-    p.fill(205, 149, 12)
-    p.rect(coin1_pos_horizontal, coin1_pos_vertical, coin1_width, coin1_height)
-    coin1_pos_horizontal = coin1_pos_horizontal - speed_coin1
-    if (coin1_pos_horizontal > 0) {
-      spawntrigger_coin1 = false
+    
+    //Health1
+    if (level > 2) {
+      if (lives < 2) {
+        p.fill(50, 205, 50)
+        p.rect(health1_pos_horizontal, health1_pos_vertical, health1_width, health1_height)
+    health1_pos_horizontal = health1_pos_horizontal - speed_health1
+    if (health1_pos_horizontal > 0) {
+      spawntrigger_health1 = false
     }
-    if (coin1_pos_horizontal < 0) {
-      coin1_pos_horizontal = p.windowWidth + coin1_width
-      spawntrigger_coin1 = true
+    if (health1_pos_horizontal < 0) {
+      health1_pos_horizontal = p.windowWidth + health1_width
+      spawntrigger_health1 = true
     }
+  }
+}
+
+//Collect Health1
+if (Player_Position_Horizontal + Player_Width >= health1_pos_horizontal + health1_width && Player_Position_Horizontal <= health1_pos_horizontal) {
+  if (Player_Position_Vertical + Player_height >= health1_pos_vertical + health1_height && Player_Position_Vertical <= health1_pos_vertical) {
+    health1_pos_horizontal = p.windowWidth + health1_width
+    lives = lives + 1
+    spawntrigger_health1= true
+  }
+}
+
+//Coin1
+p.fill(205, 149, 12)
+p.rect(coin1_pos_horizontal, coin1_pos_vertical, coin1_width, coin1_height)
+coin1_pos_horizontal = coin1_pos_horizontal - speed_coin1
+if (coin1_pos_horizontal > 0) {
+  spawntrigger_coin1 = false
+}
+if (coin1_pos_horizontal < 0) {
+  coin1_pos_horizontal = p.windowWidth + coin1_width
+  spawntrigger_coin1 = true
+}
     //Coin2
     p.fill(205, 149, 12)
     p.rect(coin2_pos_horizontal, coin2_pos_vertical, coin2_width, coin2_height)
@@ -621,7 +679,7 @@ const _app = new p5(p5Instance => {
       coin5_pos_horizontal = p.windowWidth + coin5_width
       spawntrigger_coin5 = true
     }
-
+    
     //Collect Coin 1
     if (Player_Position_Horizontal + Player_Width >= coin1_pos_horizontal + coin1_width && Player_Position_Horizontal <= coin1_pos_horizontal) {
       if (Player_Position_Vertical + Player_height >= coin1_pos_vertical + coin1_height && Player_Position_Vertical <= coin1_pos_vertical) {
@@ -682,8 +740,27 @@ const _app = new p5(p5Instance => {
         }
       }
     }
-
-
+  }
+  
+  if (level == 4) {
+    //Deathstar1
+    p.fill(600, 50, 30)
+    p.rect(deathstar1_pos_horizontal, deathstar1_pos_vertical, deathstar1_width, deathstar1_height)
+    deathstar1_pos_horizontal = deathstar1_pos_horizontal - speed_deathstar1
+    if (deathstar1_pos_horizontal > 0) {
+    }
+    if (deathstar1_pos_horizontal < 0) {
+      deathstar1_pos_horizontal = p.windowWidth + deathstar1_width
+    }
+    //Damage Deathstar1
+    if (Player_Position_Horizontal + Player_Width >= deathstar1_pos_horizontal + deathstar1_width && Player_Position_Horizontal <= deathstar1_pos_horizontal) {
+      if (Player_Position_Vertical + Player_height >= deathstar1_pos_vertical + deathstar1_height && Player_Position_Vertical <= deathstar1_pos_vertical) {
+        deathstar1_pos_horizontal = p.windowWidth + deathstar1_width
+        lives = 0
+      }
+    }
+  }
+    
     //Player
     p.fill(160, 32, 240)
     p.rect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height)
@@ -695,6 +772,7 @@ const _app = new p5(p5Instance => {
     }
     if (Player_Position_Vertical > p.windowHeight - Player_height) {
       Player_Position_Vertical = p.windowHeight - Player_height
+      lives = 0
     }
     if (Player_Position_Vertical < 0) {
       Player_Position_Vertical = 0
@@ -742,6 +820,7 @@ const _app = new p5(p5Instance => {
       speed9 = 0
       speed10 = 0
       speed_fast_obstacle1 = 0
+      speed_health1 = 0
       speed_coin1 = 0
       speed_coin2 = 0
       speed_coin3 = 0
@@ -777,6 +856,7 @@ const _app = new p5(p5Instance => {
       speed9 = 7 + level - 1
       speed10 = 6 + level - 1
       speed_fast_obstacle1 = 14 + level - 1
+      speed_health1 = 7 + level - 1
       speed_coin1 = 6 + level - 1
       speed_coin2 = 6 + level - 1
       speed_coin3 = 6 + level - 1
@@ -788,7 +868,7 @@ const _app = new p5(p5Instance => {
     //Coins/Level
     if (coins >= coins_goal) {
       coins = 0
-      coins_goal = coins_goal + 10
+      coins_goal = coins_goal + 5
       level = level + 1
       speed1 = speed1 + 1
       speed2 = speed2 + 1
@@ -801,6 +881,7 @@ const _app = new p5(p5Instance => {
       speed9 = speed9 + 1
       speed10 = speed10 + 1
       speed_fast_obstacle1 = speed_fast_obstacle1 + 1
+      speed_health1 = speed_health1 + 1
       speed_coin1 = speed_coin1 + 1
       speed_coin2 = speed_coin2 + 1
       speed_coin3 = speed_coin3 + 1
@@ -837,7 +918,7 @@ const _app = new p5(p5Instance => {
       p.rect(menu_health_pos_horizontal, menu_health_pos_vertical, menu_health_width, menu_health_height)
       p.fill(255, 255, 255)
       p.textSize(60)
-      p.text("Choose a Superpower", p.windowWidth / 2 - 275, p.windowHeight / 2 - 100)
+      p.text("Choose a Superpower", p.windowWidth / 2 - 330, p.windowHeight / 2 - 100)
       p.textSize(20)
       p.text("Flash", p.windowWidth / 2 - 278, p.windowHeight / 2 + 105)
       p.text("[1]", p.windowWidth / 2 - 267, p.windowHeight / 2 + 32)
