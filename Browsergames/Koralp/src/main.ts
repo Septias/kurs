@@ -5,8 +5,8 @@ import './style.css';
 const app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
-  let axisX=0
-  let axisY=0
+  let positionX=1
+  let positionY=1
 
   let speed=1
   let colorspeed=10
@@ -14,13 +14,16 @@ const app = new p5(p5Instance => {
   let sizeX=100
   let sizeY=200
 
-  let farbe1=0 //rot
-  let farbe2=0 //grün
-  let farbe3=0 //blau
+  let borderX=400
+  let borderY=400
 
-  let farbe4=0 //rot
-  var farbe5=0 //grün
-  let farbe6=0 //blau
+  let farbe1=100 //rot
+  let farbe2=100 //grün
+  let farbe3=200 //blau
+
+  let farbe4=100 //rot
+  var farbe5=200 //grün
+  let farbe6=100 //blau
   
   let ßw=87
   let ßa=65
@@ -31,31 +34,39 @@ const app = new p5(p5Instance => {
   let ßpfeiltasteoben=38
   let ßpfeiltasteunten=40
 
+  let ßr=82
+
+  let ßzirkumflex=220
+
   p.setup = function setup() {
-    p.createCanvas(400, 400);
+    p.createCanvas(borderX, borderY);
   };
 
   p.draw = function draw() {
     p.background(farbe1, farbe2, farbe3);
     p.fill(farbe4,farbe5,farbe6);
-    p.rect(axisX, axisY, sizeX, sizeY);
+    p.rect(positionX, positionY, sizeX, sizeY);
 
 
-    if (p.keyIsDown(ßd)) {axisX = axisX + speed}
-    if (p.keyIsDown(ßs)) {axisY = axisY + speed}
-    if (p.keyIsDown(ßa)) {axisX = axisX - speed}
-    if (p.keyIsDown(ßw)) {axisY = axisY - speed}
+
+
+    if (p.keyIsDown(ßd) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionX = positionX + speed}
+    if (p.keyIsDown(ßs) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionY = positionY + speed}
+    if (p.keyIsDown(ßa) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionX = positionX - speed}
+    if (p.keyIsDown(ßw) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionY = positionY - speed}
 
     if (p.keyIsDown(ßpfeiltasterechts)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
     if (p.keyIsDown(ßpfeiltastelinks)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
     if (p.keyIsDown(ßpfeiltasteoben)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
     if (p.keyIsDown(ßpfeiltasteunten)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
 
+    if (p.keyIsDown(ßr)) {speed=speed+1}
+
+    
 
 
   };
 
-  
 
   p.keyPressed = () => {
     console.log(p.keyCode);
