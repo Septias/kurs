@@ -259,11 +259,11 @@ const _app = new p5(p5Instance => {
   p.setup = () => {
     hello = p.loadSound("C:/Users/Bentik/Documents/GitHub/kurs/Browsergames/snake/Sounds/1-16 Electrodrome.mp3");
   }
-  
-  p.mousePressed = () =>  {
-  hello.play()
+
+  p.mousePressed = () => {
+    hello.play()
   }
-  
+
 
 
   //Background  
@@ -372,395 +372,395 @@ const _app = new p5(p5Instance => {
     //Background
     p.background(0, 0, 0)//img für bild
 
-   if (level < 4) {
-   
-    //Obstacle 1
-    p.fill(600, 50, 30)
-    p.rect(obstacle1_pos_horizontal, obstacle1_pos_vertical, obstacle1_width, obstacle1_height)
-    obstacle1_pos_horizontal = obstacle1_pos_horizontal - speed1
-    if (obstacle1_pos_horizontal > 0) {
-      spawntrigger1 = false
-    }
-    if (obstacle1_pos_horizontal < 0) {
-      obstacle1_pos_horizontal = p.windowWidth + obstacle1_width
-      spawntrigger1 = true
-    }
+    if (level < 4) {
 
-    //Obstacle 2
-    p.fill(600, 50, 30)
-    p.rect(obstacle2_pos_horizontal, obstacle2_pos_vertical, obstacle2_width, obstacle2_height)
-    obstacle2_pos_horizontal = obstacle2_pos_horizontal - speed2
-    if (obstacle2_pos_horizontal > 0) {
-      spawntrigger2 = false
-    }
-    if (obstacle2_pos_horizontal < 0) {
-      obstacle2_pos_horizontal = p.windowWidth + obstacle2_width
-      spawntrigger2 = true
-    }
-
-    //Obstacle 3
-    p.fill(600, 50, 30)
-    p.rect(obstacle3_pos_horizontal, obstacle3_pos_vertical, obstacle3_width, obstacle3_height)
-    obstacle3_pos_horizontal = obstacle3_pos_horizontal - speed3
-    if (obstacle3_pos_horizontal > 0) {
-      spawntrigger3 = false
-    }
-    if (obstacle3_pos_horizontal < 0) {
-      obstacle3_pos_horizontal = p.windowWidth + obstacle3_width
-      spawntrigger3 = true
-    }
-
-    //Obstacle 4
-    p.fill(600, 50, 30)
-    p.rect(obstacle4_pos_horizontal, obstacle4_pos_vertical, obstacle4_width, obstacle4_height)
-    obstacle4_pos_horizontal = obstacle4_pos_horizontal - speed4
-    if (obstacle4_pos_horizontal > 0) {
-      spawntrigger4 = false
-    }
-    if (obstacle4_pos_horizontal < 0) {
-      obstacle4_pos_horizontal = p.windowWidth + obstacle4_width
-      spawntrigger4 = true
-    }
-
-    //Obstacle 5
-    p.fill(600, 50, 30)
-    p.rect(obstacle5_pos_horizontal, obstacle5_pos_vertical, obstacle5_width, obstacle5_height)
-    obstacle5_pos_horizontal = obstacle5_pos_horizontal - speed5
-    if (obstacle5_pos_horizontal > 0) {
-      spawntrigger5 = false
-    }
-    if (obstacle5_pos_horizontal < 0) {
-      obstacle5_pos_horizontal = p.windowWidth + obstacle5_width
-      spawntrigger5 = true
-    }
-
-    //Obstacle 6
-    p.fill(600, 50, 30)
-    p.rect(obstacle6_pos_horizontal, obstacle6_pos_vertical, obstacle6_width, obstacle6_height)
-    obstacle6_pos_horizontal = obstacle6_pos_horizontal - speed6
-    if (obstacle6_pos_horizontal > 0) {
-      spawntrigger6 = false
-    }
-    if (obstacle6_pos_horizontal < 0) {
-      obstacle6_pos_horizontal = p.windowWidth + obstacle6_width
-      spawntrigger6 = true
-    }
-
-    //Obstacle 7
-    p.fill(600, 50, 30)
-    p.rect(obstacle7_pos_horizontal, obstacle7_pos_vertical, obstacle7_width, obstacle7_height)
-    obstacle7_pos_horizontal = obstacle7_pos_horizontal - speed7
-    if (obstacle7_pos_horizontal > 0) {
-      spawntrigger7 = false
-    }
-    if (obstacle7_pos_horizontal < 0) {
-      obstacle7_pos_horizontal = p.windowWidth + obstacle7_width
-      spawntrigger7 = true
-    }
-
-    //Obstacle 8
-    p.fill(600, 50, 30)
-    p.rect(obstacle8_pos_horizontal, obstacle8_pos_vertical, obstacle8_width, obstacle8_height)
-    obstacle8_pos_horizontal = obstacle8_pos_horizontal - speed8
-    if (obstacle8_pos_horizontal > 0) {
-      spawntrigger8 = false
-    }
-    if (obstacle8_pos_horizontal < 0) {
-      obstacle8_pos_horizontal = p.windowWidth + obstacle8_width
-      spawntrigger8 = true
-    }
-
-    //Obstacle 9
-    p.fill(600, 50, 30)
-    p.rect(obstacle9_pos_horizontal, obstacle9_pos_vertical, obstacle9_width, obstacle9_height)
-    obstacle9_pos_horizontal = obstacle9_pos_horizontal - speed9
-    if (obstacle9_pos_horizontal > 0) {
-      spawntrigger9 = false
-    }
-    if (obstacle9_pos_horizontal < 0) {
-      obstacle9_pos_horizontal = p.windowWidth + obstacle9_width
-      spawntrigger9 = true
-    }
-
-    //Obstacle 10
-    p.fill(600, 50, 30)
-    p.rect(obstacle10_pos_horizontal, obstacle10_pos_vertical, obstacle10_width, obstacle10_height)
-    obstacle10_pos_horizontal = obstacle10_pos_horizontal - speed10
-    if (obstacle10_pos_horizontal > 0) {
-      spawntrigger10 = false
-    }
-    if (obstacle10_pos_horizontal < 0) {
-      obstacle10_pos_horizontal = p.windowWidth + obstacle10_width
-      spawntrigger10 = true
-    }
-
-    //Damage 1
-    if (Player_Position_Horizontal + Player_Width >= obstacle1_pos_horizontal + obstacle1_width + obstacle1_width && Player_Position_Horizontal <= obstacle1_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= obstacle1_pos_vertical + obstacle1_height && Player_Position_Vertical <= obstacle1_pos_vertical) {
+      //Obstacle 1
+      p.fill(600, 50, 30)
+      p.rect(obstacle1_pos_horizontal, obstacle1_pos_vertical, obstacle1_width, obstacle1_height)
+      obstacle1_pos_horizontal = obstacle1_pos_horizontal - speed1
+      if (obstacle1_pos_horizontal > 0) {
+        spawntrigger1 = false
+      }
+      if (obstacle1_pos_horizontal < 0) {
         obstacle1_pos_horizontal = p.windowWidth + obstacle1_width
-        lives = lives - 1
         spawntrigger1 = true
       }
-    }
-    //Damage 2
-    if (Player_Position_Horizontal + Player_Width >= obstacle2_pos_horizontal + obstacle2_width && Player_Position_Horizontal <= obstacle2_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= obstacle2_pos_vertical + obstacle2_height && Player_Position_Vertical <= obstacle2_pos_vertical) {
+
+      //Obstacle 2
+      p.fill(600, 50, 30)
+      p.rect(obstacle2_pos_horizontal, obstacle2_pos_vertical, obstacle2_width, obstacle2_height)
+      obstacle2_pos_horizontal = obstacle2_pos_horizontal - speed2
+      if (obstacle2_pos_horizontal > 0) {
+        spawntrigger2 = false
+      }
+      if (obstacle2_pos_horizontal < 0) {
         obstacle2_pos_horizontal = p.windowWidth + obstacle2_width
-        lives = lives - 1
         spawntrigger2 = true
       }
-    }
-    //Damage 3
-    if (Player_Position_Horizontal + Player_Width >= obstacle3_pos_horizontal + obstacle3_width && Player_Position_Horizontal <= obstacle3_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= obstacle3_pos_vertical + obstacle3_height && Player_Position_Vertical <= obstacle3_pos_vertical) {
+
+      //Obstacle 3
+      p.fill(600, 50, 30)
+      p.rect(obstacle3_pos_horizontal, obstacle3_pos_vertical, obstacle3_width, obstacle3_height)
+      obstacle3_pos_horizontal = obstacle3_pos_horizontal - speed3
+      if (obstacle3_pos_horizontal > 0) {
+        spawntrigger3 = false
+      }
+      if (obstacle3_pos_horizontal < 0) {
         obstacle3_pos_horizontal = p.windowWidth + obstacle3_width
-        lives = lives - 1
         spawntrigger3 = true
       }
-    }
-    //Damage 4
-    if (Player_Position_Horizontal + Player_Width >= obstacle4_pos_horizontal + obstacle4_width && Player_Position_Horizontal <= obstacle4_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= obstacle4_pos_vertical + obstacle4_height && Player_Position_Vertical <= obstacle4_pos_vertical) {
+
+      //Obstacle 4
+      p.fill(600, 50, 30)
+      p.rect(obstacle4_pos_horizontal, obstacle4_pos_vertical, obstacle4_width, obstacle4_height)
+      obstacle4_pos_horizontal = obstacle4_pos_horizontal - speed4
+      if (obstacle4_pos_horizontal > 0) {
+        spawntrigger4 = false
+      }
+      if (obstacle4_pos_horizontal < 0) {
         obstacle4_pos_horizontal = p.windowWidth + obstacle4_width
-        lives = lives - 1
         spawntrigger4 = true
       }
-    }
-    //Damage 5
-    if (Player_Position_Horizontal + Player_Width >= obstacle5_pos_horizontal + obstacle5_width && Player_Position_Horizontal <= obstacle5_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= obstacle5_pos_vertical + obstacle5_height && Player_Position_Vertical <= obstacle5_pos_vertical) {
+
+      //Obstacle 5
+      p.fill(600, 50, 30)
+      p.rect(obstacle5_pos_horizontal, obstacle5_pos_vertical, obstacle5_width, obstacle5_height)
+      obstacle5_pos_horizontal = obstacle5_pos_horizontal - speed5
+      if (obstacle5_pos_horizontal > 0) {
+        spawntrigger5 = false
+      }
+      if (obstacle5_pos_horizontal < 0) {
         obstacle5_pos_horizontal = p.windowWidth + obstacle5_width
-        lives = lives - 1
         spawntrigger5 = true
       }
-    }
-    //Damage 6
-    if (Player_Position_Horizontal + Player_Width >= obstacle6_pos_horizontal + obstacle6_width && Player_Position_Horizontal <= obstacle6_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= obstacle6_pos_vertical + obstacle6_height && Player_Position_Vertical <= obstacle6_pos_vertical) {
+
+      //Obstacle 6
+      p.fill(600, 50, 30)
+      p.rect(obstacle6_pos_horizontal, obstacle6_pos_vertical, obstacle6_width, obstacle6_height)
+      obstacle6_pos_horizontal = obstacle6_pos_horizontal - speed6
+      if (obstacle6_pos_horizontal > 0) {
+        spawntrigger6 = false
+      }
+      if (obstacle6_pos_horizontal < 0) {
         obstacle6_pos_horizontal = p.windowWidth + obstacle6_width
-        lives = lives - 1
         spawntrigger6 = true
       }
-    }
-    //Damage 7
-    if (Player_Position_Horizontal + Player_Width >= obstacle7_pos_horizontal + obstacle7_width && Player_Position_Horizontal <= obstacle7_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= obstacle7_pos_vertical + obstacle7_height && Player_Position_Vertical <= obstacle7_pos_vertical) {
+
+      //Obstacle 7
+      p.fill(600, 50, 30)
+      p.rect(obstacle7_pos_horizontal, obstacle7_pos_vertical, obstacle7_width, obstacle7_height)
+      obstacle7_pos_horizontal = obstacle7_pos_horizontal - speed7
+      if (obstacle7_pos_horizontal > 0) {
+        spawntrigger7 = false
+      }
+      if (obstacle7_pos_horizontal < 0) {
         obstacle7_pos_horizontal = p.windowWidth + obstacle7_width
-        lives = lives - 1
         spawntrigger7 = true
       }
-    }
-    //Damage 8
-    if (Player_Position_Horizontal + Player_Width >= obstacle8_pos_horizontal + obstacle8_width && Player_Position_Horizontal <= obstacle8_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= obstacle8_pos_vertical + obstacle8_height && Player_Position_Vertical <= obstacle8_pos_vertical) {
+
+      //Obstacle 8
+      p.fill(600, 50, 30)
+      p.rect(obstacle8_pos_horizontal, obstacle8_pos_vertical, obstacle8_width, obstacle8_height)
+      obstacle8_pos_horizontal = obstacle8_pos_horizontal - speed8
+      if (obstacle8_pos_horizontal > 0) {
+        spawntrigger8 = false
+      }
+      if (obstacle8_pos_horizontal < 0) {
         obstacle8_pos_horizontal = p.windowWidth + obstacle8_width
-        lives = lives - 1
         spawntrigger8 = true
       }
-    }
-    //Damage 9
-    if (Player_Position_Horizontal + Player_Width >= obstacle9_pos_horizontal + obstacle9_width && Player_Position_Horizontal <= obstacle9_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= obstacle9_pos_vertical + obstacle9_height && Player_Position_Vertical <= obstacle9_pos_vertical) {
+
+      //Obstacle 9
+      p.fill(600, 50, 30)
+      p.rect(obstacle9_pos_horizontal, obstacle9_pos_vertical, obstacle9_width, obstacle9_height)
+      obstacle9_pos_horizontal = obstacle9_pos_horizontal - speed9
+      if (obstacle9_pos_horizontal > 0) {
+        spawntrigger9 = false
+      }
+      if (obstacle9_pos_horizontal < 0) {
         obstacle9_pos_horizontal = p.windowWidth + obstacle9_width
-        lives = lives - 1
         spawntrigger9 = true
       }
-    }
-    //Damage 10
-    if (Player_Position_Horizontal + Player_Width >= obstacle10_pos_horizontal + obstacle10_width && Player_Position_Horizontal <= obstacle10_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= obstacle10_pos_vertical + obstacle10_height && Player_Position_Vertical <= obstacle10_pos_vertical) {
+
+      //Obstacle 10
+      p.fill(600, 50, 30)
+      p.rect(obstacle10_pos_horizontal, obstacle10_pos_vertical, obstacle10_width, obstacle10_height)
+      obstacle10_pos_horizontal = obstacle10_pos_horizontal - speed10
+      if (obstacle10_pos_horizontal > 0) {
+        spawntrigger10 = false
+      }
+      if (obstacle10_pos_horizontal < 0) {
         obstacle10_pos_horizontal = p.windowWidth + obstacle10_width
-        lives = lives - 1
         spawntrigger10 = true
       }
-    }
 
-    //Fast_Obstacle1
-    if (level > 1) {
-      p.fill(139, 0, 0)
-      p.rect(fast_obstacle1_pos_horizontal, fast_obstacle1_pos_vertical, fast_obstacle1_width, fast_obstacle1_height)
-      fast_obstacle1_pos_horizontal = fast_obstacle1_pos_horizontal - speed_fast_obstacle1
-      if (fast_obstacle1_pos_horizontal > 0) {
-        spawntrigger_fast_obstacle1 = false
+      //Damage 1
+      if (Player_Position_Horizontal + Player_Width >= obstacle1_pos_horizontal + obstacle1_width + obstacle1_width && Player_Position_Horizontal <= obstacle1_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= obstacle1_pos_vertical + obstacle1_height && Player_Position_Vertical <= obstacle1_pos_vertical) {
+          obstacle1_pos_horizontal = p.windowWidth + obstacle1_width
+          lives = lives - 1
+          spawntrigger1 = true
+        }
       }
-      if (fast_obstacle1_pos_horizontal < 0) {
-        fast_obstacle1_pos_horizontal = p.windowWidth + fast_obstacle1_width
-        spawntrigger_fast_obstacle1 = true
+      //Damage 2
+      if (Player_Position_Horizontal + Player_Width >= obstacle2_pos_horizontal + obstacle2_width && Player_Position_Horizontal <= obstacle2_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= obstacle2_pos_vertical + obstacle2_height && Player_Position_Vertical <= obstacle2_pos_vertical) {
+          obstacle2_pos_horizontal = p.windowWidth + obstacle2_width
+          lives = lives - 1
+          spawntrigger2 = true
+        }
       }
-    }
-
-    //Damage Fast_Obstacle1
-    if (Player_Position_Horizontal + Player_Width >= fast_obstacle1_pos_horizontal + fast_obstacle1_width && Player_Position_Horizontal <= fast_obstacle1_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= fast_obstacle1_pos_vertical + fast_obstacle1_height && Player_Position_Vertical <= fast_obstacle1_pos_vertical) {
-        fast_obstacle1_pos_horizontal = p.windowWidth + fast_obstacle1_width
-        lives = lives - 1
-        spawntrigger_fast_obstacle1 = true
+      //Damage 3
+      if (Player_Position_Horizontal + Player_Width >= obstacle3_pos_horizontal + obstacle3_width && Player_Position_Horizontal <= obstacle3_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= obstacle3_pos_vertical + obstacle3_height && Player_Position_Vertical <= obstacle3_pos_vertical) {
+          obstacle3_pos_horizontal = p.windowWidth + obstacle3_width
+          lives = lives - 1
+          spawntrigger3 = true
+        }
       }
-    }
+      //Damage 4
+      if (Player_Position_Horizontal + Player_Width >= obstacle4_pos_horizontal + obstacle4_width && Player_Position_Horizontal <= obstacle4_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= obstacle4_pos_vertical + obstacle4_height && Player_Position_Vertical <= obstacle4_pos_vertical) {
+          obstacle4_pos_horizontal = p.windowWidth + obstacle4_width
+          lives = lives - 1
+          spawntrigger4 = true
+        }
+      }
+      //Damage 5
+      if (Player_Position_Horizontal + Player_Width >= obstacle5_pos_horizontal + obstacle5_width && Player_Position_Horizontal <= obstacle5_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= obstacle5_pos_vertical + obstacle5_height && Player_Position_Vertical <= obstacle5_pos_vertical) {
+          obstacle5_pos_horizontal = p.windowWidth + obstacle5_width
+          lives = lives - 1
+          spawntrigger5 = true
+        }
+      }
+      //Damage 6
+      if (Player_Position_Horizontal + Player_Width >= obstacle6_pos_horizontal + obstacle6_width && Player_Position_Horizontal <= obstacle6_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= obstacle6_pos_vertical + obstacle6_height && Player_Position_Vertical <= obstacle6_pos_vertical) {
+          obstacle6_pos_horizontal = p.windowWidth + obstacle6_width
+          lives = lives - 1
+          spawntrigger6 = true
+        }
+      }
+      //Damage 7
+      if (Player_Position_Horizontal + Player_Width >= obstacle7_pos_horizontal + obstacle7_width && Player_Position_Horizontal <= obstacle7_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= obstacle7_pos_vertical + obstacle7_height && Player_Position_Vertical <= obstacle7_pos_vertical) {
+          obstacle7_pos_horizontal = p.windowWidth + obstacle7_width
+          lives = lives - 1
+          spawntrigger7 = true
+        }
+      }
+      //Damage 8
+      if (Player_Position_Horizontal + Player_Width >= obstacle8_pos_horizontal + obstacle8_width && Player_Position_Horizontal <= obstacle8_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= obstacle8_pos_vertical + obstacle8_height && Player_Position_Vertical <= obstacle8_pos_vertical) {
+          obstacle8_pos_horizontal = p.windowWidth + obstacle8_width
+          lives = lives - 1
+          spawntrigger8 = true
+        }
+      }
+      //Damage 9
+      if (Player_Position_Horizontal + Player_Width >= obstacle9_pos_horizontal + obstacle9_width && Player_Position_Horizontal <= obstacle9_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= obstacle9_pos_vertical + obstacle9_height && Player_Position_Vertical <= obstacle9_pos_vertical) {
+          obstacle9_pos_horizontal = p.windowWidth + obstacle9_width
+          lives = lives - 1
+          spawntrigger9 = true
+        }
+      }
+      //Damage 10
+      if (Player_Position_Horizontal + Player_Width >= obstacle10_pos_horizontal + obstacle10_width && Player_Position_Horizontal <= obstacle10_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= obstacle10_pos_vertical + obstacle10_height && Player_Position_Vertical <= obstacle10_pos_vertical) {
+          obstacle10_pos_horizontal = p.windowWidth + obstacle10_width
+          lives = lives - 1
+          spawntrigger10 = true
+        }
+      }
 
-    
-    //Health1
-    if (level > 2) {
-      if (lives < 2) {
-        p.fill(50, 205, 50)
-        p.rect(health1_pos_horizontal, health1_pos_vertical, health1_width, health1_height)
-    health1_pos_horizontal = health1_pos_horizontal - speed_health1
-    if (health1_pos_horizontal > 0) {
-      spawntrigger_health1 = false
-    }
-    if (health1_pos_horizontal < 0) {
-      health1_pos_horizontal = p.windowWidth + health1_width
-      spawntrigger_health1 = true
-    }
-  }
-}
+      //Fast_Obstacle1
+      if (level > 1) {
+        p.fill(139, 0, 0)
+        p.rect(fast_obstacle1_pos_horizontal, fast_obstacle1_pos_vertical, fast_obstacle1_width, fast_obstacle1_height)
+        fast_obstacle1_pos_horizontal = fast_obstacle1_pos_horizontal - speed_fast_obstacle1
+        if (fast_obstacle1_pos_horizontal > 0) {
+          spawntrigger_fast_obstacle1 = false
+        }
+        if (fast_obstacle1_pos_horizontal < 0) {
+          fast_obstacle1_pos_horizontal = p.windowWidth + fast_obstacle1_width
+          spawntrigger_fast_obstacle1 = true
+        }
+      }
 
-//Collect Health1
-if (Player_Position_Horizontal + Player_Width >= health1_pos_horizontal + health1_width && Player_Position_Horizontal <= health1_pos_horizontal) {
-  if (Player_Position_Vertical + Player_height >= health1_pos_vertical + health1_height && Player_Position_Vertical <= health1_pos_vertical) {
-    health1_pos_horizontal = p.windowWidth + health1_width
-    lives = lives + 1
-    spawntrigger_health1= true
-  }
-}
+      //Damage Fast_Obstacle1
+      if (Player_Position_Horizontal + Player_Width >= fast_obstacle1_pos_horizontal + fast_obstacle1_width && Player_Position_Horizontal <= fast_obstacle1_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= fast_obstacle1_pos_vertical + fast_obstacle1_height && Player_Position_Vertical <= fast_obstacle1_pos_vertical) {
+          fast_obstacle1_pos_horizontal = p.windowWidth + fast_obstacle1_width
+          lives = lives - 1
+          spawntrigger_fast_obstacle1 = true
+        }
+      }
 
-//Coin1
-p.fill(205, 149, 12)
-p.rect(coin1_pos_horizontal, coin1_pos_vertical, coin1_width, coin1_height)
-coin1_pos_horizontal = coin1_pos_horizontal - speed_coin1
-if (coin1_pos_horizontal > 0) {
-  spawntrigger_coin1 = false
-}
-if (coin1_pos_horizontal < 0) {
-  coin1_pos_horizontal = p.windowWidth + coin1_width
-  spawntrigger_coin1 = true
-}
-    //Coin2
-    p.fill(205, 149, 12)
-    p.rect(coin2_pos_horizontal, coin2_pos_vertical, coin2_width, coin2_height)
-    coin2_pos_horizontal = coin2_pos_horizontal - speed_coin2
-    if (coin2_pos_horizontal > 0) {
-      spawntrigger_coin2 = false
-    }
-    if (coin2_pos_horizontal < 0) {
-      coin2_pos_horizontal = p.windowWidth + coin2_width
-      spawntrigger_coin2 = true
-    }
-    //Coin3
-    p.fill(205, 149, 12)
-    p.rect(coin3_pos_horizontal, coin3_pos_vertical, coin3_width, coin3_height)
-    coin3_pos_horizontal = coin3_pos_horizontal - speed_coin3
-    if (coin3_pos_horizontal > 0) {
-      spawntrigger_coin3 = false
-    }
-    if (coin3_pos_horizontal < 0) {
-      coin3_pos_horizontal = p.windowWidth + coin3_width
-      spawntrigger_coin3 = true
-    }
-    //Coin4
-    p.fill(205, 149, 12)
-    p.rect(coin4_pos_horizontal, coin4_pos_vertical, coin4_width, coin4_height)
-    coin4_pos_horizontal = coin4_pos_horizontal - speed_coin4
-    if (coin4_pos_horizontal > 0) {
-      spawntrigger_coin4 = false
-    }
-    if (coin4_pos_horizontal < 0) {
-      coin4_pos_horizontal = p.windowWidth + coin4_width
-      spawntrigger_coin4 = true
-    }
-    //Coin5
-    p.fill(205, 149, 12)
-    p.rect(coin5_pos_horizontal, coin5_pos_vertical, coin5_width, coin5_height)
-    coin5_pos_horizontal = coin5_pos_horizontal - speed_coin5
-    if (coin5_pos_horizontal > 0) {
-      spawntrigger_coin5 = false
-    }
-    if (coin1_pos_horizontal < 0) {
-      coin5_pos_horizontal = p.windowWidth + coin5_width
-      spawntrigger_coin5 = true
-    }
-    
-    //Collect Coin 1
-    if (Player_Position_Horizontal + Player_Width >= coin1_pos_horizontal + coin1_width && Player_Position_Horizontal <= coin1_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= coin1_pos_vertical + coin1_height && Player_Position_Vertical <= coin1_pos_vertical) {
+
+      //Health1
+      if (level > 2) {
+        if (lives < 2) {
+          p.fill(50, 205, 50)
+          p.rect(health1_pos_horizontal, health1_pos_vertical, health1_width, health1_height)
+          health1_pos_horizontal = health1_pos_horizontal - speed_health1
+          if (health1_pos_horizontal > 0) {
+            spawntrigger_health1 = false
+          }
+          if (health1_pos_horizontal < 0) {
+            health1_pos_horizontal = p.windowWidth + health1_width
+            spawntrigger_health1 = true
+          }
+        }
+      }
+
+      //Collect Health1
+      if (Player_Position_Horizontal + Player_Width >= health1_pos_horizontal + health1_width && Player_Position_Horizontal <= health1_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= health1_pos_vertical + health1_height && Player_Position_Vertical <= health1_pos_vertical) {
+          health1_pos_horizontal = p.windowWidth + health1_width
+          lives = lives + 1
+          spawntrigger_health1 = true
+        }
+      }
+
+      //Coin1
+      p.fill(205, 149, 12)
+      p.rect(coin1_pos_horizontal, coin1_pos_vertical, coin1_width, coin1_height)
+      coin1_pos_horizontal = coin1_pos_horizontal - speed_coin1
+      if (coin1_pos_horizontal > 0) {
+        spawntrigger_coin1 = false
+      }
+      if (coin1_pos_horizontal < 0) {
         coin1_pos_horizontal = p.windowWidth + coin1_width
         spawntrigger_coin1 = true
-        if (coinmaster == true) {
-          coins = coins + 2
-        } else {
-          coins = coins + 1
-        }
       }
-    }
-    //Collect Coin 2
-    if (Player_Position_Horizontal + Player_Width >= coin2_pos_horizontal + coin2_width && Player_Position_Horizontal <= coin2_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= coin2_pos_vertical + coin2_height && Player_Position_Vertical <= coin2_pos_vertical) {
+      //Coin2
+      p.fill(205, 149, 12)
+      p.rect(coin2_pos_horizontal, coin2_pos_vertical, coin2_width, coin2_height)
+      coin2_pos_horizontal = coin2_pos_horizontal - speed_coin2
+      if (coin2_pos_horizontal > 0) {
+        spawntrigger_coin2 = false
+      }
+      if (coin2_pos_horizontal < 0) {
         coin2_pos_horizontal = p.windowWidth + coin2_width
         spawntrigger_coin2 = true
-        if (coinmaster == true) {
-          coins = coins + 2
-        } else {
-          coins = coins + 1
-        }
       }
-    }
-    //Collect Coin 3
-    if (Player_Position_Horizontal + Player_Width >= coin3_pos_horizontal + coin3_width && Player_Position_Horizontal <= coin3_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= coin3_pos_vertical + coin3_height && Player_Position_Vertical <= coin3_pos_vertical) {
+      //Coin3
+      p.fill(205, 149, 12)
+      p.rect(coin3_pos_horizontal, coin3_pos_vertical, coin3_width, coin3_height)
+      coin3_pos_horizontal = coin3_pos_horizontal - speed_coin3
+      if (coin3_pos_horizontal > 0) {
+        spawntrigger_coin3 = false
+      }
+      if (coin3_pos_horizontal < 0) {
         coin3_pos_horizontal = p.windowWidth + coin3_width
         spawntrigger_coin3 = true
-        if (coinmaster == true) {
-          coins = coins + 2
-        } else {
-          coins = coins + 1
-        }
       }
-    }
-    //Collect Coin 4
-    if (Player_Position_Horizontal + Player_Width >= coin4_pos_horizontal + coin4_width && Player_Position_Horizontal <= coin4_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= coin4_pos_vertical + coin4_height && Player_Position_Vertical <= coin4_pos_vertical) {
+      //Coin4
+      p.fill(205, 149, 12)
+      p.rect(coin4_pos_horizontal, coin4_pos_vertical, coin4_width, coin4_height)
+      coin4_pos_horizontal = coin4_pos_horizontal - speed_coin4
+      if (coin4_pos_horizontal > 0) {
+        spawntrigger_coin4 = false
+      }
+      if (coin4_pos_horizontal < 0) {
         coin4_pos_horizontal = p.windowWidth + coin4_width
         spawntrigger_coin4 = true
-        if (coinmaster == true) {
-          coins = coins + 2
-        } else {
-          coins = coins + 1
-        }
       }
-    }
-    //Collect Coin 5
-    if (Player_Position_Horizontal + Player_Width >= coin5_pos_horizontal + coin5_width && Player_Position_Horizontal <= coin5_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= coin5_pos_vertical + coin5_height && Player_Position_Vertical <= coin5_pos_vertical) {
+      //Coin5
+      p.fill(205, 149, 12)
+      p.rect(coin5_pos_horizontal, coin5_pos_vertical, coin5_width, coin5_height)
+      coin5_pos_horizontal = coin5_pos_horizontal - speed_coin5
+      if (coin5_pos_horizontal > 0) {
+        spawntrigger_coin5 = false
+      }
+      if (coin1_pos_horizontal < 0) {
         coin5_pos_horizontal = p.windowWidth + coin5_width
         spawntrigger_coin5 = true
-        if (coinmaster == true) {
-          coins = coins + 2
-        } else {
-          coins = coins + 1
+      }
+
+      //Collect Coin 1
+      if (Player_Position_Horizontal + Player_Width >= coin1_pos_horizontal + coin1_width && Player_Position_Horizontal <= coin1_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= coin1_pos_vertical + coin1_height && Player_Position_Vertical <= coin1_pos_vertical) {
+          coin1_pos_horizontal = p.windowWidth + coin1_width
+          spawntrigger_coin1 = true
+          if (coinmaster == true) {
+            coins = coins + 2
+          } else {
+            coins = coins + 1
+          }
+        }
+      }
+      //Collect Coin 2
+      if (Player_Position_Horizontal + Player_Width >= coin2_pos_horizontal + coin2_width && Player_Position_Horizontal <= coin2_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= coin2_pos_vertical + coin2_height && Player_Position_Vertical <= coin2_pos_vertical) {
+          coin2_pos_horizontal = p.windowWidth + coin2_width
+          spawntrigger_coin2 = true
+          if (coinmaster == true) {
+            coins = coins + 2
+          } else {
+            coins = coins + 1
+          }
+        }
+      }
+      //Collect Coin 3
+      if (Player_Position_Horizontal + Player_Width >= coin3_pos_horizontal + coin3_width && Player_Position_Horizontal <= coin3_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= coin3_pos_vertical + coin3_height && Player_Position_Vertical <= coin3_pos_vertical) {
+          coin3_pos_horizontal = p.windowWidth + coin3_width
+          spawntrigger_coin3 = true
+          if (coinmaster == true) {
+            coins = coins + 2
+          } else {
+            coins = coins + 1
+          }
+        }
+      }
+      //Collect Coin 4
+      if (Player_Position_Horizontal + Player_Width >= coin4_pos_horizontal + coin4_width && Player_Position_Horizontal <= coin4_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= coin4_pos_vertical + coin4_height && Player_Position_Vertical <= coin4_pos_vertical) {
+          coin4_pos_horizontal = p.windowWidth + coin4_width
+          spawntrigger_coin4 = true
+          if (coinmaster == true) {
+            coins = coins + 2
+          } else {
+            coins = coins + 1
+          }
+        }
+      }
+      //Collect Coin 5
+      if (Player_Position_Horizontal + Player_Width >= coin5_pos_horizontal + coin5_width && Player_Position_Horizontal <= coin5_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= coin5_pos_vertical + coin5_height && Player_Position_Vertical <= coin5_pos_vertical) {
+          coin5_pos_horizontal = p.windowWidth + coin5_width
+          spawntrigger_coin5 = true
+          if (coinmaster == true) {
+            coins = coins + 2
+          } else {
+            coins = coins + 1
+          }
         }
       }
     }
-  }
-  
-  if (level == 4) {
-    //Deathstar1
-    p.fill(600, 50, 30)
-    p.rect(deathstar1_pos_horizontal, deathstar1_pos_vertical, deathstar1_width, deathstar1_height)
-    deathstar1_pos_horizontal = deathstar1_pos_horizontal - speed_deathstar1
-    if (deathstar1_pos_horizontal > 0) {
-    }
-    if (deathstar1_pos_horizontal < 0) {
-      deathstar1_pos_horizontal = p.windowWidth + deathstar1_width
-    }
-    //Damage Deathstar1
-    if (Player_Position_Horizontal + Player_Width >= deathstar1_pos_horizontal + deathstar1_width && Player_Position_Horizontal <= deathstar1_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height >= deathstar1_pos_vertical + deathstar1_height && Player_Position_Vertical <= deathstar1_pos_vertical) {
+
+    if (level == 4) {
+      //Deathstar1
+      p.fill(600, 50, 30)
+      p.rect(deathstar1_pos_horizontal, deathstar1_pos_vertical, deathstar1_width, deathstar1_height)
+      deathstar1_pos_horizontal = deathstar1_pos_horizontal - speed_deathstar1
+      if (deathstar1_pos_horizontal > 0) {
+      }
+      if (deathstar1_pos_horizontal < 0) {
         deathstar1_pos_horizontal = p.windowWidth + deathstar1_width
-        lives = 0
+      }
+      //Damage Deathstar1
+      if (Player_Position_Horizontal + Player_Width >= deathstar1_pos_horizontal + deathstar1_width && Player_Position_Horizontal <= deathstar1_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height >= deathstar1_pos_vertical + deathstar1_height && Player_Position_Vertical <= deathstar1_pos_vertical) {
+          deathstar1_pos_horizontal = p.windowWidth + deathstar1_width
+          lives = 0
+        }
       }
     }
-  }
-    
+
     //Player
     p.fill(160, 32, 240)
     p.rect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height)
