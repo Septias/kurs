@@ -55,7 +55,7 @@ const _app = new p5(p5Instance => {
 
   let collectibles: collectible[] = []
 
-  //draw
+//draw
   p.draw = function draw() {
     p.background(0, 0, 0);
 
@@ -261,11 +261,11 @@ const _app = new p5(p5Instance => {
         heal_collectible_spawntrigger = true
       }
     }
-
+  
 
   }, document.getElementById('app')!;
 
-  //classes
+//classes
   class player {
     constructor(private speed: number) {
     }
@@ -331,8 +331,8 @@ const _app = new p5(p5Instance => {
 
       this.x = this.x + this.x_speed
       this.y = this.y + this.y_speed
-
-
+      
+      
     }
     runoff() {
       if (this.x <= 0) {
