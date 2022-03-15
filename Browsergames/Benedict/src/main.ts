@@ -16,22 +16,11 @@ const _app = new p5(p5Instance => {
   let player_runoff_width = 0 - player_width
   let player_runoff_height = 0 - player_height
 
-
-  //Heal Collectible Dimensions
-  let heal_collectible_width = 25
-  let heal_collectible_height = 25
-
-  //Heal Collectible Positional Variables
-  let heal_collectible_spawn_area_horizontal = p.windowWidth - heal_collectible_width / 2
-  let heal_collectible_spawn_area_vertical = p.windowHeight - heal_collectible_height / 2
-  let heal_collectible_position_horizontal = getRndInteger(0 - heal_collectible_width / 2, heal_collectible_spawn_area_horizontal)
-  let heal_collectible_position_vertical = getRndInteger(0 - heal_collectible_height / 2, heal_collectible_spawn_area_vertical)
-
-
   // spawntrigger
   let obstacle_spawntrigger = true
   let player_spawntrigger = true
   let collectible_spawntrigger = true
+  let heal_collectible_spawntrigger = true
 
   //Move Variabels
   let moveleft = false
@@ -43,14 +32,11 @@ const _app = new p5(p5Instance => {
   let score_counter = 0
   let player_health = 3
   let highscore = 0
-  let scoreboard_speed_player = 1
-
 
   //Deathscreen variables 
   let space_is_pressed = false
 
-
-
+  //setup
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight);
     p.textFont('Helvetica');
@@ -60,25 +46,20 @@ const _app = new p5(p5Instance => {
 
   };
 
-  //Random Integer
-  function getRndInteger(min: any, max: any) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-
-
-
+  //arrays
   let obstacles: obstacle[] = []
 
   let players: player[] = []
 
+  let heal_collectibles: heal_collectible[] = []
+
   let collectibles: collectible[] = []
 
-
-
+  //draw
   p.draw = function draw() {
     p.background(0, 0, 0);
 
-
+    //update collectible
     for (const collectible of collectibles) {
 
       collectible.draw(p)
@@ -88,14 +69,29 @@ const _app = new p5(p5Instance => {
       if (collectible.collide(player_position_horizontal, player_position_vertical, player_width, player_height) == true) {
         obstacle_spawntrigger = true
         collectible_spawntrigger = true
+        heal_collectible_spawntrigger = true
         score_counter++
       }
 
     }
 
+    //update healcollectible
+    for (const heal_collectible of heal_collectibles) {
 
+      heal_collectible.draw(p)
 
+      heal_collectible.collide(player_position_horizontal, player_position_vertical, player_runoff_width, player_height)
 
+      if (heal_collectible.collide(player_position_horizontal, player_position_vertical, player_width, player_height) == true) {
+        obstacle_spawntrigger = true
+        collectible_spawntrigger = true
+        heal_collectible_spawntrigger = true
+        player_health++
+      }
+
+    }
+
+    //update obstacle
     for (const obstacle of obstacles) {
 
       obstacle.update()
@@ -110,13 +106,13 @@ const _app = new p5(p5Instance => {
       if (obstacle.collide(player_position_horizontal, player_position_vertical, player_width, player_height) == true) {
         obstacle_spawntrigger = true
         collectible_spawntrigger = true
+        heal_collectible_spawntrigger = true
         player_health--
       }
 
     }
 
-
-
+    //update player
     for (const player of players) {
 
       player.draw(p)
@@ -127,18 +123,15 @@ const _app = new p5(p5Instance => {
 
     }
 
-
-
-
+    //obstacle spawntrigger
     if (obstacle_spawntrigger == true) {
-
 
       obstacles.length = 0
 
-      obstacles.push(new obstacle(0, p.windowWidth, 0, p.windowHeight, 30, 30, 4, 0, 0, 0))
-      obstacles.push(new obstacle(0, p.windowWidth, 0, p.windowHeight, 30, 30, 4, 0, 0, 0))
-      obstacles.push(new obstacle(0, p.windowWidth, 0, p.windowHeight, 30, 30, 0, 4, 0, 0))
-      obstacles.push(new obstacle(0, p.windowWidth, 0, p.windowHeight, 30, 30, 0, 4, 0, 0))
+      obstacles.push(new obstacle(1, p.windowWidth, 1, p.windowHeight, 30, 30, 4, 0, 0, 0))
+      obstacles.push(new obstacle(1, p.windowWidth, 1, p.windowHeight, 30, 30, 4, 0, 0, 0))
+      obstacles.push(new obstacle(1, p.windowWidth, 1, p.windowHeight, 30, 30, 0, 4, 0, 0))
+      obstacles.push(new obstacle(1, p.windowWidth, 1, p.windowHeight, 30, 30, 0, 4, 0, 0))
 
       for (const obstacle of obstacles) {
         obstacle.randomizer()
@@ -146,8 +139,7 @@ const _app = new p5(p5Instance => {
       obstacle_spawntrigger = false
     }
 
-
-
+    //collectible spawntrigger
     if (collectible_spawntrigger == true) {
 
       collectibles.length = 0
@@ -161,6 +153,21 @@ const _app = new p5(p5Instance => {
       collectible_spawntrigger = false
     }
 
+    //heal_collectible spawntrigger
+    if (heal_collectible_spawntrigger == true) {
+
+      heal_collectibles.length = 0
+
+      heal_collectibles.push(new heal_collectible(0, p.windowWidth, 0, p.windowHeight, 25, 25, 0, 0))
+
+      for (const heal_collectible of heal_collectibles) {
+        heal_collectible.randomizer()
+      }
+
+      heal_collectible_spawntrigger = false
+    }
+
+    //player spawntrigger
     if (player_spawntrigger == true) {
       players.length = 0
 
@@ -172,7 +179,6 @@ const _app = new p5(p5Instance => {
 
       player_spawntrigger = false
     }
-
 
 
     p.keyPressed = function () {
@@ -213,9 +219,6 @@ const _app = new p5(p5Instance => {
       }
     }
 
-
-
-
     //Scoreboard
     p.textAlign(p.LEFT)
     p.textSize(14)
@@ -223,7 +226,6 @@ const _app = new p5(p5Instance => {
     p.fill(255, 255, 255)
     p.text("Highscore: " + highscore, 25, 25)
     p.text("Score: " + score_counter, 25, 50)
-    p.text("Speed: " + scoreboard_speed_player, 25, 75)
     if (player_health == 3) {
       p.fill("green")
     }
@@ -233,19 +235,11 @@ const _app = new p5(p5Instance => {
     if (player_health == 1) {
       p.fill(125, 0, 0)
     }
-    p.text("Health: " + player_health, 25, 100)
-
-    //Heal Collectible
-    p.rect(heal_collectible_position_horizontal, heal_collectible_position_vertical, heal_collectible_width, heal_collectible_height);
-
-
-
+    p.text("Health: " + player_health, 25, 75)
 
 
     //Deathscreen
     if (player_health <= 0) {
-
-
       p.fill(0, 0, 0)
       p.rect(0, 0, p.windowWidth, p.windowHeight)
       p.textAlign(p.CENTER)
@@ -258,28 +252,20 @@ const _app = new p5(p5Instance => {
       if (score_counter > highscore) {
         highscore = score_counter
       }
-
-
       if (space_is_pressed == true) {
         player_health = 3
         score_counter = 0
         player_spawntrigger = true
         obstacle_spawntrigger = true
-        collectible_spawntrigger
+        collectible_spawntrigger = true
+        heal_collectible_spawntrigger = true
       }
-
-
     }
-
-
-
-
-
-
 
 
   }, document.getElementById('app')!;
 
+  //classes
   class player {
     constructor(private speed: number) {
     }
@@ -325,7 +311,6 @@ const _app = new p5(p5Instance => {
       }
     }
   }
-
   class obstacle {
     constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private x_speed: number, private y_speed: number, private x: number, private y: number) {
     }
@@ -334,8 +319,8 @@ const _app = new p5(p5Instance => {
       function getRndInteger(min: any, max: any) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
-      this.x = getRndInteger(this.x_min, this.x_max - this.w)
-      this.y = getRndInteger(this.y_min, this.y_max - this.h)
+      this.x = getRndInteger(this.x_min, this.x_max - this.w - 1)
+      this.y = getRndInteger(this.y_min, this.y_max - this.h - 1)
     }
     draw(p: p5) {
       p.fill(145, 71, 254)
@@ -346,17 +331,18 @@ const _app = new p5(p5Instance => {
 
       this.x = this.x + this.x_speed
       this.y = this.y + this.y_speed
-      console.log ( this.x,this.y)
+
+
     }
     runoff() {
       if (this.x <= 0) {
-        this.x_speed = 0 + this.x_speed
+        this.x_speed = 0 - this.x_speed
       }
       if (this.x >= this.x_max - this.w) {
         this.x_speed = 0 - this.x_speed
       }
       if (this.y <= 0) {
-        this.y_speed = 0 + this.y_speed
+        this.y_speed = 0 - this.y_speed
       }
       if (this.y >= this.y_max - this.h) {
         this.y_speed = 0 - this.y_speed
@@ -383,6 +369,40 @@ const _app = new p5(p5Instance => {
       this.y = getRndInteger(this.y_min, this.y_max - this.h)
     }
     draw(p: p5) {
+      p.fill(225, 0, 127)
+      p.rect(this.x, this.y, this.w, this.h);
+    }
+
+    collide(x_player: number, y_player: number, w_player: number, h_player: number) {
+      if (x_player + w_player >= this.x + this.w && x_player <= this.x && y_player + h_player >= this.y + this.h && y_player <= this.y) {
+        return true
+      }
+      else {
+        return false
+      }
+    }
+
+  }
+  class heal_collectible {
+    constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private x: number, private y: number) {
+    }
+    randomizer() {
+      function getRndInteger(min: any, max: any) {
+        return Math.floor(Math.random() * (max - min + 1)) + min;
+      }
+      this.x = getRndInteger(this.x_min, this.x_max - this.w)
+      this.y = getRndInteger(this.y_min, this.y_max - this.h)
+    }
+    draw(p: p5) {
+      if (player_health == 3) {
+        p.fill("green")
+      }
+      if (player_health == 2) {
+        p.fill("orange")
+      }
+      if (player_health == 1) {
+        p.fill(125, 0, 0)
+      }
       p.fill(225, 0, 127)
       p.rect(this.x, this.y, this.w, this.h);
     }
