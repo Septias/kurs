@@ -211,7 +211,7 @@ const _app = new p5(p5Instance => {
       player_spawntrigger = false
     }
 
-
+    //handles all key presses
     p.keyPressed = function () {
       if (p.keyCode === 65) {
         moveleft = true
