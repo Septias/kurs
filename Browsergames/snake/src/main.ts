@@ -119,10 +119,8 @@ const _app = new p5(p5Instance => {
   //Deathstar
   let deathstar1_width = 75
   let deathstar1_height = 75
-  let spawntrigger_deathstar1 = true
   let speed_deathstar1 = 3
   let deathstar1_spawn_pos_horizontal = p.windowWidth + deathstar1_width
-  let deathstar1_spawn_area_vertical = p.windowHeight - deathstar1_height
   let deathstar1_pos_horizontal = deathstar1_spawn_pos_horizontal
   let deathstar1_pos_vertical = p.windowHeight / 2 - deathstar1_width / 2
 
@@ -495,80 +493,80 @@ const _app = new p5(p5Instance => {
       }
 
       //Damage 1
-      if (Player_Position_Horizontal + Player_Width >= obstacle1_pos_horizontal + obstacle1_width + obstacle1_width && Player_Position_Horizontal <= obstacle1_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= obstacle1_pos_vertical + obstacle1_height && Player_Position_Vertical <= obstacle1_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + obstacle1_width >= obstacle1_pos_horizontal + obstacle1_width + obstacle1_width && Player_Position_Horizontal <= obstacle1_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + obstacle1_height >= obstacle1_pos_vertical + obstacle1_height && Player_Position_Vertical <= obstacle1_pos_vertical) {
           obstacle1_pos_horizontal = p.windowWidth + obstacle1_width
           lives = lives - 1
           spawntrigger1 = true
         }
       }
       //Damage 2
-      if (Player_Position_Horizontal + Player_Width >= obstacle2_pos_horizontal + obstacle2_width && Player_Position_Horizontal <= obstacle2_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= obstacle2_pos_vertical + obstacle2_height && Player_Position_Vertical <= obstacle2_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + obstacle2_width >= obstacle2_pos_horizontal + obstacle2_width && Player_Position_Horizontal <= obstacle2_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + obstacle2_height >= obstacle2_pos_vertical + obstacle2_height && Player_Position_Vertical <= obstacle2_pos_vertical) {
           obstacle2_pos_horizontal = p.windowWidth + obstacle2_width
           lives = lives - 1
           spawntrigger2 = true
         }
       }
       //Damage 3
-      if (Player_Position_Horizontal + Player_Width >= obstacle3_pos_horizontal + obstacle3_width && Player_Position_Horizontal <= obstacle3_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= obstacle3_pos_vertical + obstacle3_height && Player_Position_Vertical <= obstacle3_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + obstacle3_width >= obstacle3_pos_horizontal + obstacle3_width && Player_Position_Horizontal <= obstacle3_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + obstacle3_height >= obstacle3_pos_vertical + obstacle3_height && Player_Position_Vertical <= obstacle3_pos_vertical) {
           obstacle3_pos_horizontal = p.windowWidth + obstacle3_width
           lives = lives - 1
           spawntrigger3 = true
         }
       }
       //Damage 4
-      if (Player_Position_Horizontal + Player_Width >= obstacle4_pos_horizontal + obstacle4_width && Player_Position_Horizontal <= obstacle4_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= obstacle4_pos_vertical + obstacle4_height && Player_Position_Vertical <= obstacle4_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + obstacle4_width >= obstacle4_pos_horizontal + obstacle4_width && Player_Position_Horizontal <= obstacle4_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + obstacle4_height >= obstacle4_pos_vertical + obstacle4_height && Player_Position_Vertical <= obstacle4_pos_vertical) {
           obstacle4_pos_horizontal = p.windowWidth + obstacle4_width
           lives = lives - 1
           spawntrigger4 = true
         }
       }
       //Damage 5
-      if (Player_Position_Horizontal + Player_Width >= obstacle5_pos_horizontal + obstacle5_width && Player_Position_Horizontal <= obstacle5_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= obstacle5_pos_vertical + obstacle5_height && Player_Position_Vertical <= obstacle5_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + obstacle5_width >= obstacle5_pos_horizontal + obstacle5_width && Player_Position_Horizontal <= obstacle5_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + obstacle5_height >= obstacle5_pos_vertical + obstacle5_height && Player_Position_Vertical <= obstacle5_pos_vertical) {
           obstacle5_pos_horizontal = p.windowWidth + obstacle5_width
           lives = lives - 1
           spawntrigger5 = true
         }
       }
       //Damage 6
-      if (Player_Position_Horizontal + Player_Width >= obstacle6_pos_horizontal + obstacle6_width && Player_Position_Horizontal <= obstacle6_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= obstacle6_pos_vertical + obstacle6_height && Player_Position_Vertical <= obstacle6_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + obstacle6_width >= obstacle6_pos_horizontal + obstacle6_width && Player_Position_Horizontal <= obstacle6_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + obstacle6_height >= obstacle6_pos_vertical + obstacle6_height && Player_Position_Vertical <= obstacle6_pos_vertical) {
           obstacle6_pos_horizontal = p.windowWidth + obstacle6_width
           lives = lives - 1
           spawntrigger6 = true
         }
       }
       //Damage 7
-      if (Player_Position_Horizontal + Player_Width >= obstacle7_pos_horizontal + obstacle7_width && Player_Position_Horizontal <= obstacle7_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= obstacle7_pos_vertical + obstacle7_height && Player_Position_Vertical <= obstacle7_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + obstacle7_width >= obstacle7_pos_horizontal + obstacle7_width && Player_Position_Horizontal <= obstacle7_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + obstacle7_height >= obstacle7_pos_vertical + obstacle7_height && Player_Position_Vertical <= obstacle7_pos_vertical) {
           obstacle7_pos_horizontal = p.windowWidth + obstacle7_width
           lives = lives - 1
           spawntrigger7 = true
         }
       }
       //Damage 8
-      if (Player_Position_Horizontal + Player_Width >= obstacle8_pos_horizontal + obstacle8_width && Player_Position_Horizontal <= obstacle8_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= obstacle8_pos_vertical + obstacle8_height && Player_Position_Vertical <= obstacle8_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + obstacle8_width >= obstacle8_pos_horizontal + obstacle8_width && Player_Position_Horizontal <= obstacle8_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + obstacle8_height >= obstacle8_pos_vertical + obstacle8_height && Player_Position_Vertical <= obstacle8_pos_vertical) {
           obstacle8_pos_horizontal = p.windowWidth + obstacle8_width
           lives = lives - 1
           spawntrigger8 = true
         }
       }
       //Damage 9
-      if (Player_Position_Horizontal + Player_Width >= obstacle9_pos_horizontal + obstacle9_width && Player_Position_Horizontal <= obstacle9_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= obstacle9_pos_vertical + obstacle9_height && Player_Position_Vertical <= obstacle9_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + obstacle9_width >= obstacle9_pos_horizontal + obstacle9_width && Player_Position_Horizontal <= obstacle9_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + obstacle9_height >= obstacle9_pos_vertical + obstacle9_height && Player_Position_Vertical <= obstacle9_pos_vertical) {
           obstacle9_pos_horizontal = p.windowWidth + obstacle9_width
           lives = lives - 1
           spawntrigger9 = true
         }
       }
       //Damage 10
-      if (Player_Position_Horizontal + Player_Width >= obstacle10_pos_horizontal + obstacle10_width && Player_Position_Horizontal <= obstacle10_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= obstacle10_pos_vertical + obstacle10_height && Player_Position_Vertical <= obstacle10_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + obstacle10_width >= obstacle10_pos_horizontal + obstacle10_width && Player_Position_Horizontal <= obstacle10_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + obstacle10_height >= obstacle10_pos_vertical + obstacle10_height && Player_Position_Vertical <= obstacle10_pos_vertical) {
           obstacle10_pos_horizontal = p.windowWidth + obstacle10_width
           lives = lives - 1
           spawntrigger10 = true
@@ -590,8 +588,8 @@ const _app = new p5(p5Instance => {
       }
 
       //Damage Fast_Obstacle1
-      if (Player_Position_Horizontal + Player_Width >= fast_obstacle1_pos_horizontal + fast_obstacle1_width && Player_Position_Horizontal <= fast_obstacle1_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= fast_obstacle1_pos_vertical + fast_obstacle1_height && Player_Position_Vertical <= fast_obstacle1_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + fast_obstacle1_width >= fast_obstacle1_pos_horizontal + fast_obstacle1_width && Player_Position_Horizontal <= fast_obstacle1_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + fast_obstacle1_height >= fast_obstacle1_pos_vertical + fast_obstacle1_height && Player_Position_Vertical <= fast_obstacle1_pos_vertical) {
           fast_obstacle1_pos_horizontal = p.windowWidth + fast_obstacle1_width
           lives = lives - 1
           spawntrigger_fast_obstacle1 = true
@@ -616,8 +614,8 @@ const _app = new p5(p5Instance => {
       }
 
       //Collect Health1
-      if (Player_Position_Horizontal + Player_Width >= health1_pos_horizontal + health1_width && Player_Position_Horizontal <= health1_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= health1_pos_vertical + health1_height && Player_Position_Vertical <= health1_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + health1_width >= health1_pos_horizontal + health1_width && Player_Position_Horizontal <= health1_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + health1_height >= health1_pos_vertical + health1_height && Player_Position_Vertical <= health1_pos_vertical) {
           health1_pos_horizontal = p.windowWidth + health1_width
           lives = lives + 1
           spawntrigger_health1 = true
@@ -681,8 +679,8 @@ const _app = new p5(p5Instance => {
       }
 
       //Collect Coin 1
-      if (Player_Position_Horizontal + Player_Width >= coin1_pos_horizontal + coin1_width && Player_Position_Horizontal <= coin1_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= coin1_pos_vertical + coin1_height && Player_Position_Vertical <= coin1_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + coin1_width >= coin1_pos_horizontal + coin1_width && Player_Position_Horizontal <= coin1_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + coin1_height >= coin1_pos_vertical + coin1_height && Player_Position_Vertical <= coin1_pos_vertical) {
           coin1_pos_horizontal = p.windowWidth + coin1_width
           spawntrigger_coin1 = true
           if (coinmaster == true) {
@@ -693,8 +691,8 @@ const _app = new p5(p5Instance => {
         }
       }
       //Collect Coin 2
-      if (Player_Position_Horizontal + Player_Width >= coin2_pos_horizontal + coin2_width && Player_Position_Horizontal <= coin2_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= coin2_pos_vertical + coin2_height && Player_Position_Vertical <= coin2_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + coin2_width >= coin2_pos_horizontal + coin2_width && Player_Position_Horizontal <= coin2_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + coin2_height >= coin2_pos_vertical + coin2_height && Player_Position_Vertical <= coin2_pos_vertical) {
           coin2_pos_horizontal = p.windowWidth + coin2_width
           spawntrigger_coin2 = true
           if (coinmaster == true) {
@@ -705,8 +703,8 @@ const _app = new p5(p5Instance => {
         }
       }
       //Collect Coin 3
-      if (Player_Position_Horizontal + Player_Width >= coin3_pos_horizontal + coin3_width && Player_Position_Horizontal <= coin3_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= coin3_pos_vertical + coin3_height && Player_Position_Vertical <= coin3_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + coin3_width >= coin3_pos_horizontal + coin3_width && Player_Position_Horizontal <= coin3_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + coin3_height >= coin3_pos_vertical + coin3_height && Player_Position_Vertical <= coin3_pos_vertical) {
           coin3_pos_horizontal = p.windowWidth + coin3_width
           spawntrigger_coin3 = true
           if (coinmaster == true) {
@@ -717,8 +715,8 @@ const _app = new p5(p5Instance => {
         }
       }
       //Collect Coin 4
-      if (Player_Position_Horizontal + Player_Width >= coin4_pos_horizontal + coin4_width && Player_Position_Horizontal <= coin4_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= coin4_pos_vertical + coin4_height && Player_Position_Vertical <= coin4_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + coin4_width >= coin4_pos_horizontal + coin4_width && Player_Position_Horizontal <= coin4_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + coin4_height >= coin4_pos_vertical + coin4_height && Player_Position_Vertical <= coin4_pos_vertical) {
           coin4_pos_horizontal = p.windowWidth + coin4_width
           spawntrigger_coin4 = true
           if (coinmaster == true) {
@@ -729,8 +727,8 @@ const _app = new p5(p5Instance => {
         }
       }
       //Collect Coin 5
-      if (Player_Position_Horizontal + Player_Width >= coin5_pos_horizontal + coin5_width && Player_Position_Horizontal <= coin5_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= coin5_pos_vertical + coin5_height && Player_Position_Vertical <= coin5_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + coin5_width >= coin5_pos_horizontal + coin5_width && Player_Position_Horizontal <= coin5_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + coin5_height >= coin5_pos_vertical + coin5_height && Player_Position_Vertical <= coin5_pos_vertical) {
           coin5_pos_horizontal = p.windowWidth + coin5_width
           spawntrigger_coin5 = true
           if (coinmaster == true) {
@@ -753,8 +751,8 @@ const _app = new p5(p5Instance => {
         deathstar1_pos_horizontal = p.windowWidth + deathstar1_width
       }
       //Damage Deathstar1
-      if (Player_Position_Horizontal + Player_Width >= deathstar1_pos_horizontal + deathstar1_width && Player_Position_Horizontal <= deathstar1_pos_horizontal) {
-        if (Player_Position_Vertical + Player_height >= deathstar1_pos_vertical + deathstar1_height && Player_Position_Vertical <= deathstar1_pos_vertical) {
+      if (Player_Position_Horizontal + Player_Width + deathstar1_width >= deathstar1_pos_horizontal + deathstar1_width && Player_Position_Horizontal <= deathstar1_pos_horizontal) {
+        if (Player_Position_Vertical + Player_height + deathstar1_height >= deathstar1_pos_vertical + deathstar1_height && Player_Position_Vertical <= deathstar1_pos_vertical) {
           deathstar1_pos_horizontal = p.windowWidth + deathstar1_width
           lives = 0
         }
