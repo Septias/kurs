@@ -21,6 +21,7 @@ const _app = new p5(p5Instance => {
   let player_spawntrigger = true
   let collectible_spawntrigger = true
   let heal_collectible_spawntrigger = true
+  let bullet_spawntrigger = false
 
   //Move Variabels
   let moveleft = false
@@ -55,9 +56,39 @@ const _app = new p5(p5Instance => {
 
   let collectibles: collectible[] = []
 
-//draw
+  let bullets: bullet[] = []
+
+  //draw
   p.draw = function draw() {
     p.background(0, 0, 0);
+    
+    //bullet spawntrigger
+    if (bullet_spawntrigger == true) {
+
+
+      bullets.push(new bullet(player_position_horizontal + player_width / 2, player_position_vertical + player_height / 2, 15, 15, 10, 10, 10, 10, 0))
+
+      for (const bullet of bullets) {
+        
+        bullet.direction_check(p)
+
+      }
+    }
+
+    //update bullet
+    for (const bullet of bullets) {
+
+      bullet.draw(p)
+
+      bullet.update()
+
+      bullet.runoff(p)
+
+      if (bullet.runoff(p) == true){
+        bullets.splice(0,1)
+      }
+
+    }
 
     //update collectible
     for (const collectible of collectibles) {
@@ -182,40 +213,42 @@ const _app = new p5(p5Instance => {
 
 
     p.keyPressed = function () {
-      if (p.keyCode === p.LEFT_ARROW) {
+      if (p.keyCode === 65) {
         moveleft = true
       }
-      if (p.keyCode === p.RIGHT_ARROW) {
+      if (p.keyCode === 68) {
         moveright = true
       }
-      if (p.keyCode === p.UP_ARROW) {
+      if (p.keyCode === 87) {
         moveup = true
       }
-      if (p.keyCode === p.DOWN_ARROW) {
+      if (p.keyCode === 83) {
         movedown = true
       }
       if (p.keyCode === 32) {
         space_is_pressed = true
+        bullet_spawntrigger = true
 
       }
     }
 
     //Handles All Keyrealeses
     p.keyReleased = function () {
-      if (p.keyCode === p.LEFT_ARROW) {
+      if (p.keyCode === 65) {
         moveleft = false
       }
-      if (p.keyCode === p.RIGHT_ARROW) {
+      if (p.keyCode === 68) {
         moveright = false
       }
-      if (p.keyCode === p.UP_ARROW) {
+      if (p.keyCode === 87) {
         moveup = false
       }
-      if (p.keyCode === p.DOWN_ARROW) {
+      if (p.keyCode === 83) {
         movedown = false
       }
       if (p.keyCode === 32) {
         space_is_pressed = false
+        bullet_spawntrigger = false
       }
     }
 
@@ -261,11 +294,10 @@ const _app = new p5(p5Instance => {
         heal_collectible_spawntrigger = true
       }
     }
-  
-
+   
   }, document.getElementById('app')!;
 
-//classes
+  //classes
   class player {
     constructor(private speed: number) {
     }
@@ -331,8 +363,8 @@ const _app = new p5(p5Instance => {
 
       this.x = this.x + this.x_speed
       this.y = this.y + this.y_speed
-      
-      
+
+
     }
     runoff() {
       if (this.x <= 0) {
@@ -403,7 +435,6 @@ const _app = new p5(p5Instance => {
       if (player_health == 1) {
         p.fill(125, 0, 0)
       }
-      p.fill(225, 0, 127)
       p.rect(this.x, this.y, this.w, this.h);
     }
 
@@ -416,6 +447,46 @@ const _app = new p5(p5Instance => {
       }
     }
 
+  }
+  class bullet {
+    constructor(private x: number, private y: number, private w: number, private h: number, private x_speed1: number, private x_speed2: number, private y_speed1: number, private y_speed2: number, private direction: number) {
+    }
+    direction_check(p: p5) {
+
+      this.direction = (player_position_horizontal + player_width / 2 - p.mouseX) / (player_position_vertical + player_height / 2 - p.mouseY)
+      if (player_position_horizontal + player_width / 2 < p.mouseX && player_position_vertical + player_height / 2 < p.mouseY) {
+        this.x_speed2 =  this.x_speed1 * this.direction
+        this.y_speed2 = this.y_speed1
+      }
+      if (player_position_horizontal + player_width / 2 > p.mouseX && player_position_vertical + player_height / 2 < p.mouseY) {
+        this.x_speed2 = this.x_speed1 * this.direction
+        this.y_speed2 = this.y_speed1
+      }
+      if (player_position_horizontal + player_width / 2 > p.mouseX && player_position_vertical + player_height / 2 > p.mouseY) {
+        this.x_speed2 = 0 - this.x_speed1 * this.direction
+        this.y_speed2 = 0 - this.y_speed1
+      }
+      if (player_position_horizontal + player_width / 2 < p.mouseX && player_position_vertical + player_height / 2 > p.mouseY) {
+        this.x_speed2 = 0 - this.x_speed1 * this.direction
+        this.y_speed2 = 0 - this.y_speed1
+      }
+    }
+    draw(p: p5) {
+      p.fill("blue")
+      p.rect(this.x, this.y, this.w, this.h)
+    }
+    update() {
+      this.x = this.x + this.x_speed2
+      this.y = this.y + this.y_speed2
+    }
+    runoff(p: p5) {
+      if (this.x <= 0 - this.w || this.x >= p.windowWidth || this.y <= 0 - this.h || this.y >= p.windowHeight) {
+        return true
+      }
+      else {
+        return false
+      }
+    }
   }
 
 })
