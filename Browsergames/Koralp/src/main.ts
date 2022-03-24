@@ -8,11 +8,11 @@ const app = new p5(p5Instance => {
   let positionX=1
   let positionY=1
 
-  let speed=1
+  let speed=2
   let colorspeed=10
 
-  let sizeX=100
-  let sizeY=100
+  let sizeX=50
+  let sizeY=50
 
   let borderX=400
   let borderY=400
@@ -43,6 +43,10 @@ const app = new p5(p5Instance => {
   };
 
   p.draw = function draw() {
+    var roundedSpeed = Math.round(speed) * 1;
+
+    var speedanzeige = document.getElementById("speedanzeige");
+    speedanzeige!.innerText = "speed ~ " + roundedSpeed.toString();
     p.background(farbe1, farbe2, farbe3);
     p.fill(farbe4,farbe5,farbe6);
     p.rect(positionX, positionY, sizeX, sizeY);
@@ -60,11 +64,12 @@ const app = new p5(p5Instance => {
     if (p.keyIsDown(ßpfeiltasteoben)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
     if (p.keyIsDown(ßpfeiltasteunten)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
 
-    if (p.keyIsDown(ßr)) {speed=speed+1}
+    if (borderX > -1000) {speed=speed*1.002}
+
+
 
     
-
-
+    
   };
 
 
