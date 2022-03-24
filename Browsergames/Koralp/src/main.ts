@@ -8,7 +8,7 @@ const app = new p5(p5Instance => {
   let positionX=1
   let positionY=1
 
-  let speed=1
+  let speed=2
   let colorspeed=10
 
   let sizeX=100
