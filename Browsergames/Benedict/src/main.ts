@@ -23,7 +23,7 @@ const _app = new p5(p5Instance => {
   let heal_collectible_spawntrigger = true
   let bullet_spawntrigger = false
 
-  //Move Variabels
+  //Move Variabels  
   let moveleft = false
   let moveright = false
   let moveup = false
@@ -43,8 +43,6 @@ const _app = new p5(p5Instance => {
     p.textFont('Helvetica');
     p.textSize(14)
     p.frameRate(60)
-
-
   };
 
   //arrays
@@ -58,41 +56,77 @@ const _app = new p5(p5Instance => {
 
   let bullets: bullet[] = []
 
+  //handles all key presses
+  p.keyPressed = function () {
+    if (p.keyCode === 65) {
+      moveleft = true
+    }
+    if (p.keyCode === 68) {
+      moveright = true
+    }
+    if (p.keyCode === 87) {
+      moveup = true
+    }
+    if (p.keyCode === 83) {
+      movedown = true
+    }
+    if (p.keyCode === 32) {
+      space_is_pressed = true
+      bullet_spawntrigger = true
+
+    }
+  }
+
+  //Handles All Keyrealeses
+  p.keyReleased = function () {
+    if (p.keyCode === 65) {
+      moveleft = false
+    }
+    if (p.keyCode === 68) {
+      moveright = false
+    }
+    if (p.keyCode === 87) {
+      moveup = false
+    }
+    if (p.keyCode === 83) {
+      movedown = false
+    }
+    if (p.keyCode === 32) {
+      space_is_pressed = false
+      bullet_spawntrigger = false
+    }
+  }
   //draw
   p.draw = function draw() {
     p.background(0, 0, 0);
-    
+
     //bullet spawntrigger
     if (bullet_spawntrigger == true) {
 
 
-      bullets.push(new bullet(player_position_horizontal + player_width / 2, player_position_vertical + player_height / 2, 15, 15, 10, 10, 10, 10, 0))
+      bullets.push(new bullet(player_position_horizontal + player_width / 2, 
+          player_position_vertical + player_height / 2, 15, 15, 10, 10, 10, 10, 0))
 
       for (const bullet of bullets) {
-        
         bullet.direction_check(p)
-
       }
     }
 
     //update bullet
-    for (const bullet of bullets) {
+    for (const [index, bullet] of bullets) {
 
       bullet.draw(p)
-
       bullet.update()
-
       bullet.runoff(p)
 
-      if (bullet.runoff(p) == true){
-        bullets.splice(0,1)
+      if (bullet.runoff(p) == true) {
+        bullets.splice(index, 1)
       }
-
     }
 
     //update collectible
     for (const collectible of collectibles) {
-
+      collectible.x_min
       collectible.draw(p)
 
       collectible.collide(player_position_horizontal, player_position_vertical, player_runoff_width, player_height)
@@ -113,11 +147,13 @@ const _app = new p5(p5Instance => {
 
       heal_collectible.collide(player_position_horizontal, player_position_vertical, player_runoff_width, player_height)
 
-      if (heal_collectible.collide(player_position_horizontal, player_position_vertical, player_width, player_height) == true) {
-        obstacle_spawntrigger = true
-        collectible_spawntrigger = true
-        heal_collectible_spawntrigger = true
-        player_health++
+      if (player_health <= 2 && player_health > 0) {
+        if (heal_collectible.collide(player_position_horizontal, player_position_vertical, player_width, player_height) == true) {
+          obstacle_spawntrigger = true
+          collectible_spawntrigger = true
+          heal_collectible_spawntrigger = true
+          player_health++
+        }
       }
 
     }
@@ -151,6 +187,7 @@ const _app = new p5(p5Instance => {
       player.update()
 
       player.runoff()
+
 
     }
 
@@ -211,47 +248,6 @@ const _app = new p5(p5Instance => {
       player_spawntrigger = false
     }
 
-    //handles all key presses
-    p.keyPressed = function () {
-      if (p.keyCode === 65) {
-        moveleft = true
-      }
-      if (p.keyCode === 68) {
-        moveright = true
-      }
-      if (p.keyCode === 87) {
-        moveup = true
-      }
-      if (p.keyCode === 83) {
-        movedown = true
-      }
-      if (p.keyCode === 32) {
-        space_is_pressed = true
-        bullet_spawntrigger = true
-
-      }
-    }
-
-    //Handles All Keyrealeses
-    p.keyReleased = function () {
-      if (p.keyCode === 65) {
-        moveleft = false
-      }
-      if (p.keyCode === 68) {
-        moveright = false
-      }
-      if (p.keyCode === 87) {
-        moveup = false
-      }
-      if (p.keyCode === 83) {
-        movedown = false
-      }
-      if (p.keyCode === 32) {
-        space_is_pressed = false
-        bullet_spawntrigger = false
-      }
-    }
-
     //Scoreboard
     p.textAlign(p.LEFT)
     p.textSize(14)
@@ -294,15 +290,15 @@ const _app = new p5(p5Instance => {
         heal_collectible_spawntrigger = true
       }
     }
-   
+
   }, document.getElementById('app')!;
 
   //classes
   class player {
-    constructor(private speed: number) {
+    constructor(public speed: number) {
     }
     draw(p: p5) {
-      if (player_health == 3) {
+      if (player_health >= 3) {
         p.fill("green")
       }
       if (player_health == 2) {
@@ -426,7 +422,7 @@ const _app = new p5(p5Instance => {
       this.y = getRndInteger(this.y_min, this.y_max - this.h)
     }
     draw(p: p5) {
-      if (player_health == 3) {
+      if (player_health >= 3) {
         p.fill("green")
       }
       if (player_health == 2) {
@@ -455,7 +451,7 @@ const _app = new p5(p5Instance => {
 
       this.direction = (player_position_horizontal + player_width / 2 - p.mouseX) / (player_position_vertical + player_height / 2 - p.mouseY)
       if (player_position_horizontal + player_width / 2 < p.mouseX && player_position_vertical + player_height / 2 < p.mouseY) {
-        this.x_speed2 =  this.x_speed1 * this.direction
+        this.x_speed2 = this.x_speed1 * this.direction
         this.y_speed2 = this.y_speed1
       }
       if (player_position_horizontal + player_width / 2 > p.mouseX && player_position_vertical + player_height / 2 < p.mouseY) {
