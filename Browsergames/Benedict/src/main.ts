@@ -166,7 +166,7 @@ const _app = new p5(p5Instance => {
 
       obstacle.draw(p)
 
-      obstacle.runoff()
+      obstacle.richtungswechsler()
 
       obstacle.collide(player_position_horizontal, player_position_vertical, player_width, player_height)
 
@@ -362,7 +362,7 @@ const _app = new p5(p5Instance => {
 
 
     }
-    runoff() {
+    richtungswechsler() {
       if (this.x <= 0) {
         this.x_speed = 0 - this.x_speed
       }
