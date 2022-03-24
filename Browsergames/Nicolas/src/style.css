@@ -3,3 +3,7 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+
+#speedAnzeige{
+  font-size: 40px;
+}

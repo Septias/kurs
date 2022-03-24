@@ -66,6 +66,8 @@ const app = new p5(p5Instance => {
 
     if (borderX > -1000) {speed=speed*1.05}
 
+
+
     
     
   };
