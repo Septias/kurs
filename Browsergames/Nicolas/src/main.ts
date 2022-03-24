@@ -16,7 +16,7 @@ const app = new p5(p5Instance => {
     img = p.loadImage('Bilder/PlayerJet.jpg');
   };
   p.setup = function setup() {
-    p.createCanvas(p.windowWidth-20, p.windowHeight-200);
+    p.createCanvas(p.windowWidth - 20, p.windowHeight - 200);
   };
   //console.log (p.keyCode);
   p.keyPressed = () => {
@@ -35,20 +35,20 @@ const app = new p5(p5Instance => {
     }
   }
   p.draw = function draw() {
-   /* if (p.keyIsDown(87) || p.keyIsDown(38)) {
-      console.log("W");
-      achseY = achseY - speed;
-
-
-
-    }
-    */
+    /* if (p.keyIsDown(87) || p.keyIsDown(38)) {
+       console.log("W");
+       achseY = achseY - speed;
+ 
+ 
+ 
+     }
+     */
     if (p.keyIsDown(65) || p.keyIsDown(37)) {
       console.log("A");
       achseX = achseX - speed;
 
-      }
-    
+    }
+
     /*
     if (p.keyIsDown(83) || p.keyIsDown(40)) {
       console.log("S");
@@ -64,9 +64,21 @@ const app = new p5(p5Instance => {
 
     }
 
+
+    if (achseX < 1) {
+      achseX = 1
+      alert("Du bist tot!")
+    }
+
+    if(achseX > p.windowWidth - 104) {
+      achseX = p.windowWidth - 105
+      alert("Du bist tot!")
+    }
+
+
+
     var speedAnzeige = document.getElementById("speedAnzeige");
     speedAnzeige!.innerText = "Speed = " + speed.toString();
-
 
 
     p.background(0);
@@ -91,3 +103,5 @@ slowDOWN!.onclick = function slowDownNOW() {
     speed = 1;
   }
 }
+
+//Leertaste ist key32
