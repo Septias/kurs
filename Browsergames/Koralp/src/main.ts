@@ -14,8 +14,8 @@ const app = new p5(p5Instance => {
   let sizeX=50
   let sizeY=50
 
-  let borderX=400
-  let borderY=400
+  let borderX=1000
+  let borderY=1000
 
   let farbe1=100 //rot
   let farbe2=100 //grün
