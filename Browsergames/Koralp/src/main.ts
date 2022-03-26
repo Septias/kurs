@@ -62,7 +62,7 @@ const app = new p5(p5Instance => {
     scorevalue!.innerText = "score: " + roundedScore.toString();
 
 
-
+    
 
 
     p.background(farbe1, farbe2, farbe3);
@@ -82,7 +82,7 @@ const app = new p5(p5Instance => {
     if (p.keyIsDown(ßpfeiltasteoben)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
     if (p.keyIsDown(ßpfeiltasteunten)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
 
-    if (borderX > -1000 && gamerunning > 0) {speed=speed+1/60 ; score=score+0.1}
+    if (borderX > -1000 && gamerunning > 0) {speed=speed+speed*0.002 ; score=score+0.1}
     if (borderX > -1000) {console.log(gamerunning)}
     
     const YouDied = "You died! Refresh to play again!"
@@ -91,6 +91,8 @@ const app = new p5(p5Instance => {
     if (positionX>borderX-sizeX+speed && p.keyIsDown(ßd)) {alert(YouDied);(gamerunning = gamerunning -2)}
     if (positionY<0-speed && p.keyIsDown(ßw)) {alert(YouDied);(gamerunning = gamerunning -2)} 
     if (positionY>borderY-sizeY+speed && p.keyIsDown(ßs)) {alert(YouDied);(gamerunning = gamerunning -2)}
+
+    if (speed == Infinity) {alert("WTF ARE YOU DOING ???!!!")}
   };
 
 
