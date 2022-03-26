@@ -2,6 +2,8 @@ import p5 from 'p5';
 
 import './style.css';
 
+//import EnemyJet from "../Erstellung_des_Gegner_Objekts"
+
 var achseX = 950;
 var achseY = 600;
 
@@ -13,9 +15,12 @@ var laserY = achseY;
 var trefferJet1 = false;
 var trefferJet2 = false;
 
-
+var damage = 1;
 
 var explosion = document.getElementById('explosion')
+
+//var jet1 = new EnemyJet(x,y);
+//var jet2 = new EnemyJet(x,y);
 
 
 const app = new p5(p5Instance => {
@@ -27,7 +32,7 @@ const app = new p5(p5Instance => {
     enemyJet = p.loadImage('Bilder/EnemyJet.jpg');
   };
 
-
+  
 
   p.setup = function setup() {
     p.createCanvas(p.windowWidth - 20, p.windowHeight - 200);
@@ -58,7 +63,7 @@ const app = new p5(p5Instance => {
      }
      */
     if (p.keyIsDown(65) || p.keyIsDown(37)) {
-      console.log("A");
+      //console.log("A");
       achseX = achseX - speed;
 
     }
@@ -72,7 +77,7 @@ const app = new p5(p5Instance => {
     }
     */
     if (p.keyIsDown(68) || p.keyIsDown(39)) {
-      console.log("D");
+      //console.log("D");
       achseX = achseX + speed;
     }
 
@@ -82,12 +87,15 @@ const app = new p5(p5Instance => {
 
     if (achseX < 1) {
       achseX = 1
-      alert("Du bist tot!")
+      alert("Verloren!")
+      location.reload();
+
     }
 
     if (achseX > p.windowWidth - 105) {
       achseX = p.windowWidth - 106
-      alert("Du bist tot!")
+      alert("Verloren!")
+      location.reload();
     }
 
 
@@ -116,17 +124,21 @@ const app = new p5(p5Instance => {
       //console.log(zufallsZahl)
       if (zufallsZahl == 69) {
         var bigLaser = p.rect(laserX, laserY, 10, 20)
+        damage = 3;
         //} else if (zufallsZahl == 420) {
         //   p.rect(laserX, laserY, 69, 69)
-      } else var smolLaser = p.rect(laserX, laserY, 5, 10)
+      } else {
+        var smolLaser = p.rect(laserX, laserY, 5, 10)
+        damage = 1;
+      }
 
-
-
+      //smolLaser -1hp
+      //bigLaser -3hp
 
     }
 
     if (p.keyIsDown(32)) {
-      console.log("Shoot!")
+      //console.log("Shoot!")
       laserX = achseX + 45;
       laserY = achseY;
 
@@ -173,6 +185,9 @@ function laserShot() {
         console.log("treffer!")
         trefferJet2 = true;
 
+        explosion.currentTime = 0;
+
+        explosion.play();
       }
     }
 

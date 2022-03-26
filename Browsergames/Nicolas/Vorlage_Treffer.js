@@ -9,7 +9,7 @@ var trefferJet2 = false;
 
 if (trefferJet2 == false) {
     p.image(enemyJet, 50, 50);
-  }
+}
 
 
 
