@@ -10,13 +10,25 @@ var speed = 15;
 var laserX = achseX + 45;
 var laserY = achseY;
 
+var trefferJet1 = false;
+var trefferJet2 = false;
+
+
+
+var explosion = document.getElementById('explosion')
+
+
 const app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
-  let img: p5.Image | p5.Element;
+  let img: p5.Image | p5.Element; let enemyJet: p5.Image | p5.Element;
   p.preload = function setup() {
     img = p.loadImage('Bilder/PlayerJet.jpg');
+    enemyJet = p.loadImage('Bilder/EnemyJet.jpg');
   };
+
+
+
   p.setup = function setup() {
     p.createCanvas(p.windowWidth - 20, p.windowHeight - 200);
   };
@@ -88,19 +100,25 @@ const app = new p5(p5Instance => {
     p.fill(205);
     p.rect(achseX, achseY, 50, 50);
     p.image(img, achseX, achseY);
+    if (trefferJet1 == false) {
+      p.image(enemyJet, 50, 50);
+    }
+    if (trefferJet2 == false) {
+      p.image(enemyJet, 1000, 50);
+    }
 
 
     if (laserY > 0) {
 
       laserShot();
 
-      var zufallsZahl = Math.round(Math.random()*1000)
+      var zufallsZahl = Math.round(Math.random() * 1000)
       //console.log(zufallsZahl)
       if (zufallsZahl == 69) {
-        p.rect(laserX, laserY, 10, 20)
-      //} else if (zufallsZahl == 420) {
-     //   p.rect(laserX, laserY, 69, 69)
-      } else p.rect(laserX, laserY, 5, 10)
+        var bigLaser = p.rect(laserX, laserY, 10, 20)
+        //} else if (zufallsZahl == 420) {
+        //   p.rect(laserX, laserY, 69, 69)
+      } else var smolLaser = p.rect(laserX, laserY, 5, 10)
 
 
 
@@ -140,10 +158,30 @@ function laserShot() {
   if (laserY > 0) {
     laserY = laserY - 10;
     //console.log(laserY)
+    if (trefferJet1 == false) {
+      if (laserY > 50 && laserY < 150 && laserX < 150 && laserX > 50) {
+        console.log("treffer!")
+        trefferJet1 = true;
+        explosion.currentTime = 0;
+
+        explosion.play();
+      }
+    }
+
+    if (trefferJet2 == false) {
+      if (laserY > 50 && laserY < 150 && laserX < 1100 && laserX > 1000) {
+        console.log("treffer!")
+        trefferJet2 = true;
+
+      }
+    }
+
 
   }
-  //}
+
 }
+  //}
 // else
 //  delete
 //}
+
