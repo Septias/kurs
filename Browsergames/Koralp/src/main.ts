@@ -5,15 +5,16 @@ import './style.css';
 const app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
-
+  let gamerunning = 1
 
 
 
   let positionX=1
   let positionY=1
 
-  let speed=2
-  let colorspeed=10
+  let score = 1
+  let speed = 1
+  let colorspeed = 10
 
   let sizeX=50
   let sizeY=50
@@ -53,6 +54,17 @@ const app = new p5(p5Instance => {
 
     var speedanzeige = document.getElementById("speedanzeige");
     speedanzeige!.innerText = "speed ~ " + roundedSpeed.toString();
+
+
+    var roundedScore = Math.round(score) * 1;
+
+    var scorevalue = document.getElementById("score");
+    scorevalue!.innerText = "score: " + roundedScore.toString();
+
+
+
+
+
     p.background(farbe1, farbe2, farbe3);
     p.fill(farbe4,farbe5,farbe6);
     p.rect(positionX, positionY, sizeX, sizeY);
@@ -60,22 +72,25 @@ const app = new p5(p5Instance => {
 
     if (p.keyIsDown(ßp)) {alert("Your game is paused. Press OK to unpause.");}
 
-    if (p.keyIsDown(ßd) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionX = positionX + speed}
-    if (p.keyIsDown(ßs) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionY = positionY + speed}
-    if (p.keyIsDown(ßa) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionX = positionX - speed}
-    if (p.keyIsDown(ßw) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionY = positionY - speed}
+    if (p.keyIsDown(ßd) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionX = positionX + speed}
+    if (p.keyIsDown(ßs) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionY = positionY + speed}
+    if (p.keyIsDown(ßa) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionX = positionX - speed}
+    if (p.keyIsDown(ßw) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionY = positionY - speed}
 
     if (p.keyIsDown(ßpfeiltasterechts)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
     if (p.keyIsDown(ßpfeiltastelinks)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
     if (p.keyIsDown(ßpfeiltasteoben)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
     if (p.keyIsDown(ßpfeiltasteunten)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
 
-    if (borderX > -1000 ) {speed=speed*1.002}
-
-
-
+    if (borderX > -1000 && gamerunning > 0) {speed=speed+1/60 ; score=score+0.1}
+    if (borderX > -1000) {console.log(gamerunning)}
     
+    const YouDied = "You died! Refresh to play again!"
     
+    if (positionX<0-speed && p.keyIsDown(ßa)) {alert(YouDied);(gamerunning = gamerunning -2)}
+    if (positionX>borderX-sizeX+speed && p.keyIsDown(ßd)) {alert(YouDied);(gamerunning = gamerunning -2)}
+    if (positionY<0-speed && p.keyIsDown(ßw)) {alert(YouDied);(gamerunning = gamerunning -2)} 
+    if (positionY>borderY-sizeY+speed && p.keyIsDown(ßs)) {alert(YouDied);(gamerunning = gamerunning -2)}
   };
 
 

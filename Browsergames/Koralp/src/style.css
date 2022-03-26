@@ -7,5 +7,15 @@
 
 #speedanzeige {
   font-size:  200px;
-  font-family:'Courier New', Courier, monospace
+  font-family:'Courier New', Courier, monospace;
+  font-weight: 900;
+  font-style: normal;
+}
+
+
+#score {
+  font-size:  200px;
+  font-family:'Courier New', Courier, monospace;
+  font-weight: 900;
+  font-style: normal;
 }
