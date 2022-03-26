@@ -7,6 +7,8 @@ var achseY = 600;
 
 var speed = 15;
 
+var laserX = achseX + 45;
+var laserY = achseY;
 
 const app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
@@ -60,9 +62,10 @@ const app = new p5(p5Instance => {
     if (p.keyIsDown(68) || p.keyIsDown(39)) {
       console.log("D");
       achseX = achseX + speed;
-
-
     }
+
+
+
 
 
     if (achseX < 1) {
@@ -70,8 +73,8 @@ const app = new p5(p5Instance => {
       alert("Du bist tot!")
     }
 
-    if(achseX > p.windowWidth - 105) {
-      achseX = p.windowWidth - 104
+    if (achseX > p.windowWidth - 105) {
+      achseX = p.windowWidth - 106
       alert("Du bist tot!")
     }
 
@@ -85,6 +88,31 @@ const app = new p5(p5Instance => {
     p.fill(205);
     p.rect(achseX, achseY, 50, 50);
     p.image(img, achseX, achseY);
+
+
+    if (laserY > 0) {
+
+      laserShot();
+
+      var zufallsZahl = Math.round(Math.random()*1000)
+      //console.log(zufallsZahl)
+      if (zufallsZahl == 69) {
+        p.rect(laserX, laserY, 10, 20)
+      //} else if (zufallsZahl == 420) {
+     //   p.rect(laserX, laserY, 69, 69)
+      } else p.rect(laserX, laserY, 5, 10)
+
+
+
+
+    }
+
+    if (p.keyIsDown(32)) {
+      console.log("Shoot!")
+      laserX = achseX + 45;
+      laserY = achseY;
+
+    }
   }
 }, document.getElementById('app')!);
 
@@ -106,3 +134,16 @@ slowDOWN!.onclick = function slowDownNOW() {
 
 //Leertaste ist key32
 //Ziel:Shoot Laserbeams with Space
+
+function laserShot() {
+  //for (var i = 0; i < 100; i++){
+  if (laserY > 0) {
+    laserY = laserY - 10;
+    //console.log(laserY)
+
+  }
+  //}
+}
+// else
+//  delete
+//}
