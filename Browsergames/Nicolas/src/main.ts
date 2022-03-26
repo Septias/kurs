@@ -70,8 +70,8 @@ const app = new p5(p5Instance => {
       alert("Du bist tot!")
     }
 
-    if(achseX > p.windowWidth - 104) {
-      achseX = p.windowWidth - 105
+    if(achseX > p.windowWidth - 105) {
+      achseX = p.windowWidth - 104
       alert("Du bist tot!")
     }
 
@@ -105,3 +105,4 @@ slowDOWN!.onclick = function slowDownNOW() {
 }
 
 //Leertaste ist key32
+//Ziel:Shoot Laserbeams with Space
