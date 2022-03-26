@@ -11,11 +11,11 @@ const app = new p5(p5Instance => {
   let speed=2
   let colorspeed=10
 
-  let sizeX=10
-  let sizeY=10
+  let sizeX=50
+  let sizeY=50
 
-  let borderX=400
-  let borderY=400
+  let borderX=1000
+  let borderY=1000
 
   let farbe1=100 //rot
   let farbe2=100 //grün
@@ -64,7 +64,9 @@ const app = new p5(p5Instance => {
     if (p.keyIsDown(ßpfeiltasteoben)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
     if (p.keyIsDown(ßpfeiltasteunten)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
 
-    if (borderX > -1000) {speed=speed*1.005}
+    if (borderX > -1000) {speed=speed*1.002}
+
+
 
     
     
