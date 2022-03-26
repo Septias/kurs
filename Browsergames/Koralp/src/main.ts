@@ -58,7 +58,7 @@ const app = new p5(p5Instance => {
     p.rect(positionX, positionY, sizeX, sizeY);
 
 
-    if (p.keyIsPressed(ßp)) {alert("Your game is paused")}
+    if (p.keyIsDown(ßp)) {alert("Your game is paused. Press OK to unpause.");}
 
     if (p.keyIsDown(ßd) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionX = positionX + speed}
     if (p.keyIsDown(ßs) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionY = positionY + speed}
