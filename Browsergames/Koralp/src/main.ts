@@ -5,6 +5,10 @@ import './style.css';
 const app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
+
+
+
+
   let positionX=1
   let positionY=1
 
@@ -25,6 +29,8 @@ const app = new p5(p5Instance => {
   var farbe5=200 //grün
   let farbe6=100 //blau
   
+  let ßp=80
+
   let ßw=87
   let ßa=65
   let ßs=83
@@ -52,7 +58,7 @@ const app = new p5(p5Instance => {
     p.rect(positionX, positionY, sizeX, sizeY);
 
 
-
+    if (p.keyIsPressed(ßp)) {alert("Your game is paused")}
 
     if (p.keyIsDown(ßd) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionX = positionX + speed}
     if (p.keyIsDown(ßs) && positionX<borderX-sizeX && positionY<borderY-sizeY && positionX>0 && positionY>0) {positionY = positionY + speed}
@@ -64,7 +70,7 @@ const app = new p5(p5Instance => {
     if (p.keyIsDown(ßpfeiltasteoben)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
     if (p.keyIsDown(ßpfeiltasteunten)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
 
-    if (borderX > -1000) {speed=speed*1.002}
+    if (borderX > -1000 ) {speed=speed*1.002}
 
 
 
