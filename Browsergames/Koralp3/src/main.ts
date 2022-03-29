@@ -36,16 +36,14 @@ const app = new p5(p5Instance => {
   var playercolor = p.fill(P1, P2, P3)
   var obstaclecolor = p.fill(O1, O2, O3)
 
-  var BGsize = p.createCanvas(borderX=borderX-1, borderY=borderY-1)
-  var playersize = p.rect(PpX, PpY, PsX, PsY)
+  var BGsize = p.createCanvas(borderX=borderX-0, borderY=borderY-0)
+  var playersetup = p.rect(PpX, PpY, PsX, PsY)
 
     
-  p.setup = function setup() {
-    p.createCanvas(borderX, borderY);
-  };
+  p.setup = function setup() {(BGsize)};
 
 
-  p.draw = function draw() {BGcolor;playercolor;p.rotate(0.0)}
+  p.draw = function draw() {(BGcolor);(playercolor)}
 
 
 
