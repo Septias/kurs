@@ -18,6 +18,7 @@ var trefferJet2 = false;
 var damage = 1;
 
 var explosion = document.getElementById('explosion')
+var eXplosion = document.getElementById('exploAnimation')
 
 //var jet1 = new EnemyJet(x,y);
 //var jet2 = new EnemyJet(x,y);
@@ -57,9 +58,6 @@ const app = new p5(p5Instance => {
     /* if (p.keyIsDown(87) || p.keyIsDown(38)) {
        console.log("W");
        achseY = achseY - speed;
- 
- 
- 
      }
      */
     if (p.keyIsDown(65) || p.keyIsDown(37)) {
@@ -81,7 +79,9 @@ const app = new p5(p5Instance => {
       achseX = achseX + speed;
     }
 
-
+    if (p.keyIsDown(27)){
+      alert("Spiel pausiert. Zum Weiterspielen, drück Ok")
+    }
 
 
 
@@ -177,6 +177,7 @@ function laserShot() {
         explosion.currentTime = 0;
 
         explosion.play();
+        
       }
     }
 
