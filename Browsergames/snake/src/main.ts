@@ -155,6 +155,8 @@ const _app = new p5(p5Instance => {
 
       obstacle.border
 
+      obstacle.collide(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height)
+
       if (obstacle.collide(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
         lives = lives - 1
         spawntrigger_obstacle = true
@@ -164,7 +166,7 @@ const _app = new p5(p5Instance => {
     //Spawn Obstacle
     if (spawntrigger_obstacle == true) {
 
-      obstacles.push(new obstacle(p.windowWidth + 35, p.windowWidth + 1000, 0, p.windowHeight - 35, 35, 35, speed_obstacle, 0, 0))
+      obstacles.push(new obstacle(p.windowWidth, p.windowWidth + 1000, 0, p.windowHeight - 35, 35, 35, speed_obstacle, 0, 0))
 
       for (const obstacle of obstacles) {
         obstacle.randomizer()
@@ -405,12 +407,12 @@ class obstacle {
     function getRndInteger(min: any, max: any) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    this.x = this.x_min, this.x_max - this.w //Horizontaler Spawnbereich, später als Wert für x_max p.random() einsetzen
+    this.x = getRndInteger(this.y_min, this.y_max )//Horizontaler Spawnbereich
     this.y = getRndInteger(this.y_min, this.y_max - this.h) //Vertikaler Spawnbereich
   }
 
   execute_in_draw_1(p: p5) { //Wird in der draw function aufgegriffen und ausgeführt
-    p.fill(600, 50, 30)
+    p.fill(200, 50, 30)
     p.rect(this.x, this.y, this.w, this.h) //Werte werden in der draw function eingesetzt
   }
 
@@ -431,8 +433,11 @@ class obstacle {
   }
 
   border(p: p5) {
+    function getRndInteger(min: any, max: any) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
     if (this.x < p.windowWidth) {
-      this.x = this.x_min, this.x_max + this.w
+      this.x = getRndInteger(this.y_min, this.y_max )
     }
   }
 }
