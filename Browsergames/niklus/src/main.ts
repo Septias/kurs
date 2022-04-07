@@ -5,17 +5,36 @@ import './style.css';
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
-  const x = 50;
-  const y = 450;
+  //backround
+   p.setup = function setup() {
+   p.createCanvas(p.windowHeight, p.windowWidth)
 
-  p.setup = function setup() {
-    p.createCanvas(500, 500);
-  };
+   }
+  
+ 
+  //Playerdata
+    let Player_width = 60
+    let Player_hight = 60
+    let Player_position_horizontal = p.windowWidth / 2 - Player_width / 2
+    let Player_position_vertikal = p.windowHeight /2 - Player_hight / 2
 
-  p.draw = function draw() {
-    p.background(0);
-    p.fill(51, 25,0);
-    p.rect(x, y, 50, 50);
-  };
-}, document.getElementById('app')!);
+  //Playerspeed
+  let speed = 6
+
+
+  p.keyPressed = function () {
+   if(p.keyCode === p.UP_ARROW)
+    up = true
+  
+   if()
+
+  } 
+
+
+
+ 
+  //Player
+  p.fill( 50, 0, 255)
+  p.rect(Player_position_horizontal, Player_position_vertikal)
+
 
