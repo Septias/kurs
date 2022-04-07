@@ -6,8 +6,10 @@ const app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
   let gamerunning = 1
+  let fullscreen = false
 
-
+  let windowdistanceX = 100
+  let windowdistanceY = 100
 
   let positionX=1
   let positionY=1
@@ -19,8 +21,12 @@ const app = new p5(p5Instance => {
   let sizeX=50
   let sizeY=50
 
-  let borderX=1000
-  let borderY=1000
+  let borderX = 1000
+  let borderY = 1000
+
+  if (fullscreen = true) {let borderX=window.innerWidth - windowdistanceX; let borderY=window.innerHeight - windowdistanceY}
+  if (fullscreen = false) {let borderX=1000; let borderY=1000}
+ 
 
   let farbe1=100 //rot
   let farbe2=100 //grün
@@ -30,6 +36,10 @@ const app = new p5(p5Instance => {
   var farbe5=200 //grün
   let farbe6=100 //blau
   
+  let hslvalue = 0
+  let ORIGINALhlsvalue = 100
+  let colorcycleduration = 100
+
   let ßp=80
 
   let ßw=87
@@ -54,6 +64,16 @@ const app = new p5(p5Instance => {
 
     var speedanzeige = document.getElementById("speedanzeige");
     speedanzeige!.innerText = "speed ~ " + roundedSpeed.toString();
+
+    
+    hslvalue == ORIGINALhlsvalue - speed
+    
+
+
+
+    speedanzeige!.style.color = `hsl(${(hslvalue*360)/colorcycleduration}, 100%, 30%)`;
+
+
 
 
     var roundedScore = Math.round(score) * 1;
