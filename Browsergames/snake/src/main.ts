@@ -191,7 +191,7 @@ const _app = new p5(p5Instance => {
 
     //Fast_Obstacle1
     if (level > 1) {
-      p.fill(139, 0, 0)
+      p.fill(138, 0, 0)
       p.rect(fast_obstacle1_pos_horizontal, fast_obstacle1_pos_vertical, fast_obstacle1_width, fast_obstacle1_height)
       fast_obstacle1_pos_horizontal = fast_obstacle1_pos_horizontal - speed_fast_obstacle1
       if (fast_obstacle1_pos_horizontal > 0) {
