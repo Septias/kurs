@@ -97,7 +97,7 @@ const _app = new p5(p5Instance => {
   let coinmaster = false
 
   //Variablen Klassen
-  let obstacles: obstacle[] = []
+  let obstacles: Obstacle[] = []
 
   //Randomizer
   function getRndInteger(min: any, max: any) {
@@ -135,6 +135,8 @@ const _app = new p5(p5Instance => {
   }
 
   p.keyReleased = function () {
+    console.log(obstacles)
+
     if (p.keyCode === p.UP_ARROW) {
       up = false
     }
@@ -146,14 +148,17 @@ const _app = new p5(p5Instance => {
   //Draw
   p.draw = function draw() {
 
+    //Background
+    p.background(0, 0, 0)
+
     //Damage Obstacle and Border
     for (const obstacle of obstacles) {
 
       obstacle.execute_in_draw_1(p) //p weil p5 elemente verwendet werden
 
-      obstacle.execute_in_draw_2
+      obstacle.execute_in_draw_2()
 
-      obstacle.border
+      obstacle.border(p)
 
       obstacle.collide(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height)
 
@@ -165,12 +170,10 @@ const _app = new p5(p5Instance => {
 
     //Spawn Obstacle
     if (spawntrigger_obstacle == true) {
-
-      obstacles.push(new obstacle(p.windowWidth, p.windowWidth + 1000, 0, p.windowHeight - 35, 35, 35, speed_obstacle, 0, 0))
-
-      for (const obstacle of obstacles) {
-        obstacle.randomizer()
-      }
+      console.log("yes")
+      let new_obstacle = new Obstacle(p.windowWidth, p.windowWidth - 50, p.windowHeight - 35, 0 + 35, 35, 35, speed_obstacle, 0, 0)
+      //new_obstacle.randomizer()
+      obstacles.push(new_obstacle)
       spawntrigger_obstacle = false
     }
 
@@ -186,8 +189,7 @@ const _app = new p5(p5Instance => {
       health1_pos_horizontal = health1_spawn_pos_horizontal
     }
 
-    //Background
-    p.background(0, 0, 0)
+    
 
     //Fast_Obstacle1
     if (level > 1) {
@@ -399,7 +401,7 @@ const _app = new p5(p5Instance => {
   }
 }, document.getElementById('app')!);
 
-class obstacle {
+class Obstacle {
   constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private x_speed: number, private x: number, private y: number) {
   }
 
@@ -425,6 +427,7 @@ class obstacle {
     if (player_x + player_w + this.w >= this.x + this.w && player_x <= this.x) {
       if (player_y + player_h + this.h >= this.y + this.h && player_y <= this.y) {
         this.x = this.x_min, this.x_max + this.w
+        this.y = this.y_min, this.y_max
         return true
       }
     } else {
@@ -436,8 +439,9 @@ class obstacle {
     function getRndInteger(min: any, max: any) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    if (this.x < p.windowWidth) {
-      this.x = getRndInteger(this.y_min, this.y_max )
+    if (this.x < 0) {
+      this.x = getRndInteger(this.x_min, this.x_max )
+      this.y = getRndInteger(this.y_min, this.y_max)
     }
   }
 }
