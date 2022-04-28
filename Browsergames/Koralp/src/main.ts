@@ -17,6 +17,8 @@ const app = new p5(p5Instance => {
   let score = 1
   let speed = 1
   let colorspeed = 10
+  let acceleration = 0.002
+  let defaultacceleration = 0.002
 
   let sizeX=50
   let sizeY=50
@@ -36,8 +38,9 @@ const app = new p5(p5Instance => {
   var farbe5=200 //grün
   let farbe6=100 //blau
   
-  let hslvalue = 0
-  let ORIGINALhlsvalue = 100
+  let ORIGINALhlsvalue = 0
+  let hslvalue = 100
+
   let colorcycleduration = 100
 
   let ßp=80
@@ -60,18 +63,19 @@ const app = new p5(p5Instance => {
   };
 
   p.draw = function draw() {
-    var roundedSpeed = Math.round(speed) * 1;
+    var roundedSpeed = Math.round(speed);
 
     var speedanzeige = document.getElementById("speedanzeige");
     speedanzeige!.innerText = "speed ~ " + roundedSpeed.toString();
 
+   
+    hslvalue = ORIGINALhlsvalue - speed
     
-    hslvalue == ORIGINALhlsvalue - speed
-    
-
-
 
     speedanzeige!.style.color = `hsl(${(hslvalue*360)/colorcycleduration}, 100%, 30%)`;
+
+    
+    
 
 
 
@@ -102,7 +106,7 @@ const app = new p5(p5Instance => {
     if (p.keyIsDown(ßpfeiltasteoben)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
     if (p.keyIsDown(ßpfeiltasteunten)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
 
-    if (borderX > -1000 && gamerunning > 0) {speed=speed+speed*0.002 ; score=score+0.1}
+    if (borderX > -1000 && gamerunning > 0) {speed=speed+speed*acceleration ; score=score+0.1}
     if (borderX > -1000) {console.log(gamerunning)}
     
     const YouDied = "You died! Refresh to play again!"
