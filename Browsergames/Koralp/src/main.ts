@@ -6,7 +6,8 @@ const app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
   let gamerunning = 1
-  let fullscreen = false
+  let gamepaused = -1
+  let fullscreen = true
 
   let windowdistanceX = 100
   let windowdistanceY = 100
@@ -16,9 +17,9 @@ const app = new p5(p5Instance => {
 
   let score = 1
   let speed = 1
+  let roundspeed = 1
   let colorspeed = 10
   let acceleration = 0.002
-  let defaultacceleration = 0.002
 
   let sizeX=50
   let sizeY=50
@@ -63,7 +64,7 @@ const app = new p5(p5Instance => {
   };
 
   p.draw = function draw() {
-    var roundedSpeed = Math.round(speed);
+    var roundedSpeed = Math.round(speed) *roundspeed;
 
     var speedanzeige = document.getElementById("speedanzeige");
     speedanzeige!.innerText = "speed ~ " + roundedSpeed.toString();
@@ -94,7 +95,9 @@ const app = new p5(p5Instance => {
     p.rect(positionX, positionY, sizeX, sizeY);
 
 
-    if (p.keyIsDown(ßp)) {alert("Your game is paused. Press OK to unpause.");}
+    if (p.keyIsDown(ßp) && gamepaused < 0) {alert("Your game is paused. Press OK to unpause."); gamepaused = gamepaused - 2}
+    if (p.keyIsDown(ßp) && gamepaused > 0) {gamepaused = gamepaused + 2}
+    
 
     if (p.keyIsDown(ßd) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionX = positionX + speed}
     if (p.keyIsDown(ßs) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionY = positionY + speed}
@@ -111,12 +114,16 @@ const app = new p5(p5Instance => {
     
     const YouDied = "You died! Refresh to play again!"
     
-    if (positionX<0-speed && p.keyIsDown(ßa)) {alert(YouDied);(gamerunning = gamerunning -2)}
-    if (positionX>borderX-sizeX+speed && p.keyIsDown(ßd)) {alert(YouDied);(gamerunning = gamerunning -2)}
-    if (positionY<0-speed && p.keyIsDown(ßw)) {alert(YouDied);(gamerunning = gamerunning -2)} 
-    if (positionY>borderY-sizeY+speed && p.keyIsDown(ßs)) {alert(YouDied);(gamerunning = gamerunning -2)}
+    if (positionX<0-speed && p.keyIsDown(ßa) && gamerunning>0) {alert(YouDied);(gamerunning = gamerunning -2)}
+    if (positionX>borderX-sizeX+speed && p.keyIsDown(ßd) && gamerunning>0) {alert(YouDied);(gamerunning = gamerunning -2)}
+    if (positionY<0-speed && p.keyIsDown(ßw) && gamerunning>0) {alert(YouDied);(gamerunning = gamerunning -2)} 
+    if (positionY>borderY-sizeY+speed && p.keyIsDown(ßs) && gamerunning>0) {alert(YouDied);(gamerunning = gamerunning -2)}
 
     if (speed == Infinity) {alert("WTF ARE YOU DOING ???!!!")}
+
+
+
+    console.log(gamepaused)
   };
 
 
