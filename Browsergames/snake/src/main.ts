@@ -2,23 +2,51 @@ import p5 from 'p5';
 
 import './style.css';
 
+class Obstacle {
+  constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private x_speed: number, private x: number, private y: number) {
+  }
+
+  randomizer() {
+    function getRndInteger(min: any, max: any) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    this.x = getRndInteger(this.x_min, this.x_max )//Horizontaler Spawnbereich
+    this.y = getRndInteger(this.y_min, this.y_max ) //Vertikaler Spawnbereich
+  }
+
+  execute_in_draw_1(p: p5) { //Wird in der draw function aufgegriffen und ausgeführt
+    p.fill(200, 50, 30)
+    p.rect(this.x, this.y, this.w, this.h) //Werte werden in der draw function eingesetzt
+  }
+
+  execute_in_draw_2() {
+    this.x = this.x - this.x_speed
+  }
+
+  collide(player_x: number, player_y: number, player_w: number, player_h: number) {
+
+    if (player_x + player_w + this.w >= this.x + this.w && player_x <= this.x) {
+      if (player_y + player_h + this.h >= this.y + this.h && player_y <= this.y) {
+
+        return true
+      }
+    } 
+    return  false
+  }
+
+  border(p: p5) {
+    function getRndInteger(min: any, max: any) {
+      return Math.floor(Math.random() * (max - min + 1)) + min;
+    }
+    if (this.x < 0) {
+      this.x = getRndInteger(this.x_min, this.x_max )
+      this.y = getRndInteger(this.y_min, this.y_max)
+    }
+  }
+}
+
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
-
-  //Obstacle
-  let spawntrigger_obstacle = true
-  let speed_obstacle = 5
-
-  //Fast_Obstacle 1
-  let fast_obstacle1_width = 40
-  let fast_obstacle1_height = 40
-  let spawntrigger_fast_obstacle1 = false
-  let rnd_number_fast_obstacle1 = p.random(800, 1000)
-  let speed_fast_obstacle1 = 14
-  let fast_obstacle1_spawn_pos_horizontal = p.windowWidth + fast_obstacle1_width + rnd_number_fast_obstacle1
-  let fast_obstacle1_spawn_area_vertical = p.windowHeight - fast_obstacle1_height
-  let fast_obstacle1_pos_horizontal = fast_obstacle1_spawn_pos_horizontal
-  let fast_obstacle1_pos_vertical = getRndInteger(0 - fast_obstacle1_height / 2, fast_obstacle1_spawn_area_vertical)
 
   //Health 1
   let health1_width = 35
@@ -144,13 +172,21 @@ const _app = new p5(p5Instance => {
       space = false
     }
   }
-
+  
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
+  
   //Draw
   p.draw = function draw() {
-
+    
     //Background
-    p.background(0, 0, 0)
-
+    p.background(0, 0, 0)    
+    
     //Damage Obstacle and Border
     for (const obstacle of obstacles) {
 
@@ -160,26 +196,13 @@ const _app = new p5(p5Instance => {
 
       obstacle.border(p)
 
-      obstacle.collide(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height)
-
       if (obstacle.collide(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
         lives = lives - 1
-        spawntrigger_obstacle = true
+        console.log(lives)
+        obstacle.randomizer()
       }
     }
 
-    //Spawn Obstacle
-    if (spawntrigger_obstacle == true) {
-      console.log("yes")
-      let new_obstacle = new Obstacle(p.windowWidth, p.windowWidth - 50, p.windowHeight - 100, 0, 35, 35, speed_obstacle, 0, 0)
-      obstacles.push(new_obstacle)
-      //new_obstacle.randomizer()
-      spawntrigger_obstacle = false
-    }
-
-    if (spawntrigger_fast_obstacle1 == true) {
-      fast_obstacle1_pos_vertical = getRndInteger(0 - fast_obstacle1_height / 2, fast_obstacle1_spawn_area_vertical)
-    }
     if (spawntrigger_coin1 == true) {
       coin1_pos_vertical = getRndInteger(0 - coin1_height / 2, coin1_spawn_area_vertical)
       coin1_pos_horizontal = coin1_spawn_pos_horizontal
@@ -187,31 +210,6 @@ const _app = new p5(p5Instance => {
     if (spawntrigger_health1 == true) {
       health1_pos_vertical = getRndInteger(0 - health1_height / 2, health1_spawn_area_vertical)
       health1_pos_horizontal = health1_spawn_pos_horizontal
-    }
-
-    
-
-    //Fast_Obstacle1
-    if (level > 1) {
-      p.fill(138, 0, 0)
-      p.rect(fast_obstacle1_pos_horizontal, fast_obstacle1_pos_vertical, fast_obstacle1_width, fast_obstacle1_height)
-      fast_obstacle1_pos_horizontal = fast_obstacle1_pos_horizontal - speed_fast_obstacle1
-      if (fast_obstacle1_pos_horizontal > 0) {
-        spawntrigger_fast_obstacle1 = false
-      }
-      if (fast_obstacle1_pos_horizontal < 0) {
-        fast_obstacle1_pos_horizontal = p.windowWidth + fast_obstacle1_width + rnd_number_fast_obstacle1
-        spawntrigger_fast_obstacle1 = true
-      }
-    }
-
-    //Damage Fast_Obstacle1
-    if (Player_Position_Horizontal + Player_Width + fast_obstacle1_width >= fast_obstacle1_pos_horizontal + fast_obstacle1_width && Player_Position_Horizontal <= fast_obstacle1_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height + fast_obstacle1_height >= fast_obstacle1_pos_vertical + fast_obstacle1_height && Player_Position_Vertical <= fast_obstacle1_pos_vertical) {
-        fast_obstacle1_pos_horizontal = p.windowWidth + fast_obstacle1_width
-        lives = lives - 1
-        spawntrigger_fast_obstacle1 = true
-      }
     }
 
     //Health1
@@ -312,8 +310,6 @@ const _app = new p5(p5Instance => {
     if (menu == true) {
       timer_active = false
       speed = 0
-      speed_obstacle = 0
-      speed_fast_obstacle1 = 0
       speed_health1 = 0
       speed_coin1 = 0
       p.fill(87, 87, 87)
@@ -335,8 +331,6 @@ const _app = new p5(p5Instance => {
     } else {
       timer_active = true
       speed = 6
-      speed_obstacle = 5 + level - 1
-      speed_fast_obstacle1 = 14 + level - 1
       speed_health1 = 7 + level - 1
       speed_coin1 = 6 + level - 1
     }
@@ -346,8 +340,6 @@ const _app = new p5(p5Instance => {
       coins = 0
       coins_goal = coins_goal + 5
       level = level + 1
-      speed_obstacle = speed_obstacle + 1
-      speed_fast_obstacle1 = speed_fast_obstacle1 + 1
       speed_health1 = speed_health1 + 1
       speed_coin1 = speed_coin1 + 1
     }
@@ -356,7 +348,6 @@ const _app = new p5(p5Instance => {
     if (power_menu == true) {
       timer_active = false
       speed = 0
-      speed_obstacle = 0
       speed_coin1 = 0
       p.fill(87, 87, 87)
       p.rect(power_menu_pos_horizontal, power_menu_pos_vertical, power_menu_width, power_menu_height)
@@ -400,48 +391,3 @@ const _app = new p5(p5Instance => {
     }
   }
 }, document.getElementById('app')!);
-
-class Obstacle {
-  constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private x_speed: number, private x: number, private y: number) {
-  }
-
-  randomizer() {
-    function getRndInteger(min: any, max: any) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    this.x = getRndInteger(this.x_min, this.x_max )//Horizontaler Spawnbereich
-    this.y = getRndInteger(this.y_min, this.y_max ) //Vertikaler Spawnbereich
-  }
-
-  execute_in_draw_1(p: p5) { //Wird in der draw function aufgegriffen und ausgeführt
-    p.fill(200, 50, 30)
-    p.rect(this.x, this.y, this.w, this.h) //Werte werden in der draw function eingesetzt
-  }
-
-  execute_in_draw_2() {
-    this.x = this.x - this.x_speed
-  }
-
-  collide(player_x: number, player_y: number, player_w: number, player_h: number) {
-
-    if (player_x + player_w + this.w >= this.x + this.w && player_x <= this.x) {
-      if (player_y + player_h + this.h >= this.y + this.h && player_y <= this.y) {
-        this.x = this.x_max
-        this.y = this.y_max
-        return true
-      }
-    } else {
-      return false
-    }
-  }
-
-  border(p: p5) {
-    function getRndInteger(min: any, max: any) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    if (this.x < 0) {
-      this.x = getRndInteger(this.x_min, this.x_max )
-      this.y = getRndInteger(this.y_min, this.y_max)
-    }
-  }
-}
