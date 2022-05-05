@@ -171,9 +171,9 @@ const _app = new p5(p5Instance => {
     //Spawn Obstacle
     if (spawntrigger_obstacle == true) {
       console.log("yes")
-      let new_obstacle = new Obstacle(p.windowWidth, p.windowWidth - 50, p.windowHeight - 35, 0 + 35, 35, 35, speed_obstacle, 0, 0)
-      //new_obstacle.randomizer()
+      let new_obstacle = new Obstacle(p.windowWidth, p.windowWidth - 50, p.windowHeight - 100, 0, 35, 35, speed_obstacle, 0, 0)
       obstacles.push(new_obstacle)
+      //new_obstacle.randomizer()
       spawntrigger_obstacle = false
     }
 
@@ -409,8 +409,8 @@ class Obstacle {
     function getRndInteger(min: any, max: any) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    this.x = getRndInteger(this.y_min, this.y_max )//Horizontaler Spawnbereich
-    this.y = getRndInteger(this.y_min, this.y_max - this.h) //Vertikaler Spawnbereich
+    this.x = getRndInteger(this.x_min, this.x_max )//Horizontaler Spawnbereich
+    this.y = getRndInteger(this.y_min, this.y_max ) //Vertikaler Spawnbereich
   }
 
   execute_in_draw_1(p: p5) { //Wird in der draw function aufgegriffen und ausgeführt
@@ -426,8 +426,8 @@ class Obstacle {
 
     if (player_x + player_w + this.w >= this.x + this.w && player_x <= this.x) {
       if (player_y + player_h + this.h >= this.y + this.h && player_y <= this.y) {
-        this.x = this.x_min, this.x_max + this.w
-        this.y = this.y_min, this.y_max
+        this.x = this.x_max
+        this.y = this.y_max
         return true
       }
     } else {
