@@ -7,7 +7,10 @@ const app = new p5(p5Instance => {
 
   let gamerunning = 1
   let gamepaused = -1
+  let gametimer = 0
+  let directionswitchthreshhold = 100
   let fullscreen = true
+  let sqrt0point5 = 0.707106781
 
   let windowdistanceX = 100
   let windowdistanceY = 100
@@ -17,9 +20,10 @@ const app = new p5(p5Instance => {
 
   let score = 1
   let speed = 1
+  let diagonalspeedfactor = 0.707106781 - 1
   let roundspeed = 1
   let colorspeed = 10
-  let acceleration = 0.002
+  let acceleration = 0.002 - gametimer/1000
 
   let sizeX=50
   let sizeY=50
@@ -95,6 +99,11 @@ const app = new p5(p5Instance => {
     p.rect(positionX, positionY, sizeX, sizeY);
 
 
+    gametimer = gametimer + 1
+    acceleration = acceleration - gametimer/(this.pow(10,8))
+    if (gametimer == directionswitchthreshhold) {speed = speed*(-1); gametimer = gametimer - directionswitchthreshhold}
+
+
     if (p.keyIsDown(ßp) && gamepaused < 0) {alert("Your game is paused. Press OK to unpause."); gamepaused = gamepaused - 2}
     if (p.keyIsDown(ßp) && gamepaused > 0) {gamepaused = gamepaused + 2}
     
@@ -104,15 +113,18 @@ const app = new p5(p5Instance => {
     if (p.keyIsDown(ßa) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionX = positionX - speed}
     if (p.keyIsDown(ßw) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionY = positionY - speed}
 
-    if (p.keyIsDown(ßs) && p.keyIsDown(ßd) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionX = positionX + speed*(this.sqrt(0.5)-1); positionY = positionY + speed*(this.sqrt(0.5)-1)}
+    if (p.keyIsDown(ßs) && p.keyIsDown(ßd) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionX = positionX + speed*diagonalspeedfactor; positionY = positionY + speed*diagonalspeedfactor}
+    if (p.keyIsDown(ßs) && p.keyIsDown(ßa) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionX = positionX - speed*diagonalspeedfactor; positionY = positionY + speed*diagonalspeedfactor}
+    if (p.keyIsDown(ßw) && p.keyIsDown(ßs) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionX = positionX - speed*diagonalspeedfactor; positionY = positionY - speed*diagonalspeedfactor}
+    if (p.keyIsDown(ßw) && p.keyIsDown(ßd) && positionX<borderX-sizeX+speed && positionY<borderY-sizeY+speed && positionX>0-speed && positionY>0-speed) {positionX = positionX + speed*diagonalspeedfactor; positionY = positionY - speed*diagonalspeedfactor}
 
     if (p.keyIsDown(ßpfeiltasterechts)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
     if (p.keyIsDown(ßpfeiltastelinks)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
     if (p.keyIsDown(ßpfeiltasteoben)) {farbe4 = farbe4 +colorspeed; farbe5 = farbe5 +colorspeed; farbe6 = farbe6 +colorspeed}
     if (p.keyIsDown(ßpfeiltasteunten)) {farbe4 = farbe4 -colorspeed; farbe5 = farbe5 -colorspeed; farbe6 = farbe6 -colorspeed}
 
-    if (borderX > -1000 && gamerunning > 0) {speed=speed+speed*acceleration ; score=score+0.1}
-    if (borderX > -1000) {console.log(gamerunning)}
+    if (borderX > -1000 && gamerunning > 0) {speed=speed+speed*acceleration;}
+    if (borderX > -1000) {console.log(acceleration)}
     
     const YouDied = "You died! Refresh to play again!"
     
@@ -123,9 +135,24 @@ const app = new p5(p5Instance => {
 
     if (speed == Infinity) {alert("WTF ARE YOU DOING ???!!!")}
 
+    if (p.keyIsDown(ßw) && gamerunning > 0) {score = score + this.sqrt(this.sq(speed))}
+    if (p.keyIsDown(ßa) && gamerunning > 0) {score = score + this.sqrt(this.sq(speed))}
+    if (p.keyIsDown(ßs) && gamerunning > 0) {score = score + this.sqrt(this.sq(speed))}
+    if (p.keyIsDown(ßd) && gamerunning > 0) {score = score + this.sqrt(this.sq(speed))}
 
 
-    console.log(speed*this.sqrt(0.5))
+
+
+    if (p.keyIsDown(89) && p.keyIsDown(88)) {console.log("hehe")}
+
+
+
+
+
+
+
+
+    if (borderX > 1000) {console.log(speed*this.sqrt(0.5))}
   };
 
 
