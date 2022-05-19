@@ -31,7 +31,6 @@ new p5(p5Instance => {
     player.draw(p);
 
     // Hindernisse updaten
-
     for (const obstacle of obstacles ) {
       obstacle.update(p);
       obstacle.draw(p);
