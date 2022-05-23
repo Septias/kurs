@@ -24,3 +24,17 @@ Heute erstellen wir spiele mit [p5.js](https://p5js.org/).
         - Danach `localhost:3000` im Browser öffnen
 
 6. Den Code in `Browsergames/<Dein Ordnername>/src/main.ts` verändern.
+
+# 19.05.2022
+
+Laded euch das Template von `https://github.com/webxdc/webxdc-dev` herunter
+
+```
+git clone https://github.com/webxdc/webxdc-dev.git
+```
+
+Erstellt danach ein Templateprojekt für gamedev mit p5.js wie in dem obigen Eintrag.
+
+Kopiert die webxdc dateien rüber
+
+
