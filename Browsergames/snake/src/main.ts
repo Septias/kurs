@@ -2,6 +2,10 @@ import p5 from 'p5';
 
 import './style.css';
 
+import {Coin} from "./coins"
+
+import {coins} from "./coins"
+
 class Obstacle {
   constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private x_speed: number, private x: number, private y: number) {
   }
@@ -10,8 +14,8 @@ class Obstacle {
     function getRndInteger(min: any, max: any) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
-    this.x = getRndInteger(this.x_min, this.x_max )//Horizontaler Spawnbereich
-    this.y = getRndInteger(this.y_min, this.y_max ) //Vertikaler Spawnbereich
+    this.x = getRndInteger(this.x_min, this.x_max)//Horizontaler Spawnbereich
+    this.y = getRndInteger(this.y_min, this.y_max) //Vertikaler Spawnbereich
   }
 
   execute_in_draw_1(p: p5) { //Wird in der draw function aufgegriffen und ausgeführt
@@ -30,8 +34,8 @@ class Obstacle {
 
         return true
       }
-    } 
-    return  false
+    }
+    return false
   }
 
   border(p: p5) {
@@ -39,50 +43,7 @@ class Obstacle {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
     if (this.x < 0) {
-      this.x = getRndInteger(this.x_min, this.x_max )
-      this.y = getRndInteger(this.y_min, this.y_max)
-    }
-  }
-}
-
-class Coinss {
-  constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private x_speed: number, private x: number, private y: number) {
-  }
-
-  randomizercoins() {
-    function getRndInteger(min: any, max: any) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    this.x = getRndInteger(this.x_min, this.x_max )
-    this.y = getRndInteger(this.y_min, this.y_max )
-  }
-
-  execute_in_draw_1coins(p: p5) {
-    p.fill(205, 149, 12)
-    p.rect(this.x, this.y, this.w, this.h)
-  }
-
-  execute_in_draw_2coins() {
-    this.x = this.x - this.x_speed
-  }
-
-  collidecoins(player_x: number, player_y: number, player_w: number, player_h: number) {
-
-    if (player_x + player_w + this.w >= this.x + this.w && player_x <= this.x) {
-      if (player_y + player_h + this.h >= this.y + this.h && player_y <= this.y) {
-
-        return true
-      }
-    } 
-    return  false
-  }
-
-  bordercoins(p: p5) {
-    function getRndInteger(min: any, max: any) {
-      return Math.floor(Math.random() * (max - min + 1)) + min;
-    }
-    if (this.x < 0) {
-      this.x = getRndInteger(this.x_min, this.x_max )
+      this.x = getRndInteger(this.x_min, this.x_max)
       this.y = getRndInteger(this.y_min, this.y_max)
     }
   }
@@ -90,17 +51,6 @@ class Coinss {
 
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
-
-  //Health 1
-  let health1_width = 35
-  let health1_height = 35
-  let spawntrigger_health1 = true
-  let rnd_number_health1 = p.random(0, 100)
-  let speed_health1 = 7
-  let health1_spawn_pos_horizontal = p.windowWidth + health1_width + rnd_number_health1
-  let health1_spawn_area_vertical = p.windowHeight - health1_height
-  let health1_pos_horizontal = health1_spawn_pos_horizontal
-  let health1_pos_vertical = getRndInteger(0 - health1_height / 2, health1_spawn_area_vertical)
 
   //Deathscreen
   let deathscreen_width = p.windowWidth
@@ -123,13 +73,11 @@ const _app = new p5(p5Instance => {
   let time = 0
   let real_time = 0
   let level = 1
-  let coins = 0
+  let coin_item = 0
   let coins_goal = 10
 
   //Variablen Klassen
   let obstacles: Obstacle[] = []
-  
-  let coinsclass: Coinss[] = []
 
   //Randomizer
   function getRndInteger(min: any, max: any) {
@@ -161,40 +109,30 @@ const _app = new p5(p5Instance => {
       space = false
     }
   }
-  
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
 
-  //coinsclass.push(new Coinss(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(4, 10), 0, 0))
-  
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+
+  coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+  coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+
   //Draw
   p.draw = function draw() {
-    
+
     //Background
     p.background(0, 0, 0)
 
-    /*for (const coinsclass of coinsclass) {
-
-      coinsclass.execute_in_draw_1coins(p)
-
-      coinsclass.execute_in_draw_2coins()
-
-      coinsclass.bordercoins(p)
-
-      if (coinsclass.collidecoins(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
-        coins = coins + 1
-        console.log(coins)
-        coinsclass.randomizercoins()
-      }
-    }*/
-    
     //Damage Obstacle and Border
     for (const obstacle of obstacles) {
 
@@ -211,36 +149,24 @@ const _app = new p5(p5Instance => {
       }
     }
 
-    if (spawntrigger_health1 == true) {
-      health1_pos_vertical = getRndInteger(0 - health1_height / 2, health1_spawn_area_vertical)
-      health1_pos_horizontal = health1_spawn_pos_horizontal
-    }
+    //Collect Coin and border
+    for (const coin of coins) {
 
-    //Health1
-    if (level > 2) {
-      if (lives < 2) {
-        p.fill(50, 205, 50)
-        p.rect(health1_pos_horizontal, health1_pos_vertical, health1_width, health1_height)
-        health1_pos_horizontal = health1_pos_horizontal - speed_health1
-        if (health1_pos_horizontal > 0) {
-          spawntrigger_health1 = false
-        }
-        if (health1_pos_horizontal < 0) {
-          health1_pos_horizontal = p.windowWidth + health1_width + rnd_number_health1
-          spawntrigger_health1 = true
-        }
+      coin.coin_execute_in_draw_1(p)
+
+      coin.coin_execute_in_draw_2()
+
+      coin.coin_border(p)
+
+      if (coin.coin_collect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
+        coin_item = coin_item + 1
+        console.log(coin_item)
+        coin.coin_randomizer()
       }
     }
 
-    //Collect Health1
-    if (Player_Position_Horizontal + Player_Width + health1_width >= health1_pos_horizontal + health1_width && Player_Position_Horizontal <= health1_pos_horizontal) {
-      if (Player_Position_Vertical + Player_height + health1_height >= health1_pos_vertical + health1_height && Player_Position_Vertical <= health1_pos_vertical) {
-        health1_pos_horizontal = p.windowWidth + health1_width
-        lives = lives + 1
-        spawntrigger_health1 = true
-      }
-    }
 
+    
     //Player
     p.fill(160, 32, 240)
     p.rect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height)
@@ -275,17 +201,15 @@ const _app = new p5(p5Instance => {
     p.text("Press [ESC] for menu", 25, 30)
     p.text("Time survived: " + real_time, 25, 120)
     p.text("Lives: " + lives, 25, 60)
-    p.text(coins + "/" + coins_goal + " Coins", 25, 90)
-    p.fill(255, 255, 255)
+    p.text(coin_item + "/" + coins_goal + " Coins", 25, 90)
     p.textSize(45)
     p.text("Level: " + level, p.windowWidth / 2 - 100, 50)
 
     //Coins/Level
-    if (coins >= coins_goal) {
-      coins = 0
+    if (coin_item >= coins_goal) {
+      coin_item = 0
       coins_goal = coins_goal + 5
       level = level + 1
-      speed_health1 = speed_health1 + 1
     }
 
     //Death
