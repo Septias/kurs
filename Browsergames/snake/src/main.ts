@@ -1,13 +1,13 @@
 import p5 from 'p5';
-
 import './style.css';
 
 import { Coin } from "./coins"
-
 import { coins } from "./coins"
+import { Health } from "./health"
+import { healthpack } from "./health"
 
 class Obstacle {
-  constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private x_speed: number, private x: number, private y: number) {
+  constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private obstacle_speed: number, private x: number, private y: number) {
   }
 
   randomizer() {
@@ -24,7 +24,7 @@ class Obstacle {
   }
 
   execute_in_draw_2() {
-    this.x = this.x - this.x_speed
+    this.x = this.x - this.obstacle_speed
   }
 
   collide(player_x: number, player_y: number, player_w: number, player_h: number) {
@@ -99,8 +99,6 @@ const _app = new p5(p5Instance => {
   }
 
   p.keyReleased = function () {
-    console.log(obstacles)
-
     if (p.keyCode === p.UP_ARROW) {
       up = false
     }
@@ -126,45 +124,51 @@ const _app = new p5(p5Instance => {
   coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
   coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
 
+  healthpack.push(new Health(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+
   //Draw
   p.draw = function draw() {
 
     //Background
     p.background(0, 0, 0)
 
-    //Damage Obstacle and Border
+    //Damage Obstacle, Border
     for (const obstacle of obstacles) {
-
       obstacle.execute_in_draw_1(p) //p weil p5 elemente verwendet werden
-
       obstacle.execute_in_draw_2()
-
       obstacle.border()
 
       if (obstacle.collide(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
         lives = lives - 1
-        console.log(lives)
         obstacle.randomizer()
       }
     }
 
-    //Collect Coin and border
+    //Collect Coin, Border
     for (const coin of coins) {
-
       coin.coin_execute_in_draw_1(p)
-
       coin.coin_execute_in_draw_2()
-
       coin.coin_border()
 
       if (coin.coin_collect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
         coin_item = coin_item + 1
-        console.log(coin_item)
         coin.coin_randomizer()
       }
     }
 
+    //Collect Healthpack, Border
+    for (const health of healthpack) {
+      if (lives == 1) {
+        health.health_execute_in_draw_1(p)
+        health.health_execute_in_draw_2()
+        health.health_border()
+      }
 
+      if (health.health_collect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
+        lives = lives + 1
+        health.health_randomizer()
+      }
+    }
 
     //Player
     p.fill(160, 32, 240)
