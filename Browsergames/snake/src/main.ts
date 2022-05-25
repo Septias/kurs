@@ -2,9 +2,9 @@ import p5 from 'p5';
 
 import './style.css';
 
-import {Coin} from "./coins"
+import { Coin } from "./coins"
 
-import {coins} from "./coins"
+import { coins } from "./coins"
 
 class Obstacle {
   constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private x_speed: number, private x: number, private y: number) {
@@ -38,7 +38,7 @@ class Obstacle {
     return false
   }
 
-  border(p: p5) {
+  border() {
     function getRndInteger(min: any, max: any) {
       return Math.floor(Math.random() * (max - min + 1)) + min;
     }
@@ -53,10 +53,6 @@ const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
   //Deathscreen
-  let deathscreen_width = p.windowWidth
-  let deathscreen_height = p.windowHeight
-  let deathscreen_pos_horizontal = 0
-  let deathscreen_pos_Vertical = 0
   let space = false
 
   //Player
@@ -79,15 +75,18 @@ const _app = new p5(p5Instance => {
   //Variablen Klassen
   let obstacles: Obstacle[] = []
 
-  //Randomizer
-  function getRndInteger(min: any, max: any) {
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+  /*let loopStart = 0;
+  let loopDuration = 3;
+
+  function preload() {
+    let maintheme = p.loadSound("Sounds\maintheme.mp3");
+  }*/
 
   //Background  
   p.setup = function setup() {
     p.frameRate(60)
-    p.createCanvas(p.windowWidth, p.windowHeight,)
+    p.createCanvas(p.windowWidth, p.windowHeight)
+    //p.PlaySound("maintheme")
   }
 
   //Keys
@@ -140,7 +139,7 @@ const _app = new p5(p5Instance => {
 
       obstacle.execute_in_draw_2()
 
-      obstacle.border(p)
+      obstacle.border()
 
       if (obstacle.collide(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
         lives = lives - 1
@@ -156,7 +155,7 @@ const _app = new p5(p5Instance => {
 
       coin.coin_execute_in_draw_2()
 
-      coin.coin_border(p)
+      coin.coin_border()
 
       if (coin.coin_collect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
         coin_item = coin_item + 1
@@ -166,14 +165,14 @@ const _app = new p5(p5Instance => {
     }
 
 
-    
+
     //Player
     p.fill(160, 32, 240)
     p.rect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height)
     if (up == true) {
       Player_Position_Vertical = Player_Position_Vertical - speed
     }
-    if (up == false) {
+    else {
       Player_Position_Vertical = Player_Position_Vertical + speed * 1.3
     }
     if (Player_Position_Vertical > p.windowHeight - Player_height) {
@@ -215,14 +214,13 @@ const _app = new p5(p5Instance => {
     //Death
     if (lives < 1) {
       p.fill(0, 0, 0)
-      p.rect(deathscreen_pos_horizontal, deathscreen_pos_Vertical, deathscreen_width, deathscreen_height)
+      p.rect(0, 0, p.windowWidth, p.windowHeight)
+      p.textAlign(p.CENTER)
+      p.fill(255, 255, 255)
+      p.text("Press [Space] to continue", p.windowWidth / 2, p.windowHeight / 2 + 100)
       p.fill(600, 50, 30)
       p.textSize(90)
-      p.textAlign(p.CENTER)
       p.text("GAME OVER", p.windowWidth / 2, p.windowHeight / 2)
-      p.fill(255, 255, 255)
-      p.textSize(40)
-      p.text("Press [Space] to continue", p.windowWidth / 2, p.windowHeight / 2 + 180)
       speed = 0
       if (space == true) {
         location.reload()

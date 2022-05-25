@@ -34,7 +34,7 @@ export class Coin {
       return false
     }
   
-    coin_border(p: p5) {
+    coin_border() {
       function getRndInteger(min: any, max: any) {
         return Math.floor(Math.random() * (max - min + 1)) + min;
       }
