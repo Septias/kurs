@@ -11,21 +11,21 @@ const _app = new p5(p5Instance => {
     p.textSize(14)
     p.frameRate(60)
     p.background(255, 255, 255);
-    
+
   };
-  
+
   const body_x_top = p.windowWidth / 2
   const body_y_top = p.windowHeight / 2
   const galgen_x_bottom = body_x_top - 250
   const galgen_y_bottom = body_y_top + 300
-  let elements_to_draw = 0
+  let elements_to_draw = -1
   const wörter = ["lol", "sodkak", "adada"]
-  let zielwort = wörter[Math.floor(Math.random() * wörter.length + 1)]
-  
-    
-  
-  
-  
+  let zielwort = "lol" //wörter[Math.floor(Math.random() * wörter.length + 1)]
+  const parts_to_draw = []
+
+
+
+
   const parts = [
     //galgen
     [galgen_x_bottom, galgen_y_bottom, 250, 250, p.PI, 0],
@@ -46,34 +46,90 @@ const _app = new p5(p5Instance => {
     [body_x_top, body_y_top + 100, body_x_top - 25, body_y_top + 175],
     [body_x_top, body_y_top + 100, body_x_top + 25, body_y_top + 175],
   ]
-  
-  
-  
-  
-  
-  
-  
-  const parts_to_draw = [p.rect(100, 100, 50, 50)]
+
+
+  const buchstaben = {
+    a: false,
+    b: false,
+    c: false,
+    d: false,
+    e: false,
+    f: false,
+    g: false,
+    h: false,
+    i: false,
+    j: false,
+    k: false,
+    l: false,
+    m: false,
+    n: false,
+    o: false,
+    p: false,
+    q: false,
+    r: false,
+    s: false,
+    t: false,
+    u: false,
+    v: false,
+    w: false,
+    x: false,
+    y: false,
+    z: false,
+  }
+
+
+
+
+
+
+
   p.draw = function draw() {
-  
-   
-    if (zielwort.includes(p.key) == false) {
+
+    for (const part of parts_to_draw) {
+      if (part.length == 6) {
+        p.arc(part[0], part[1], part[2], part[3], part[4], part[5])
+      }
+      if (part.length == 4) {
+        p.line(part[0], part[1], part[2], part[3])
+      }
+      if (part.length == 3) {
+        p.circle(part[0], part[1], part[2])
+      }
+
+      console.log(zielwort)
+
+    }
+
+
+
+
+  }
+  p.keyPressed = () => {
+
+    let key = p.key
+    if (zielwort.includes(key) == false && buchstaben[key] == false) {
       elements_to_draw++
       parts_to_draw.push(parts[elements_to_draw])
-  
+
     }
-    for(var x of parts_to_draw ) {
-      console.log(x)
-        
-      }
-    }
-    console.log("lol")
-  
+    buchstaben[key] = true
+    console.log(parts_to_draw.length)
+    console.log(key)
+  }
 
 
 
 
-  }, document.getElementById('app')!;
 
-})
+
+
+
+
+
+
+
+
+}, document.getElementById('app')!);
+
+
 
