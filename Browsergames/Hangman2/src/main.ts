@@ -1,14 +1,20 @@
-import { inAppPurchase } from 'electron/main';
-import p5, { Vector } from 'p5';
+import p5 from 'p5';
 import './style.css';
+import { gameScreen, endScreen } from './screens'
 
-const _app = new p5(p5Instance => {
+
+enum SCREENS {
+  gameScreen,
+  endScreen
+}
+
+new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight);
-    p.textFont('Helvetica');
-    p.textSize(14)
+    p.textFont('Arial');
+    p.textSize(30)
     p.frameRate(60)
     p.background(255, 255, 255);
 
@@ -18,13 +24,11 @@ const _app = new p5(p5Instance => {
   const body_y_top = p.windowHeight / 2
   const galgen_x_bottom = body_x_top - 250
   const galgen_y_bottom = body_y_top + 300
-  let elements_to_draw = -1
-  const wörter = ["lol", "sodkak", "adada"]
-  let zielwort = "lol" //wörter[Math.floor(Math.random() * wörter.length + 1)]
-  const parts_to_draw = []
-
-
-
+  const words = ["hallo", "tschüss"]
+  let target_word = words[Math.floor(Math.random() * (words.length - 1))]
+  let new_string = "_ ".repeat(target_word.length)
+  let elements_to_draw = 0
+  let render_function = SCREENS.gameScreen
 
   const parts = [
     //galgen
@@ -46,9 +50,7 @@ const _app = new p5(p5Instance => {
     [body_x_top, body_y_top + 100, body_x_top - 25, body_y_top + 175],
     [body_x_top, body_y_top + 100, body_x_top + 25, body_y_top + 175],
   ]
-
-
-  const buchstaben = {
+  const letters = {
     a: false,
     b: false,
     c: false,
@@ -75,61 +77,50 @@ const _app = new p5(p5Instance => {
     x: false,
     y: false,
     z: false,
-  }
+  } as { [key: string]: boolean }
 
-
-
-
-
-
+  const parts_to_draw = [parts[0]] as number[][]
 
   p.draw = function draw() {
+    p.background(255)
 
-    for (const part of parts_to_draw) {
-      if (part.length == 6) {
-        p.arc(part[0], part[1], part[2], part[3], part[4], part[5])
-      }
-      if (part.length == 4) {
-        p.line(part[0], part[1], part[2], part[3])
-      }
-      if (part.length == 3) {
-        p.circle(part[0], part[1], part[2])
-      }
-
-      console.log(zielwort)
-
+    if (render_function == SCREENS.gameScreen) {
+      gameScreen(parts_to_draw, p, new_string)
+    } else if (render_function == SCREENS.endScreen) {
+      endScreen(p)
     }
 
-
-
-
   }
-  p.keyPressed = () => {
 
+  p.keyPressed = () => {
     let key = p.key
-    if (zielwort.includes(key) == false && buchstaben[key] == false) {
+    let keyCode = p.keyCode
+    
+    if (!(65 <= keyCode && keyCode <= 90 || 97 <= keyCode && keyCode <= 122)) {
+      return
+    }
+
+    letters[key] = true
+
+    if (!target_word.includes(key)) {
       elements_to_draw++
       parts_to_draw.push(parts[elements_to_draw])
-
     }
-    buchstaben[key] = true
-    console.log(parts_to_draw.length)
-    console.log(key)
+
+    new_string = ""
+    let comparison_string = ""
+    for (const letter of target_word) {
+      if (letters[letter] == true) {
+        new_string += letter
+        comparison_string += letter
+      } else {
+        new_string += "_"
+      }
+      new_string += " "
+    }
+
+    if (target_word == comparison_string) {
+      render_function = SCREENS.endScreen
+    }
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
 }, document.getElementById('app')!);
-
-
-
