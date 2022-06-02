@@ -1,0 +1,19 @@
+- Cooles Game
+	- Brainstorming
+	- 
+- Cooles Game mit DC
+	- keine real time sachen
+	- direkt scores sharen
+	- Brettspiel clone
+	- Live Textadventure
+- Arduino (schwierig mit Raum)
+	- Brainstorming
+	- Roboter
+	- Lichtkontrolle
+	- Uhr
+		- 3D gedrucktes Gehäuse mit Display
+	- Lichtschranke  
+- Website
+	- Live Coding Delta Chat
+		- Websiten sharen
+	- Spotify Playlist
