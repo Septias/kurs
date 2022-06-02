@@ -7,8 +7,7 @@ new p5(p5Instance => {
 
   p.setup = function setup() {
     p.createCanvas(10,10)
-    p.createCanvas(10,10)
-    p.background("red")
+    p.background(255, 0, 0)
   };
 
   p.keyPressed = () => {
