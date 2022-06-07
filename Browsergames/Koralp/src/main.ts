@@ -151,15 +151,7 @@ const app = new p5(p5Instance => {
 
 
 
-
-    if (borderX > 1000) {console.log(speed*this.sqrt(0.5))}
-  };
-
-
-  p.keyPressed = () => {
-    console.log(p.keyCode);
-    
-  
+git 
     
   }
 

@@ -1,31 +1,36 @@
-import { inAppPurchase } from 'electron/main';
-import p5, { Vector } from 'p5';
+import p5 from 'p5';
 import './style.css';
+import { gameScreen, endScreen } from './screens'
 
-const _app = new p5(p5Instance => {
+
+enum SCREENS {
+  gameScreen,
+  endScreen
+}
+
+new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
   p.setup = function setup() {
     p.createCanvas(p.windowWidth, p.windowHeight);
-    p.textFont('Helvetica');
-    p.textSize(14)
+    p.textFont('Arial');
+    p.textSize(30)
     p.frameRate(60)
     p.background(255, 255, 255);
     
+
   };
-  
+
   const body_x_top = p.windowWidth / 2
   const body_y_top = p.windowHeight / 2
   const galgen_x_bottom = body_x_top - 250
   const galgen_y_bottom = body_y_top + 300
+  const words = ["hallo", "tschüss"]
+  let target_word = words[Math.floor(Math.random() * (words.length - 1))]
+  let new_string = "_ ".repeat(target_word.length)
   let elements_to_draw = 0
-  const wörter = ["lol", "sodkak", "adada"]
-  let zielwort = wörter[Math.floor(Math.random() * wörter.length + 1)]
-  
-    
-  
-  
-  
+  let render_function = SCREENS.gameScreen
+
   const parts = [
     //galgen
     [galgen_x_bottom, galgen_y_bottom, 250, 250, p.PI, 0],
@@ -46,34 +51,90 @@ const _app = new p5(p5Instance => {
     [body_x_top, body_y_top + 100, body_x_top - 25, body_y_top + 175],
     [body_x_top, body_y_top + 100, body_x_top + 25, body_y_top + 175],
   ]
-  
-  
-  
-  
-  
-  
-  
-  const parts_to_draw = [p.rect(100, 100, 50, 50)]
+  const letters = {
+    a: false,
+    b: false,
+    c: false,
+    d: false,
+    e: false,
+    f: false,
+    g: false,
+    h: false,
+    i: false,
+    j: false,
+    k: false,
+    l: false,
+    m: false,
+    n: false,
+    o: false,
+    p: false,
+    q: false,
+    r: false,
+    s: false,
+    t: false,
+    u: false,
+    v: false,
+    w: false,
+    x: false,
+    y: false,
+    z: false,
+  } as { [key: string]: boolean }
+
+  const parts_to_draw = [parts[0]] as number[][]
+
   p.draw = function draw() {
+    p.background(255)
+
+    if (render_function == SCREENS.gameScreen) {
+      gameScreen(parts_to_draw, p, new_string)
+    } else if (render_function == SCREENS.endScreen) {
+      endScreen(p,/*render_function,SCREENS*/)
+    }
+    else if (endScreen == true){
+      
+    }
+    
+
+  }
   
-   
-    if (zielwort.includes(p.key) == false) {
+ 
+  
+
+  p.keyPressed = () => {
+    let key = p.key
+    let keyCode = p.keyCode
+
+    if (!(65 <= keyCode && keyCode <= 90 || 97 <= keyCode && keyCode <= 122)) {
+      return
+    }
+
+    letters[key] = true
+
+    if (!target_word.includes(key)) {
       elements_to_draw++
       parts_to_draw.push(parts[elements_to_draw])
-  
     }
-    for(var x of parts_to_draw ) {
-      console.log(x)
+
+    new_string = ""
+    let comparison_string = ""
+    for (const letter of target_word) {
+      if (letters[letter] == true) {
+        new_string += letter
+        comparison_string += letter
+      } else {
+        new_string += "_"
+      }
+      new_string += " "
+    }
+
+    if (target_word == comparison_string) {
+     
         
+      const timeout = setTimeout(timeout_endscreen,1000)
+      function timeout_endscreen() {
+
+        render_function = SCREENS.endScreen
       }
     }
-    console.log("lol")
-  
-
-
-
-
-  }, document.getElementById('app')!;
-
-})
-
+  }
+}, document.getElementById('app')!);
