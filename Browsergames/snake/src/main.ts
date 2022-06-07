@@ -1,5 +1,5 @@
-import p5 from 'p5';
-import './style.css';
+import p5 from "p5";
+import "./style.css";
 
 import { Coin } from "./coins"
 import { coins } from "./coins"
@@ -52,9 +52,6 @@ class Obstacle {
 const _app = new p5(p5Instance => {
   const p = p5Instance as unknown as p5;
 
-  //Deathscreen
-  let space = false
-
   //Player
   let Player_Width = 90
   let Player_height = 90
@@ -64,13 +61,11 @@ const _app = new p5(p5Instance => {
   let speed = 6
   let up = false
 
-  //Timer/Level/Coins
-  let timer_active = true
-  let time = 0
-  let real_time = 0
-  let level = 1
+  //Deathscreen
+  let space = false
+
+  //Score
   let coin_item = 0
-  let coins_goal = 10
 
   //Variablen Klassen
   let obstacles: Obstacle[] = []
@@ -187,33 +182,12 @@ const _app = new p5(p5Instance => {
       Player_Position_Vertical = 0
     }
 
-    //Timer
-    if (timer_active == true) {
-      time = time + 1
-    }
-    if (time >= 60) {
-      real_time = real_time + 1
-      time = 0
-    }
-
     //Text
     p.textFont("Calibri")
-    p.textSize(20)
     p.fill(255, 255, 255)
-    p.textAlign(p.LEFT)
-    p.text("Press [ESC] for menu", 25, 30)
-    p.text("Time survived: " + real_time, 25, 120)
-    p.text("Lives: " + lives, 25, 60)
-    p.text(coin_item + "/" + coins_goal + " Coins", 25, 90)
     p.textSize(45)
-    p.text("Level: " + level, p.windowWidth / 2 - 100, 50)
-
-    //Coins/Level
-    if (coin_item >= coins_goal) {
-      coin_item = 0
-      coins_goal = coins_goal + 5
-      level = level + 1
-    }
+    p.text("Lives: " + lives, p.windowWidth / 2 - 100, 50)
+    p.text("Score: " + coin_item, p.windowWidth / 2 + 100, 50)
 
     //Death
     if (lives < 1) {
@@ -231,4 +205,4 @@ const _app = new p5(p5Instance => {
       }
     }
   }
-}, document.getElementById('app')!);
+}, document.getElementById("app")!);
