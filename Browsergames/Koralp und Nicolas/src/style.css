@@ -9,3 +9,6 @@
   margin: 0px;
   background: #000
 }
+canvas{
+  position: x, y;
+}
