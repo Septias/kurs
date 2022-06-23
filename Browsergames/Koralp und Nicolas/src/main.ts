@@ -6,8 +6,7 @@ new p5(p5Instance => {
 
 
   p.setup = function setup() {
-    p.createCanvas(10,10)
-    p.background(255, 0, 0)
+    p.createCanvas(100 ,100)
   };
 
   p.keyPressed = () => {
@@ -16,17 +15,10 @@ new p5(p5Instance => {
 
 
   p.draw = function draw() {
-    p.background(0);
+    p.background(0,255,0);
 
 
 
   };
 
 }, document.getElementById('app')!);
-
-
-
-
-
-
-FFFFFFFFF
