@@ -17,6 +17,7 @@ new p5(p5Instance => {
     p.textSize(30)
     p.frameRate(60)
     p.background(255, 255, 255);
+    
 
   };
 
@@ -87,15 +88,22 @@ new p5(p5Instance => {
     if (render_function == SCREENS.gameScreen) {
       gameScreen(parts_to_draw, p, new_string)
     } else if (render_function == SCREENS.endScreen) {
-      endScreen(p)
+      endScreen(p,/*render_function,SCREENS*/)
     }
+    else if (endScreen == true){
+      
+    }
+    
 
   }
+  
+ 
+  
 
   p.keyPressed = () => {
     let key = p.key
     let keyCode = p.keyCode
-    
+
     if (!(65 <= keyCode && keyCode <= 90 || 97 <= keyCode && keyCode <= 122)) {
       return
     }
@@ -120,7 +128,13 @@ new p5(p5Instance => {
     }
 
     if (target_word == comparison_string) {
-      render_function = SCREENS.endScreen
+     
+        
+      const timeout = setTimeout(timeout_endscreen,1000)
+      function timeout_endscreen() {
+
+        render_function = SCREENS.endScreen
+      }
     }
   }
 }, document.getElementById('app')!);
