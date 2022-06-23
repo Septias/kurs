@@ -1,4 +1,5 @@
 import p5 from "p5"
+import { SCREENS } from "./main"
 
 export function gameScreen(parts_to_draw: number[][], p: p5, new_string: string) {
     for (const part of parts_to_draw) {
@@ -17,22 +18,26 @@ export function gameScreen(parts_to_draw: number[][], p: p5, new_string: string)
 }
 
 
+
 export function endScreen(p: p5, /*render_function, SCREENS: any,*/) {
     let button_width = 150
     let button_height = 70
-    let button
+    let next_screen = SCREENS.endScreen
+
     p.textSize(80)
     p.textAlign("center")
     p.text("You Won", p.windowWidth / 2, p.windowHeight / 2 - 150)
-    button = p.createButton("New Game")
+
+    let button = p.createButton("New Game")
     button.position(p.windowWidth / 2 - button_width / 2, p.windowHeight / 2 - button_height / 2)
     button.size(button_width, button_height)
-    button.mouseClicked(new_game)
     function new_game() {
-        console.log("lol")
-        //render_function = SCREENS.gameScreen
+        next_screen = SCREENS.gameScreen
+        console.log('hi');
+
         return true
     }
+    button.mouseClicked(new_game)
 
-
+    return next_screen
 }
