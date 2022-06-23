@@ -3,7 +3,7 @@ import './style.css';
 import { gameScreen, endScreen } from './screens'
 
 
-enum SCREENS {
+export enum SCREENS {
   gameScreen,
   endScreen
 }
@@ -17,8 +17,6 @@ new p5(p5Instance => {
     p.textSize(30)
     p.frameRate(60)
     p.background(255, 255, 255);
-    
-
   };
 
   const body_x_top = p.windowWidth / 2
@@ -88,17 +86,9 @@ new p5(p5Instance => {
     if (render_function == SCREENS.gameScreen) {
       gameScreen(parts_to_draw, p, new_string)
     } else if (render_function == SCREENS.endScreen) {
-      endScreen(p,/*render_function,SCREENS*/)
+      render_function = endScreen(p)
     }
-    else if (endScreen == true){
-      
-    }
-    
-
   }
-  
- 
-  
 
   p.keyPressed = () => {
     let key = p.key
@@ -128,9 +118,9 @@ new p5(p5Instance => {
     }
 
     if (target_word == comparison_string) {
-     
-        
-      const timeout = setTimeout(timeout_endscreen,1000)
+
+
+      const timeout = setTimeout(timeout_endscreen, 1000)
       function timeout_endscreen() {
 
         render_function = SCREENS.endScreen
