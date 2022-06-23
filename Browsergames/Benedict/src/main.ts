@@ -362,7 +362,7 @@ const _app = new p5(p5Instance => {
 
 
     }
-    richtungswechsler() {
+    ftr() {
       if (this.x <= 0) {
         this.x_speed = 0 - this.x_speed
       }
