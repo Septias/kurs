@@ -86,14 +86,14 @@ new p5(p5Instance => {
     }
 
     if (y < 1) {
-      alert("Du hast Verloren! Schade")
+      alert("Dein Score: " + Math.floor(score/200))
       y = 200 
       location.reload();
     
     }
     
     if (y > p.windowHeight - 114) {
-      alert("Du hast Verloren! Schade")
+      alert("Dein Score: " +  Math.floor(score/200))
       y = p.windowHeight - 200
       location.reload();
     }
