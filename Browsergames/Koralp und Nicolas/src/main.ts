@@ -66,7 +66,7 @@ new p5(p5Instance => {
     console.log(this.keyPressed)
   };
 
- document.getElementById('app')!);
+ document.getElementById('app')!});
 
 
 // space ist 32
