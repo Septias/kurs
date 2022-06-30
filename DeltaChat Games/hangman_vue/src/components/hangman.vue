@@ -5,10 +5,10 @@ import p5 from 'p5'
 const canvas: HTMLElement = $ref()
 
 function randomword(words: string[]) {
-  return words[Math.floor(Math.random() * (words.length - 1))]
+  return words[Math.round(Math.random() * (words.length - 1))]
 }
 
-const words = ['hallo', 'tschüss']
+const words = ['hallo', 'tschuess',"bentik",'trump','luchs','eierschalensollbruchstellenverursacher']
 let target_word = randomword(words)
 let new_string = $ref('_ '.repeat(target_word.length))
 
@@ -53,8 +53,10 @@ let parts_to_draw = [parts[0]] as number[][]
 function replay() {
   console.log('starting new game')
   letters = {}
-  parts_to_draw = []
+  parts_to_draw = [parts[0]]
   target_word = randomword(words)
+  new_string = '_ '.repeat(target_word.length)
+  elements_to_draw = 0
   game_state = GameState.Playing
 }
 
@@ -88,6 +90,8 @@ onMounted(() => {
     p.keyPressed = () => {
       const key = p.key
       const keyCode = p.keyCode
+      if (game_state != GameState.Playing)
+        return
 
       if (!((keyCode >= 65 && keyCode <= 90) || (keyCode >= 97 && keyCode <= 122)))
         return

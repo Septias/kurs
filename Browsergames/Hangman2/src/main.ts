@@ -1,4 +1,4 @@
-import p5 from 'p5';
+Qimport p5 from 'p5';
 import './style.css';
 import { gameScreen, endScreen } from './screens'
 
