@@ -67,21 +67,21 @@ const _app = new p5(p5Instance => {
   //Score
   let coin_item = 0
 
-  //Variablen Klassen
+  //Variablen Klassen Install p5 Contributor Library
   let obstacles: Obstacle[] = []
 
-  /*let loopStart = 0;
-  let loopDuration = 3;
+  //let loopStart = 0;
+  //let loopDuration = 3;
 
-  function preload() {
-    let maintheme = p.loadSound("Sounds\maintheme.mp3");
+  /*function preload() {
+    let maintheme = p.loadSound("/src/maintheme.mp3");
   }*/
 
   //Background  
   p.setup = function setup() {
     p.frameRate(60)
     p.createCanvas(p.windowWidth, p.windowHeight)
-    //p.PlaySound("maintheme")
+    //maintheme.play();
   }
 
   //Keys

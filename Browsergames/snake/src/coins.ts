@@ -1,4 +1,4 @@
-import p5 from 'p5';
+import p5 from "p5";
 
 export class Coin {
   constructor(private x_min: number, private x_max: number, private y_min: number, private y_max: number, private w: number, private h: number, private coin_speed: number, private x: number, private y: number) {
