@@ -70,18 +70,22 @@ const _app = new p5(p5Instance => {
   //Variablen Klassen Install p5 Contributor Library
   let obstacles: Obstacle[] = []
 
-  //let loopStart = 0;
-  //let loopDuration = 3;
+  let maintheme;
+  let loopStart = 0
+  let loopDuration = 3
 
-  /*function preload() {
-    let maintheme = p.loadSound("/src/maintheme.mp3");
+  maintheme = window.loadSound("src/maintheme.mp3")
+  maintheme.play()
+
+  //Preload
+  /*p.preload = function preload(){
+    
   }*/
 
   //Background  
   p.setup = function setup() {
     p.frameRate(60)
     p.createCanvas(p.windowWidth, p.windowHeight)
-    //maintheme.play();
   }
 
   //Keys
