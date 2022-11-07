@@ -1,5 +1,10 @@
-import p5 from "p5";
 import "./style.css";
+
+import "K:/Bentiks Dateien/Coding/kurs/Browsergames/snake/node_modules/p5/lib/p5.js";
+
+window.p5 = p5;
+
+import "K:/Bentiks Dateien/Coding/kurs/Browsergames/snake/node_modules/p5/lib/addons/p5.sound.js";
 
 import { Coin } from "./coins"
 import { coins } from "./coins"
@@ -49,8 +54,7 @@ class Obstacle {
   }
 }
 
-const _app = new p5(p5Instance => {
-  const p = p5Instance as unknown as p5;
+const instance = new p5((p) => {
 
   //Player
   let Player_Width = 90
@@ -67,146 +71,170 @@ const _app = new p5(p5Instance => {
   //Score
   let coin_item = 0
 
-  //Variablen Klassen Install p5 Contributor Library
+  //Variablen Klassen
   let obstacles: Obstacle[] = []
 
   let maintheme;
   let loopStart = 0
   let loopDuration = 3
-
-  maintheme = window.loadSound("src/maintheme.mp3")
-  maintheme.play()
+  let soundvalue = 0
+  let time = 0
 
   //Preload
-  /*p.preload = function preload(){
-    
-  }*/
+  p.preload = () => {
+    maintheme = p.loadSound("src/maintheme.mp3", () => {
+      maintheme.loop()
+    });
 
-  //Background  
-  p.setup = function setup() {
-    p.frameRate(60)
-    p.createCanvas(p.windowWidth, p.windowHeight)
-  }
-
-  //Keys
-  p.keyPressed = function () {
-    if (p.keyCode === p.UP_ARROW)
-      up = true
-    if (p.keyCode === 32) {
-      space = true
+    //Background  
+    p.setup = function setup() {
+      p.frameRate(60)
+      p.createCanvas(p.windowWidth, p.windowHeight)
     }
-  }
 
-  p.keyReleased = function () {
-    if (p.keyCode === p.UP_ARROW) {
-      up = false
-    }
-    if (p.keyCode === 32) {
-      space = false
-    }
-  }
 
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
 
-  coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-  coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-
-  healthpack.push(new Health(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
-
-  //Draw
-  p.draw = function draw() {
-
-    //Background
-    p.background(0, 0, 0)
-
-    //Damage Obstacle, Border
-    for (const obstacle of obstacles) {
-      obstacle.execute_in_draw_1(p) //p weil p5 elemente verwendet werden
-      obstacle.execute_in_draw_2()
-      obstacle.border()
-
-      if (obstacle.collide(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
-        lives = lives - 1
-        obstacle.randomizer()
+    //Keys
+    p.keyPressed = function () {
+      if (p.keyCode === p.UP_ARROW)
+        up = true
+      if (p.keyCode === 32) {
+        space = true
+      }
+      if (p.keyCode === 49) {
+        soundvalue = soundvalue + 1
       }
     }
 
-    //Collect Coin, Border
-    for (const coin of coins) {
-      coin.coin_execute_in_draw_1(p)
-      coin.coin_execute_in_draw_2()
-      coin.coin_border()
-
-      if (coin.coin_collect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
-        coin_item = coin_item + 1
-        coin.coin_randomizer()
+    p.keyReleased = function () {
+      if (p.keyCode === p.UP_ARROW) {
+        up = false
+      }
+      if (p.keyCode === 32) {
+        space = false
       }
     }
 
-    //Collect Healthpack, Border
-    for (const health of healthpack) {
-      if (lives == 1) {
-        health.health_execute_in_draw_1(p)
-        health.health_execute_in_draw_2()
-        health.health_border()
+    obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    obstacles.push(new Obstacle(p.windowWidth + 50, p.windowWidth + 300, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+
+    coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+    coins.push(new Coin(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+
+    healthpack.push(new Health(p.windowWidth + 50, p.windowWidth + 200, p.windowHeight - 100, 0, 35, 35, p.random(5, 11), 0, 0))
+
+    //Draw
+    p.draw = function draw() {
+
+      //Background
+      p.background(0, 0, 0)
+
+      //Timer
+      if (time < 300) {
+        time = time + 1
       }
 
-      if (health.health_collect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
-        lives = lives + 1
-        health.health_randomizer()
+      //Sound
+      if (soundvalue == 0) {
+        if (time < 300) {
+          p.textAlign(p.CENTER)
+          p.fill(255, 255, 255)
+          p.textSize(20)
+          p.text("Press 1 for music! Use the arrow- keys to move!", p.windowWidth / 2, p.windowHeight / 2 + 400)
+        }
+      } else {
+        p.getAudioContext().resume();
       }
-    }
 
-    //Player
-    p.fill(160, 32, 240)
-    p.rect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height)
-    if (up == true) {
-      Player_Position_Vertical = Player_Position_Vertical - speed
-    }
-    else {
-      Player_Position_Vertical = Player_Position_Vertical + speed * 1.3
-    }
-    if (Player_Position_Vertical > p.windowHeight - Player_height) {
-      Player_Position_Vertical = p.windowHeight - Player_height
-      lives = 0
-    }
-    if (Player_Position_Vertical < 0) {
-      Player_Position_Vertical = 0
-    }
+      //Damage Obstacle, Border
+      for (const obstacle of obstacles) {
+        obstacle.execute_in_draw_1(p) //p weil p5 elemente verwendet werden
+        obstacle.execute_in_draw_2()
+        obstacle.border()
 
-    //Text
-    p.textFont("Calibri")
-    p.fill(255, 255, 255)
-    p.textSize(45)
-    p.text("Lives: " + lives, p.windowWidth / 2 - 100, 50)
-    p.text("Score: " + coin_item, p.windowWidth / 2 + 100, 50)
+        if (obstacle.collide(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
+          lives = lives - 1
+          obstacle.randomizer()
+        }
+      }
 
-    //Death
-    if (lives < 1) {
-      p.fill(0, 0, 0)
-      p.rect(0, 0, p.windowWidth, p.windowHeight)
-      p.textAlign(p.CENTER)
+      //Collect Coin, Border
+      for (const coin of coins) {
+        coin.coin_execute_in_draw_1(p)
+        coin.coin_execute_in_draw_2()
+        coin.coin_border()
+
+        if (coin.coin_collect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
+          coin_item = coin_item + 1
+          coin.coin_randomizer()
+        }
+      }
+
+      //Collect Healthpack, Border
+      for (const health of healthpack) {
+        if (lives == 1) {
+          health.health_execute_in_draw_1(p)
+          health.health_execute_in_draw_2()
+          health.health_border()
+        }
+
+        if (health.health_collect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height) == true) {
+          lives = lives + 1
+          health.health_randomizer()
+        }
+      }
+
+      //Player
+      p.fill(160, 32, 240)
+      p.rect(Player_Position_Horizontal, Player_Position_Vertical, Player_Width, Player_height)
+      if (up == true) {
+        Player_Position_Vertical = Player_Position_Vertical - speed
+      }
+      else {
+        Player_Position_Vertical = Player_Position_Vertical + speed * 1.3
+      }
+      if (Player_Position_Vertical > p.windowHeight - Player_height) {
+        Player_Position_Vertical = p.windowHeight - Player_height
+        lives = 0
+      }
+      if (Player_Position_Vertical < 0) {
+        Player_Position_Vertical = 0
+      }
+
+      //Text
+      p.textFont("Calibri")
       p.fill(255, 255, 255)
-      p.text("Press [Space] to continue", p.windowWidth / 2, p.windowHeight / 2 + 100)
-      p.fill(600, 50, 30)
-      p.textSize(90)
-      p.text("GAME OVER", p.windowWidth / 2, p.windowHeight / 2)
-      speed = 0
-      if (space == true) {
-        location.reload()
+      p.textAlign(p.CENTER)
+      p.textSize(45)
+      p.text("Lives: " + lives, p.windowWidth / 2 - 100, 50)
+      p.text("Score: " + coin_item, p.windowWidth / 2 + 100, 50)
+
+      //Death
+      if (lives < 1) {
+        p.fill(0, 0, 0)
+        p.rect(0, 0, p.windowWidth, p.windowHeight)
+        p.textAlign(p.CENTER)
+        p.fill(255, 255, 255)
+        p.text("Press [Space] to continue", p.windowWidth / 2, p.windowHeight / 2 + 100)
+        p.fill(600, 50, 30)
+        p.textSize(90)
+        p.text("GAME OVER", p.windowWidth / 2, p.windowHeight / 2)
+        speed = 0
+        if (space == true) {
+          location.reload()
+        }
       }
     }
   }
-}, document.getElementById("app")!);
+})
