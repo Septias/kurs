@@ -21,7 +21,7 @@ const instance = new p5((p) => {
   let highscore = 0
 
   //Speed increase
-  let speedIncrease = coin_item / 4;
+  let speedIncrease = coin_item / 4;//experimental
 
 
   //Startscreen
@@ -57,7 +57,7 @@ const instance = new p5((p) => {
       }
 
       execute_in_draw_2() {
-        this.x = this.x - (this.obstacle_speed + speedIncrease);//experimental
+        this.x = this.x - this.obstacle_speed;//experimental
       }
 
       collide(player_x: number, player_y: number, player_w: number, player_h: number) {
